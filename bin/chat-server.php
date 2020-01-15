@@ -1,6 +1,6 @@
 <?php
 use Ratchet\Server\IoServer;
-use MyApp\Chat;
+use chatApp\Chat;
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 

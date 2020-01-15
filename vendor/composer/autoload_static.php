@@ -17,6 +17,10 @@ class ComposerStaticInitc7c054f250c478d4dcd0df06cfb3a3c6
     );
 
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'chatApp\\' => 8,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
@@ -49,6 +53,10 @@ class ComposerStaticInitc7c054f250c478d4dcd0df06cfb3a3c6
     );
 
     public static $prefixDirsPsr4 = array (
+        'chatApp\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/chatApp',
+        ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
