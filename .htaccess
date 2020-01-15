@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+RewriteEngine On
+# urls with /admin/somepage/id go to the matching somepage.php file with the id of the record. ie. /admin/members/2 is /admin/members.php where $id=2
+RewriteRule ^admin/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)[/]*$ /admin/index.php?page=$1&id=$2 [L,NC]
+# urls with /admin/somepage go to the matching somepage.php file. ie. /admin/settings is /admin/settings.php:
+RewriteRule ^admin/([A-Za-z0-9-]+)[/]*$ /admin/index.php?page=$1 [L,NC]
+# urls with only /admin go to the main admin page (logged in or not):
+RewriteRule ^(admin) - [L]
+# urls that are NOT in /admin have the page as the first parameter.
+RewriteRule ^([A-Za-z0-9]+)[/]*$ /index.php?page=$1 [L,NC]
+# Custom 404 page:
+ErrorDocument 404 /404.php
