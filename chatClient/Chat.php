@@ -1,5 +1,5 @@
 <?php
-namespace chatApp;
+namespace chatClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
@@ -8,6 +8,7 @@ class Chat implements MessageComponentInterface {
 
     public function __construct() {
         $this->clients = new \SplObjectStorage;
+        echo "Chat server started!\n";
     }
 
     public function onOpen(ConnectionInterface $conn) {
