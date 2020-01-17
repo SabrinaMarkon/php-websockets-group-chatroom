@@ -9,10 +9,12 @@ $members = $allmembers->getAllMembers('login_status desc');
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-		
+		<div class="col-md-8 col-md-offset-2">		
 			<h1 class="ja-bottompadding"><?php echo $title ?> Chat</h1>
-			
+    </div>
+  </div>	
+  <div class="row">
+		<div class="col-md-4">			
       <table class="table table-striped">
         <thead>
           <tr>
@@ -40,12 +42,38 @@ $members = $allmembers->getAllMembers('login_status desc');
         ?>       
         </tbody>
       </table>
-
-			<div class="ja-bottompadding"></div>
-
 		</div>
+    <div class="col-md-8">
+      <div id="messages">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th colspan="4" scope="col"><strong>Chat Room</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td valign="top">
+                <div><strong>From </strong></div>
+                <div>Message</div>
+              </td>
+              <td valign="top" align="right">Message Time</td>
+            </tr>
+          </tbody>
+        </table>           
+      </div>
+      <form id="chat-room-frm" method="post" action="">
+          <div class="form-group">
+            <textarea class="form-control" id="msg" name="msg" placeholder="Enter Message"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="button" value="Send" class="btn btn-success btn-block" id="send" name="send">
+          </div>
+      </form>
+    </div>
 	</div>
 </div>
+<div class="ja-bottompadding"></div>
 <script type="text/javascript">
   $(document).ready(function() {
     let conn = new WebSocket('ws://localhost:8080');
