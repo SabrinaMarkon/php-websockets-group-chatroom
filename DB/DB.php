@@ -36,6 +36,7 @@ accounttype varchar(255) not null default 'Member',
 firstname varchar(255) not null,
 lastname varchar(255) not null,
 email varchar(255) not null,
+login_status tinyint(1) not null default '0',
 signupdate datetime not null,
 signupip varchar(255) not null,
 verified varchar(4) not null default 'no',
@@ -62,7 +63,7 @@ INSERT INTO pages (name, htmlcode, slug, core) values ('Login Page', '', 'login'
 INSERT INTO pages (name, htmlcode, slug, core) values ('Terms and Conditions', '', 'terms', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Main Page', '', 'members', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Profile Page', '', 'profile', 'yes');
-INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Chat Page', '', 'chat', 'yes');
+INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Chatroom Page', '', 'chatroom', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Registration Page', '', 'register', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Logout Page', '', 'logout', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('About Us Page', '', 'aboutus', 'yes');
