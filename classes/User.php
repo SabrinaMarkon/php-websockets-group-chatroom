@@ -162,7 +162,7 @@ class User
 
 	}
 
-	public function updateLoginStatus($username, $loginstatus) {
+	public function updateChatLoginStatus($username, $loginstatus) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		$sql = "update members set login_status=? where username=?";

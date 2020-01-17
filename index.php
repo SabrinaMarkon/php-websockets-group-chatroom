@@ -66,12 +66,12 @@ $showupdate = $update->saveProfile($_SESSION['username']);
 }
 if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
 $loginstatus = new User();
-$loginstatus->updateLoginStatus($_SESSION['username'], 1);
+$loginstatus->updateChatLoginStatus($_SESSION['username'], 1);
 }
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
 $logout = new User();
-$logout->updateLoginStatus($_SESSION['username'], 0);
+$logout->updateChatLoginStatus($_SESSION['username'], 0);
 $logout->userLogout();
 $logoutpage = new PageContent();
 $showlogout = $logoutpage->showPage('Logout Page');
