@@ -78,6 +78,11 @@ class User
 			# successful login.
 			$q->setFetchMode(PDO::FETCH_ASSOC);
 			$memberdetails = $q->fetch();
+			# update last login date & time.
+			$sql = "update members set lastlogin=NOW() where username=? and password=?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($username,$password));
+			# return the member fields.
 			return $memberdetails;
 			}
 		else
