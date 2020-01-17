@@ -30,7 +30,7 @@ KEY mail_username_foreign (username)
 
 create table members (
 id integer unsigned not null primary key auto_increment,
-username varchar(255) not null,
+username varchar(255) not null unique,
 password varchar(255) not null,
 accounttype varchar(255) not null default 'Member',
 firstname varchar(255) not null,
