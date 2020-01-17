@@ -10,11 +10,11 @@ class Member
 {
     private $pdo;
 
-    public function getAllMembers() {
+    public function getAllMembers($orderby) {
 
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $sql = "select * from members order by username";
+        $sql = "select * from members order by $orderby";
         $q = $pdo->prepare($sql);
         $q->execute();
         $q->setFetchMode(PDO::FETCH_ASSOC);

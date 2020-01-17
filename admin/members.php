@@ -5,7 +5,7 @@ if (isset($showupdate))
     echo $showupdate;
 }
 $allmembers = new Member();
-$members = $allmembers->getAllMembers();
+$members = $allmembers->getAllMembers('username');
 ?>
 
 <div class="container">

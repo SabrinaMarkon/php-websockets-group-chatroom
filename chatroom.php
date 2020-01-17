@@ -4,7 +4,7 @@ $showcontent = new PageContent();
 echo $showcontent->showPage('Members Area Chatroom Page');
 # Get the members to show which ones are online and which aren't.
 $allmembers = new Member();
-$members = $allmembers->getAllMembers();
+$members = $allmembers->getAllMembers('login_status desc');
 ?>
 
 <div class="container">
