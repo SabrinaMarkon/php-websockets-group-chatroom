@@ -49,10 +49,10 @@ if (isset($_POST['forgotlogin']))
 $forgot = new User();
 $showforgot = $forgot->forgotLogin($sitename,$domain,$adminemail);
 }
-if (isset($_POST['talk']))
+if (isset($_POST['chat']))
 {
-    $talk = new Talk();
-    $showupdate = $talk->addPost($_SESSION['username'], $_POST['neworreply']);
+    // $chat = new Chat();
+    // $showupdate = '';
 }
 if (isset($_POST['contactus']))
 {
