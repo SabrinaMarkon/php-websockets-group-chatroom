@@ -13,7 +13,33 @@ $members = $allmembers->getAllMembers();
 		
 			<h1 class="ja-bottompadding"><?php echo $title ?> Chat</h1>
 			
-
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>
+              <div><?php echo $firstname . " " . $lastname ?></div>
+              <div><?php echo $email ?></div>
+            </td>
+          </tr>
+          <tr>
+            <th>Users</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php
+          foreach ($members as $member) {
+            $color = "color: #f00";
+            if ($member['login_status'] === 1) {
+              $color = "color: #00f";
+            }
+            $member_fullname = $member['firstname'] . " " . $member['lastname'];
+            echo "<tr><td>" . $member_fullname . "</td>";
+            echo "<td><span class=\"fas fa-circle\" style=\"" . $color . "\"></span></td>";
+            echo "<td>" . $member['lastlogin'] . "</td></tr>";
+          }
+        ?>       
+        </tbody>
+      </table>
 
 			<div class="ja-bottompadding"></div>
 
