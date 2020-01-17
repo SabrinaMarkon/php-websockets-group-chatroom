@@ -121,7 +121,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="name">Email Subject</label>
-                            <input type="text" name="subject" placeholder="Email Subject" class="form-control" value="<?php echo $showeditmail['subject']; ?>">
+                            <input type="text" name="subject" placeholder="Email Subject" class="form-control" value="<?php echo $showeditmail['subject']; ?>" required minlength="1" maxlength="255">
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="htmlcode">Email Message</label>
-                            <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30"><?php echo $showeditmail['message']; ?></textarea>
+                            <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" required minlength="1" maxlength="10000"><?php echo $showeditmail['message']; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -169,7 +169,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="name">Email Subject</label>
-                                <input type="text" name="subject" placeholder="Email Subject" class="form-control">
+                                <input type="text" name="subject" placeholder="Email Subject" class="form-control" required minlength="1" maxlength="255">
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="htmlcode">Email Message</label>
-                                <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30"></textarea>
+                                <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" required minlength="1" maxlength="10000"></textarea>
                             </div>
                         </div>
                     </div>

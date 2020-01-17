@@ -21,25 +21,22 @@ foreach ($settings as $key => $value)
             <form method="post" accept-charset="utf-8" class="form" role="form">
 
                 <label class="sr-only" for="adminuser">Your Website Name:</label>
-                <input type="text" name="adminuser" value="<?php echo $adminuser ?>" class="form-control input-lg" placeholder="Admin Username">
+                <input type="text" name="adminuser" value="<?php echo $adminuser ?>" class="form-control input-lg" placeholder="Admin Username" required minlength="41" maxlength="255">
 
                 <label class="sr-only" for="adminpass">Admin Password</label>
-                <input type="password" name="adminpass" value="<?php echo $adminpass ?>" class="form-control input-lg" placeholder="Admin Password">
+                <input type="password" name="adminpass" value="<?php echo $adminpass ?>" class="form-control input-lg" placeholder="Admin Password" required minlength="6" maxlength="255">
 
                 <label class="sr-only" for="confirm_adminpass">Confirm Password</label>
-                <input type="password" name="confirm_adminpass" value="<?php echo $adminpass ?>" class="form-control input-lg" placeholder="Confirm Password">
+                <input type="password" name="confirm_adminpass" value="<?php echo $adminpass ?>" class="form-control input-lg" placeholder="Confirm Password" required minlength="6" maxlength="255">
 
                 <label class="sr-only" for="adminemail">Your Admin Email</label>
-                <input type="text" name="adminemail" value="<?php echo $adminemail ?>" class="form-control input-lg" placeholder="Admin Email">
-
-                <label class="sr-only" for="adminemail">Your PayPal Email</label>
-                <input type="text" name="adminpaypal" value="<?php echo $adminpaypal ?>" class="form-control input-lg" placeholder="PayPal Email">
+                <input type="text" name="adminemail" value="<?php echo $adminemail ?>" class="form-control input-lg" placeholder="Admin Email" required minlength="4" maxlength="255">
 
                 <label class="sr-only" for="sitename">Your Website Name:</label>
-                <input type="text" name="sitename" value="<?php echo $sitename ?>" class="form-control input-lg" placeholder="Website Name">
+                <input type="text" name="sitename" value="<?php echo $sitename ?>" class="form-control input-lg" placeholder="Website Name" required minlength="1" maxlength="255">
 
                 <label class="sr-only" for="domain">Your Domain:</label>
-                <input type="text" name="domain" value="<?php echo $domain ?>" class="form-control input-lg" placeholder="Website URL (start with http://)">
+                <input type="text" name="domain" value="<?php echo $domain ?>" class="form-control input-lg" placeholder="Website URL (start with http://)" required minlength="1" maxlength="255">
 
                 <div class="ja-bottompadding"></div>
 

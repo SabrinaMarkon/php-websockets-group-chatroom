@@ -103,7 +103,7 @@ $pages = $allpages->getAllPages();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="name">Page Name</label>
-                            <input type="text" name="name" placeholder="Page Name" class="form-control" value="<?php echo $showeditpage['name']; ?>">
+                            <input type="text" name="name" placeholder="Page Name" class="form-control" value="<?php echo $showeditpage['name']; ?>" required minlength="1" maxlength="255">
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ $pages = $allpages->getAllPages();
                                 $disabled = "";
                             }
                             ?>
-                            <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12"<?php echo $disabled ?> value="<?php echo $showeditpage['slug']; ?>">
+                            <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12"<?php echo $disabled ?> value="<?php echo $showeditpage['slug']; ?>" required minlength="1" maxlength="255">
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@ $pages = $allpages->getAllPages();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="htmlcode">Page HTML</label>
-                            <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30"><?php echo $showeditpage['htmlcode']; ?></textarea>
+                            <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" required minlength="1" maxlength="100000"><?php echo $showeditpage['htmlcode']; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ $pages = $allpages->getAllPages();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="name">Page Name</label>
-                                <input type="text" name="name" placeholder="Page Name" class="form-control">
+                                <input type="text" name="name" placeholder="Page Name" class="form-control" required minlength="1" maxlength="255">
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ $pages = $allpages->getAllPages();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="name">Page Slug (url)</label>
-                                <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12">
+                                <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12" required minlength="1" maxlength="255">
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@ $pages = $allpages->getAllPages();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="htmlcode">Page HTML</label>
-                                <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30"></textarea>
+                                <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" required minlength="1" maxlength="100000"></textarea>
                             </div>
                         </div>
                     </div>
