@@ -49,11 +49,6 @@ if (isset($_POST['forgotlogin']))
 $forgot = new User();
 $showforgot = $forgot->forgotLogin($sitename,$domain,$adminemail);
 }
-if (isset($_POST['chat']))
-{
-    // $chat = new Chat();
-    // $showupdate = '';
-}
 if (isset($_POST['contactus']))
 {
 $contact = new Contact();
@@ -69,9 +64,14 @@ if (isset($_POST['saveprofile']))
 $update = new User();
 $showupdate = $update->saveProfile($_SESSION['username']);
 }
+if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
+$loginstatus = new User();
+$loginstatus->updateLoginStatus($_SESSION['username'], 1);
+}
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
 $logout = new User();
+$logout->updateLoginStatus($_SESSION['username'], 0);
 $logout->userLogout();
 $logoutpage = new PageContent();
 $showlogout = $logoutpage->showPage('Logout Page');

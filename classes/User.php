@@ -162,10 +162,16 @@ class User
 
 	}
 
+	public function updateLoginStatus($username, $loginstatus) {
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$sql = "update members set login_status=? where username=?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($loginstatus,$username));	
+	}
+
 	public function userLogout() {
-
 		session_unset();
-
 	}
 
 	public function deleteUser($username) {
