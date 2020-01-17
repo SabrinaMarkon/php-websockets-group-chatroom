@@ -13,11 +13,7 @@ use chatClient\Chat;
     $checkedApp->allowedOrigins[] = 'collectorsscave.com';
 
     $server = IoServer::factory(
-        new HttpServer(
-            new WsServer(
-                new Chat()
-            )
-        ),
+        new HttpServer($checkedApp),
         8080
     );
 
