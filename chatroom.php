@@ -62,7 +62,7 @@ $allchatmessages = $chatroom->loadChatRoom();
                     <div><strong>' . $chatmessage['username'] . '</strong></div>
                     <div>' . $chatmessage['msg'] . '</div>
                   </td>
-                  <td valign="top" align="right">' . $chatmessage['created_on'] . '</td>
+                  <td valign="top" align="right">' . date("M-d-Y h:i:s a", $chatmessage['created_on']) . '</td>
                 </tr>';
               }
             ?>
@@ -97,7 +97,7 @@ $allchatmessages = $chatroom->loadChatRoom();
           <div><strong>${data.user}</strong></div>
           <div>${data.text}</div>
         </td>
-        <td valign="top" align="right">${data.time}</td>
+        <td valign="top" align="right">${data.dt}</td>
       </tr>
       `;
       // Add the new message row to the chat box.
