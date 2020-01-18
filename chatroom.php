@@ -55,7 +55,17 @@ $allchatmessages = $chatroom->loadChatRoom();
             </tr>
           </thead>
           <tbody>
-
+            <?php
+              foreach($allchatmessages as $chatmessage) {
+                echo '<tr>
+                  <td valign="top">
+                    <div><strong>' . $chatmessage['username'] . '</strong></div>
+                    <div>' . $chatmessage['msg'] . '</div>
+                  </td>
+                  <td valign="top" align="right">' . $chatmessage['created_on'] . '</td>
+                </tr>';
+              }
+            ?>
             <!-- This is where the new messages will appear!  -->
           </tbody>
         </table>           

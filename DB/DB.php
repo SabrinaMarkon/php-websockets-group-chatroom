@@ -15,6 +15,13 @@ CREATE TABLE `adminnotes` (
   KEY `index` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
+create table chatroom (
+id integer unsigned not null primary key auto_increment,
+username varchar(255) not null unique,
+msg text not null,
+created_on datetime not null
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
 CREATE TABLE mail (
 `id` int(10) unsigned not null auto_increment,
 username varchar(255) not null default 'admin',

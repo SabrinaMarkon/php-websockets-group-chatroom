@@ -15,7 +15,7 @@ class ChatRoom {
   }
 
   public function saveChatRoom() {
-		$sql = "insert into chatrooms (username, msg, createdOn) values (?, ?, NOW())";
+		$sql = "insert into chatroom (username, msg, created_on) values (?, ?, NOW())";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($this->username, $this->msg));
   }
@@ -23,7 +23,7 @@ class ChatRoom {
   public function loadChatRoom() {
     // limit the number so if there are 1000s we don't crash.
     // (function later to click and view older messages or search them).
-    $sql = "select * from chatrooms order by id desc limit 100";
+    $sql = "select * from chatroom order by id desc limit 100";
     $q = $pdo->prepare($sql);
     $q->execute();
     $q->setFetchMode(PDO::FETCH_ASSOC);
