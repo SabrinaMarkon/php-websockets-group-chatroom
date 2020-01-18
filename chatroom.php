@@ -5,6 +5,9 @@ echo $showcontent->showPage('Members Area Chatroom Page');
 // Get the members to show which ones are online and which aren't.
 $allmembers = new Member();
 $members = $allmembers->getAllMembers('login_status desc');
+// Get class for chatroom database handling.
+$chatroom = new ChatRoom();
+$allchatmessages = $chatroom->loadChatRoom();
 ?>
 
 <div class="container">
@@ -52,7 +55,8 @@ $members = $allmembers->getAllMembers('login_status desc');
             </tr>
           </thead>
           <tbody>
-          <!-- This is where the messages will appear!  -->
+
+            <!-- This is where the new messages will appear!  -->
           </tbody>
         </table>           
       </div>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Chat client handling for group chatroom.
+ * PHP 5+
+ * @author Sabrina Markon
+ * @copyright 2020 Sabrina Markon, SabrinaMarkon.com
+ * @license LICENSE.md
+ **/
 namespace chatClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
