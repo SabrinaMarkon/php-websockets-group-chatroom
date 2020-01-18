@@ -2,7 +2,7 @@
 include "control.php";
 $showcontent = new PageContent();
 echo $showcontent->showPage('Members Area Chatroom Page');
-# Get the members to show which ones are online and which aren't.
+// Get the members to show which ones are online and which aren't.
 $allmembers = new Member();
 $members = $allmembers->getAllMembers('login_status desc');
 ?>
@@ -45,20 +45,14 @@ $members = $allmembers->getAllMembers('login_status desc');
 		</div>
     <div class="col-md-8">
       <div id="messages">
-        <table class="table table-striped">
+        <table id="chats" class="table table-striped">
           <thead>
             <tr>
               <th colspan="4" scope="col"><strong>Chat Room</strong></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td valign="top">
-                <div><strong>From </strong></div>
-                <div>Message</div>
-              </td>
-              <td valign="top" align="right">Message Time</td>
-            </tr>
+          <!-- This is where the messages will appear!  -->
           </tbody>
         </table>           
       </div>
@@ -80,17 +74,32 @@ $members = $allmembers->getAllMembers('login_status desc');
     conn.onopen = function(e) {
       console.log("Connection established!");
     }
+    // onmessage received this is what happens:
     conn.onmessage = function(e) {
       console.log(e.data);
+      let data = JSON.parse(e.data);
+      let row = `<tr>
+        <td valign="top">
+          <div><strong>${data.user}</strong></div>
+          <div>${data.text}</div>
+        </td>
+        <td valign="top" align="right">${data.time}</td>
+      </tr>
+      `;
+      // Add the new message row to the chat box.
+      $('#chats > tbody').append(row); 
     }
     $('#send').click(function() {
-      let userId = $('#userId').val();
+      // let userId = $('#userId').val();
+      let username = "<?php echo $username ?>";
       let msg = $('#msg').val();
       let data = {
-        userId,
-        msg
+        'user': username,
+        'text': msg
       };
       conn.send(JSON.stringify(data) );
+      $('#msg').val(''); // reset the form field to be empty.
     });
+
   });
 </script>
