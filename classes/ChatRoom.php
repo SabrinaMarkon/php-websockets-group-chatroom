@@ -23,7 +23,7 @@ class ChatRoom {
   public function loadChatRoom() {
     // limit the number so if there are 1000s we don't crash.
     // (function later to click and view older messages or search them).
-    $sql = "select * from chatroom order by id desc limit 100";
+    $sql = "select * from chatroom order by id limit 100";
     $q = $pdo->prepare($sql);
     $q->execute();
     $q->setFetchMode(PDO::FETCH_ASSOC);
