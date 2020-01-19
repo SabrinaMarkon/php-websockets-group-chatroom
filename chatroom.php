@@ -2,12 +2,27 @@
 include "control.php";
 $showcontent = new PageContent();
 echo $showcontent->showPage('Members Area Chatroom Page');
+
 // Get the members to show which ones are online and which aren't.
 $allmembers = new Member();
 $members = $allmembers->getAllMembers('login_status desc');
+
 // Get class for chatroom database handling.
 $chatroom = new ChatRoom();
 $allchatmessages = $chatroom->loadChatRoom();
+
+// User class to update login_status.
+$user = new User();
+// Update login_status to 1 when user arrives on this page.
+$user->updateChatLoginStatus($username, 1);
+// Manually leaves the chat by clicking the Leave button.
+if(isset($_POST['action'])) 
+{
+  if ($action === 'leave') {
+    $user->updateChatLoginStatus($username, 0);
+    @header('Location:members.php');
+  }
+}
 ?>
 
 <div class="container">
@@ -89,9 +104,11 @@ $allchatmessages = $chatroom->loadChatRoom();
 <script type="text/javascript">
   $(document).ready(function() {
     let conn = new WebSocket('ws://localhost:8080');
+
     conn.onopen = function(e) {
       console.log("Connection established!");
     }
+
     // onmessage received this is what happens:
     conn.onmessage = function(e) {
       console.log(e.data);
@@ -107,6 +124,11 @@ $allchatmessages = $chatroom->loadChatRoom();
       // Add the new message row to the chat box.
       $('#chats > tbody').append(row); 
     }
+
+    conn.onclose = function(e) {
+      console.log("Connection Closed!");
+    }
+
     $('#send').click(function() {
       // let userId = $('#userId').val();
       let username = "<?php echo $username ?>";
@@ -117,6 +139,24 @@ $allchatmessages = $chatroom->loadChatRoom();
       };
       conn.send(JSON.stringify(data) );
       $('#msg').val(''); // reset the form field to be empty.
+    });
+
+    $('#leave-chat').click(function() {
+      let username = "<?php echo $username ?>";
+      $.ajax({
+        // url: "", // Leave empty if we are posting to the same page.
+        method: "post",
+        data: `action=leave`
+      }).done(function(result) {
+        // Send message to all users that this user has left the chat.
+        let data = {
+        'user': username,
+        'text': username . " has left the chat."
+        };
+        conn.send(JSON.stringify(data) );
+        conn.close(); // Calls conn.onclose above.
+        // console.log(result);
+      });
     });
 
   });

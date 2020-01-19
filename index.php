@@ -64,10 +64,10 @@ if (isset($_POST['saveprofile']))
 $update = new User();
 $showupdate = $update->saveProfile($_SESSION['username']);
 }
-if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
-$loginstatus = new User();
-$loginstatus->updateChatLoginStatus($_SESSION['username'], 1);
-}
+// if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
+// $loginstatus = new User();
+// $loginstatus->updateChatLoginStatus($_SESSION['username'], 1);
+// }
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
 $logout = new User();
