@@ -14,10 +14,10 @@ class ChatRoom {
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
   }
 
-  public function saveChatRoom() {
+  public function saveChatRoom($username, $msg) {
 		$sql = "insert into chatroom (username, msg, created_on) values (?, ?, NOW())";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($this->username, $this->msg));
+		$q->execute(array($username, $msg));
   }
 
   public function loadChatRoom() {
@@ -34,7 +34,5 @@ class ChatRoom {
   public function __destruct() {
     Database::disconnect();
   }
-
-
   
 }

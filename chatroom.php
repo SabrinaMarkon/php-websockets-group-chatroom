@@ -40,7 +40,7 @@ $allchatmessages = $chatroom->loadChatRoom();
             $member_fullname = $member['firstname'] . " " . $member['lastname'];
             echo "<tr><td>" . $member_fullname . "</td>";
             echo "<td><span class=\"fas fa-circle\" style=\"" . $color . "\"></span></td>";
-            echo "<td>" . $member['lastlogin'] . "</td></tr>";
+            echo "<td>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</td></tr>";
           }
         ?>       
         </tbody>
@@ -62,7 +62,7 @@ $allchatmessages = $chatroom->loadChatRoom();
                     <div><strong>' . $chatmessage['username'] . '</strong></div>
                     <div>' . $chatmessage['msg'] . '</div>
                   </td>
-                  <td valign="top" align="right">' . date("M-d-Y h:i:s a", $chatmessage['created_on']) . '</td>
+                  <td valign="top" align="right">' . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . '</td>
                 </tr>';
               }
             ?>

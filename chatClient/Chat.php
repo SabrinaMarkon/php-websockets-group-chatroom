@@ -32,12 +32,15 @@ class Chat implements MessageComponentInterface {
             // $numRecv == 1 ? '' : 's' just makes 'connections' word plural or not depending on $numRecv.
 
         // Add the date/time to the $data object:
-        $data['dt'] = date("M-d-Y h:i:s a");
+        $data['dt'] = date("M-d-Y h:i:s A");
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
                 // Uncomment if we don't want users to see their own messages.
                 $client->send($json_encode($data));
             // }
+        // Add the message to the database chatroom history:
+        $chathistory = new \ChatRoom();
+        $chathistory->saveChatRoom($msg['user'], $msg['text']);
         }
     }
 
