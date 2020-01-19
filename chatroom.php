@@ -28,7 +28,7 @@ if(isset($_POST['action']))
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">		
-			<h1 class="ja-bottompadding"><?php echo $title ?> Chat</h1>
+			<h1 class="ja-bottompadding"><?php echo $sitename ?> Chat</h1>
     </div>
   </div>	
   <div class="row">
