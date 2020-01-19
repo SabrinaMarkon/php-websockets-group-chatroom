@@ -106,7 +106,7 @@ if(isset($_POST['action']))
 <div class="ja-bottompadding"></div>
 <script type="text/javascript">
   $(document).ready(function() {
-    let conn = new WebSocket('ws://localhost:8080');
+    let conn = new WebSocket('ws://96.43.136.186:8080');
 
     conn.onopen = function(e) {
       console.log("Connection established!");
@@ -154,7 +154,7 @@ if(isset($_POST['action']))
         // Send message to all users that this user has left the chat.
         let data = {
         'user': username,
-        'text': username . " has left the chat."
+        'text': `${username} has left the chat.`
         };
         conn.send(JSON.stringify(data) );
         conn.close(); // Calls conn.onclose above.

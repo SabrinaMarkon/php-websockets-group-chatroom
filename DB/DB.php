@@ -35,21 +35,22 @@ PRIMARY KEY (`id`),
 KEY mail_username_foreign (username)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-create table members (
-id integer unsigned not null primary key auto_increment,
-username varchar(255) not null unique,
-password varchar(255) not null,
-accounttype varchar(255) not null default 'Member',
-firstname varchar(255) not null,
-lastname varchar(255) not null,
-email varchar(255) not null,
-login_status tinyint(1) not null default '0',
-signupdate datetime not null,
-signupip varchar(255) not null,
-verified varchar(4) not null default 'no',
-verifieddate datetime not null,
-lastlogin datetime not null
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+CREATE TABLE `members` (
+  `id` int(10) UNSIGNED NOT NULL primary key auto_increment,
+  `username` varchar(255) NOT NULL unique,
+  `password` varchar(255) NOT NULL,
+  `accounttype` varchar(255) NOT NULL DEFAULT 'Member',
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `signupdate` datetime NOT NULL,
+  `signupip` varchar(255) NOT NULL,
+  `verified` varchar(4) NOT NULL DEFAULT 'no',
+  `verifieddate` datetime NOT NULL,
+  `lastlogin` datetime NOT NULL,
+  `login_status` tinyint(1) NOT NULL DEFAULT '0',
+  `resourceId` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE `pages` (
   `id` int(10) unsigned not null auto_increment,

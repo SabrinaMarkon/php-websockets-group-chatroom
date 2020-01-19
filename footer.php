@@ -8,8 +8,8 @@
 </div><!-- main container -->
 
 
-<script src="//code.jquery.com/jquery.js"></script>
+<!-- <script src="//code.jquery.com/jquery.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/navigation.js"></script>
+<script src="/js/navigation.js"></script> -->
 </body>
 </html>
