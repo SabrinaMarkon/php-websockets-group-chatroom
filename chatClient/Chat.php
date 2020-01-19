@@ -48,6 +48,11 @@ class Chat implements MessageComponentInterface {
         // The connection is closed, remove it, as we can no longer send it messages
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
+
+        // IMPORTANT - ADD field to database for resourceId, and update that value
+        // for a username when they connect. When onClose is received here, 
+        // look up that resourceId in the database and set login_status=0 and resourceId=0
+        // for that username.
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {

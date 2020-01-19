@@ -57,6 +57,9 @@ if(isset($_POST['action']))
               $color = "color: #00f";
             }
             $member_fullname = $member['firstname'] . " " . $member['lastname'];
+            
+            // ADD GRAVATAR (need user email) - change to uploaded photos later.
+
             echo "<tr><td>" . $member_fullname . "</td>";
             echo "<td><span class=\"fas fa-circle\" style=\"" . $color . "\"></span></td>";
             echo "<td>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</td></tr>";

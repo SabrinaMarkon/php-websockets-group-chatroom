@@ -9,6 +9,8 @@ Stories:
 
 - As members of the website, users can login and chat with one another either privately or in the group channel.
 
+- The chat uses websockets.
+
 - The admin may login to an admin area.
 
 - The admin can change the basic website settings from the admin area (site name, admin user/pass, domain url, etc.)
