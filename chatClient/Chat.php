@@ -26,10 +26,11 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        // $msg is the data = {'user': username, 'text': msg} sent from the jQuery in chatroom.php. 
+        // $msg is the data = {'username': username, 'text': msg} sent from the jQuery in chatroom.php. 
         $numRecv = count($this->clients) - 1;
-        echo sprintf('Connection %d with username u sending message "%s" to %d other connection%s' . "\n"
-            , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
+        $userobj = json_decode($msg);
+        echo sprintf('Connection %d with username %s sending message "%s" to %d other connection%s' . "\n"
+            , $from->resourceId, $userobj->username, $userobj->text, $numRecv, $numRecv == 1 ? '' : 's');
             // $numRecv == 1 ? '' : 's' just makes 'connections' word plural or not depending on $numRecv.
 
         // Add the date/time to the $data object:
@@ -42,7 +43,7 @@ class Chat implements MessageComponentInterface {
             // }
         // Add the message to the database chatroom history: FIX THIS PROBLEM!!
         $chathistory = new ChatRoom();
-        $chathistory->saveChatRoom($msg['user'], $msg['text']);
+        $chathistory->saveChatRoom($userobj->username, $userobj->text);
         }
     }
 

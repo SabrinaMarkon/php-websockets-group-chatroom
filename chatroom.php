@@ -119,7 +119,7 @@ if(isset($_POST['action']))
       let data = JSON.parse(e.data);
       let row = `<tr>
         <td valign="top">
-          <div><strong>${data.user}</strong></div>
+          <div><strong>${data.username}</strong></div>
           <div>${data.text}</div>
         </td>
         <td valign="top" align="right">${data.dt}</td>
@@ -134,11 +134,10 @@ if(isset($_POST['action']))
     }
 
     $('#send').click(function() {
-      // let userId = $('#userId').val();
       let username = "<?php echo $username ?>";
       let msg = $('#msg').val();
       let data = {
-        'user': username,
+        'username': username,
         'text': msg
       };
       conn.send(JSON.stringify(data) );
@@ -154,7 +153,7 @@ if(isset($_POST['action']))
       }).done(function(result) {
         // Send message to all users that this user has left the chat.
         let data = {
-        'user': username,
+        'username': username,
         'text': `${username} has left the chat.`
         };
         conn.send(JSON.stringify(data) );
