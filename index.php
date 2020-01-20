@@ -90,7 +90,7 @@ if ((!empty($_GET['page'])) and ((file_exists($_GET['page'] . ".php") and ($_GET
 
     $Layout = new Layout();
     $Layout->showHeader();
-    include "main.php";
+    include "home.php";
     $Layout->showFooter();
 
 }

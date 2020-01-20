@@ -27,7 +27,7 @@ $content = <<<HEREDOC
 				
 			<h1 class="ja-bottompadding">Login</h1>
 
-			<form action="/members" method="post" accept-charset="utf-8" class="form" role="form">
+			<form action="main" method="post" accept-charset="utf-8" class="form" role="form">
 
 				$showloginerror
 

@@ -40,7 +40,7 @@
 			if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
 			{
 			?>
-			<a href="/members" type="button" class="btn ja-navbutton ja-navbutton-first" role="button">MAIN</a>
+			<a href="/main" type="button" class="btn ja-navbutton ja-navbutton-first" role="button">MAIN</a>
 			<a href="/profile" type="button" class="btn ja-navbutton" role="button">PROFILE</a>
 			<a href="/chatroom" type="button" class="btn ja-navbutton" role="button">JOIN CHAT!</a>
 			<a href="/contact" type="button" class="btn ja-navbutton" role="button">CONTACT</a>
@@ -71,7 +71,7 @@
 				<?php
 				if ((isset($_SESSION['username'])) && (isset($_SESSION['password']))) {
 					?>
-					<li class="list-item navmobilelink"><a href="/members">MAIN</a></li>
+					<li class="list-item navmobilelink"><a href="/main">MAIN</a></li>
 					<li class="list-item navmobilelink"><a href="/profile">PROFILE</a></li>
 					<li class="list-item navmobilelink"><a href="/chatroom">JOIN CHAT!</a></li>
 					<li class="list-item navmobilelink"><a href="/contact">CONTACT</a></li>

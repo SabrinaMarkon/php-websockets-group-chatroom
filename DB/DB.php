@@ -69,7 +69,7 @@ INSERT INTO `adminnotes` (`id`, `name`, `htmlcode`) values (1, 'Admin Notes', ''
 INSERT INTO pages (name, htmlcode, slug, core) values ('Home Page', '', '', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Login Page', '', 'login', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Terms and Conditions', '', 'terms', 'yes');
-INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Main Page', '', 'members', 'yes');
+INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Main Page', '', 'main', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Profile Page', '', 'profile', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Chatroom Page', '', 'chatroom', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Registration Page', '', 'register', 'yes');

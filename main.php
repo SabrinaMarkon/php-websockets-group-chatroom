@@ -1,4 +1,5 @@
 <?php
+include "control.php";
 $showcontent = new PageContent();
-echo $showcontent->showPage('Home Page');
+echo $showcontent->showPage('Members Area Main Page');
 ?>
