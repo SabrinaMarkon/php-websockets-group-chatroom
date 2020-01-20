@@ -107,7 +107,7 @@ if(isset($_POST['action']))
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    let conn = new WebSocket('ws://0.0.0.0:8080');
+    let conn = new WebSocket('ws://collectorsscave.phpsitescripts.com:8080');
 
     conn.onopen = function(e) {
       console.log("Connection established!");
