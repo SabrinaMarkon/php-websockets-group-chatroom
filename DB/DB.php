@@ -46,8 +46,8 @@ CREATE TABLE `members` (
   `signupdate` datetime NOT NULL,
   `signupip` varchar(255) NOT NULL,
   `verified` varchar(4) NOT NULL DEFAULT 'no',
-  `verifieddate` datetime NOT NULL,
-  `lastlogin` datetime NOT NULL,
+  `verifieddate` datetime,
+  `lastlogin` datetime,
   `login_status` tinyint(1) NOT NULL DEFAULT '0',
   `resourceId` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

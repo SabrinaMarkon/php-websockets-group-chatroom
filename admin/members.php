@@ -78,10 +78,10 @@ $members = $allmembers->getAllMembers('username');
                         $datesignedup = $signupdate->format('Y-m-d');
 
                         $verifieddate = new DateTime($member['verifieddate']);
-                        if($member['verifieddate'] === NULL){ $dateverified = 'Not Yet'; } else { $dateverified = $verifieddate->format('Y-m-d'); }
+                        if(is_null($member['verifieddate'])){ $dateverified = 'Not Yet'; } else { $dateverified = $verifieddate->format('Y-m-d'); }
 
                         $lastlogin = new DateTime($member['lastlogin']);
-                        if($member['lastlogin'] === NULL){ $datelastlogin = 'Not Yet'; } else { $datelastlogin = $lastlogin->format('Y-m-d'); }
+                        if(is_null($member['lastlogin'])){ $datelastlogin = 'Not Yet'; } else { $datelastlogin = $lastlogin->format('Y-m-d'); }
                         ?>
                         <tr>
                             <form action="/admin/members/<?php echo $member['id']; ?>" method="post" accept-charset="utf-8" class="form" role="form">
