@@ -27,16 +27,17 @@ class Chat implements MessageComponentInterface {
     public function onMessage(ConnectionInterface $from, $msg) {
         // $msg is the data = {'user': username, 'text': msg} sent from the jQuery in chatroom.php. 
         $numRecv = count($this->clients) - 1;
-        echo sprintf('Connection %d with username %u sending message "%s" to %d other connection%s' . "\n"
-            , $from->resourceId, $msg['user'], $msg['text'], $numRecv, $numRecv == 1 ? '' : 's');
+        echo sprintf('Connection %d with username u sending message "%s" to %d other connection%s' . "\n"
+            , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
             // $numRecv == 1 ? '' : 's' just makes 'connections' word plural or not depending on $numRecv.
 
         // Add the date/time to the $data object:
         $data['dt'] = date("M-d-Y h:i:s A");
+        
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
                 // Uncomment if we don't want users to see their own messages.
-                $client->send($json_encode($data));
+                $client->send(json_encode($data));
             // }
         // Add the message to the database chatroom history:
         $chathistory = new \ChatRoom();
