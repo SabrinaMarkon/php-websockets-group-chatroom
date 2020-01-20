@@ -44,7 +44,7 @@ img {
 #ja-heading-title {
 	font-size: 12rem;
 	font-family: 'Creepster', cursive;
-	opacity: 0.9;
+	opacity: 0.8;
 	letter-spacing: 3px;
 	text-shadow: 2px 2px 3px #000;
 }
@@ -106,7 +106,8 @@ img {
 /* Footer */
 .madewithlove {
 	width: 100%;
-	margin: 3rem 0;
+	margin: 0;
+	margin-bottom: 3rem;
 	padding: 0.4rem;
 	border: 1px solid #fff;
 	background-color: #533174;
@@ -116,14 +117,17 @@ img {
   color: #fff;
 }
 .madewithlove a {
-  color: #ff6c25;
+  color: #ff006a;
   text-decoration: none;
 }
 .madewithlove a:hover {
-	color: #feb658;
+	color: #fff;
+}
+.madewithlove__heart {
+  color: #ff006a;
 }
 .madewithlove__heart:hover {
-  color: #ff006a;
+  color: #fff;
 }
 
 /* Mobile Navigation */
@@ -190,30 +194,14 @@ img {
 	color: #000;
 }
 
-/* Threaded Posts */
-.root_post {
-	text-align: left;
-	width: 90%;
+.ja-chat-container {
+	margin: 0;
+	background: #000;
+	opacity: 0.9;
 }
-.root_post li{
-	list-style-type: none;
+.ja-small-font { 
+	font-size: 1.4rem; 
 }
-.fa {
-	font-size: 0.8em;
- 	margin: 5px;
-}
-.fa.hidechevron {
-	visibility: hidden;
-}
-.fa-chevron-right, .fa-chevron-down {
-	cursor: pointer;
-}
-.whoandwhen {
-	font-size: 0.4em;
-	font-style: italic;
-}
-
-
 .ja-bottompadding {
 	margin-bottom: 20px;
 }
@@ -288,14 +276,12 @@ border-color: #d0e3f0;
 	h1 { font-size: 140%; }
 	#ja-heading-title { font-size: 8rem; }
 }
-
 @media (min-width:800px)
 {
 	.ja-navbutton { font-size: 60%; border-right: 1px solid #a0a0a0; }
 	.ja-content { font-size: 120%; border-right: 1px solid #a0a0a0; }
 	h1 { font-size: 160%; }
 }
-
 @media (min-width:900px)
 {
 	.ja-navbutton { font-size: 80%; border-right: 1px solid #a0a0a0; }
@@ -305,18 +291,17 @@ border-color: #d0e3f0;
 	.ja-navbutton { visibility: visible; display: inline-block; }
 	#ja-heading-title { font-size: 10rem; }
 }
-
 @media (min-width:1000px)
 {
 	.ja-navbutton { font-size: 100%; border-right: 1px solid #a0a0a0; }
 	.ja-content { font-size: 160%; border-right: 1px solid #a0a0a0; }
 	h1 { font-size: 180%; }
 }
-
 @media (min-width:1100px)
 {
 	.ja-navbutton { font-size: 120%; border-right: 1px solid #a0a0a0; }
 	.ja-content { font-size: 180%; border-right: 1px solid #a0a0a0; }
 	h1 { font-size: 180%; }
 	#ja-heading-title { font-size: 12rem; }
+
 }

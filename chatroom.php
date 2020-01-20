@@ -21,12 +21,11 @@ if(isset($_POST['action']))
   $action = $_POST['action'];
   if ($action === 'leave') {
     $user->updateChatLoginStatus($username, 0);
-    @header('Location:members.php');
   }
 }
 ?>
 
-<div class="container">
+<div class="container ja-chat-container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">		
 			<h1 class="ja-bottompadding"><?php echo $sitename ?> Chat</h1>
@@ -34,7 +33,7 @@ if(isset($_POST['action']))
   </div>	
   <div class="row">
 		<div class="col-md-4">			
-      <table class="table">
+      <table class="table ja-small-font">
         <thead>
           <tr>
             <td>
@@ -73,7 +72,7 @@ if(isset($_POST['action']))
 		</div>
     <div class="col-md-8">
       <div id="messages">
-        <table id="chats" class="table table-striped">
+        <table id="chats" class="table table-striped ja-small-font">
           <thead>
             <tr>
               <th colspan="4" scope="col"><strong>Chat Room</strong></th>
@@ -106,10 +105,9 @@ if(isset($_POST['action']))
     </div>
 	</div>
 </div>
-<div class="ja-bottompadding"></div>
 <script type="text/javascript">
   $(document).ready(function() {
-    let conn = new WebSocket('ws://phpsitescripts.com:8080');
+    let conn = new WebSocket('ws://0.0.0.0:8080');
 
     conn.onopen = function(e) {
       console.log("Connection established!");
