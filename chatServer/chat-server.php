@@ -25,5 +25,5 @@ use chatClient\Chat;
         ),
         8080
     );
-    
+
     $server->run();

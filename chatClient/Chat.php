@@ -9,6 +9,7 @@
 namespace chatClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use \classes\ChatRoom;
 
 class Chat implements MessageComponentInterface {
     protected $clients;
@@ -33,14 +34,14 @@ class Chat implements MessageComponentInterface {
 
         // Add the date/time to the $data object:
         $data['dt'] = date("M-d-Y h:i:s A");
-        
+
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
                 // Uncomment if we don't want users to see their own messages.
                 $client->send(json_encode($data));
             // }
-        // Add the message to the database chatroom history:
-        $chathistory = new \ChatRoom();
+        // Add the message to the database chatroom history: FIX THIS PROBLEM!!
+        $chathistory = new ChatRoom();
         $chathistory->saveChatRoom($msg['user'], $msg['text']);
         }
     }
