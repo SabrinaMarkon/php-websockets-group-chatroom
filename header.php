@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Collectors Cave</title>
+<link href="https://fonts.googleapis.com/css?family=Creepster|Roboto&display=swap" rel="stylesheet">
 <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 <script src="https://kit.fontawesome.com/b5d058e525.js" crossorigin="anonymous"></script>
@@ -21,17 +22,15 @@
 <body>
 
 <div class="container text-center">
-
-	<header id="heading" class="ParallaxVideo">
+		
+	<header id="ja-heading">
 		<div class="overlay">
-			<h2>welcome to</h2>
-			<h1>Collectors Cave!</h1>
+			<h2 id="ja-heading-welcome">welcome to</h2>
+			<h1 id="ja-heading-title">Collectors Cave!</h1>
 		</div>
-		<!--
-		<video id="fireworksBG" autoplay muted loop poster="/images/backgroundvideoposter.jpg">
+		<video id="videoBG" autoplay muted loop poster="/images/fireworks.jpg">
 			<source src="/images/fireworks.mp4" type="video/mp4">
 		</video>
-		-->
 	</header>
 
 	<div class="btn-group btn-group-justified ja-navgroup" role="group" aria-label="Main Navigation Menu" id="navbar">

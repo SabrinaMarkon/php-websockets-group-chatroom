@@ -8,13 +8,22 @@ use chatClient\Chat;
     require dirname(__DIR__) . '/vendor/autoload.php';
 
     # Make sure the client is connected from one of the allowed domains only.
-    $checkedApp = new OriginCheck(new WsServer(new Chat()), array('localhost'));
-    $checkedApp->allowedOrigins[] = 'phpsitescripts.com';
-    $checkedApp->allowedOrigins[] = 'collectorsscave.com';
+    // $checkedApp = new OriginCheck(new WsServer(new Chat()), array('localhost'));
+    // $checkedApp->allowedOrigins[] = 'phpsitescripts.com';
+    // $checkedApp->allowedOrigins[] = 'collectorsscave.com';
+
+    // $server = IoServer::factory(
+    //     new HttpServer($checkedApp),
+    //     8080
+    // );
 
     $server = IoServer::factory(
-        new HttpServer($checkedApp),
+        new HttpServer(
+            new WsServer(
+                new Chat()
+            )
+        ),
         8080
     );
-
+    
     $server->run();

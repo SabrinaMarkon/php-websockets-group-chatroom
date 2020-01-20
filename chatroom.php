@@ -33,7 +33,7 @@ if(isset($_POST['action']))
   </div>	
   <div class="row">
 		<div class="col-md-4">			
-      <table class="table table-striped">
+      <table class="table">
         <thead>
           <tr>
             <td>
@@ -106,7 +106,7 @@ if(isset($_POST['action']))
 <div class="ja-bottompadding"></div>
 <script type="text/javascript">
   $(document).ready(function() {
-    let conn = new WebSocket('ws://96.43.136.186:8080');
+    let conn = new WebSocket('ws://phpsitescripts.com:8080');
 
     conn.onopen = function(e) {
       console.log("Connection established!");
