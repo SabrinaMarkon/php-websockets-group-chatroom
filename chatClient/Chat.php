@@ -9,7 +9,10 @@
 namespace chatClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-use \classes\ChatRoom;
+// use \classes\ChatRoom;
+
+require_once "config/Database.php";
+require_once "classes/ChatRoom.php";
 
 class Chat implements MessageComponentInterface {
     protected $clients;
@@ -42,7 +45,7 @@ class Chat implements MessageComponentInterface {
                 $client->send(json_encode($data));
             // }
         // Add the message to the database chatroom history: FIX THIS PROBLEM!!
-        $chathistory = new ChatRoom();
+        $chathistory = new \ChatRoom();
         $chathistory->saveChatRoom($userobj->username, $userobj->text);
         }
     }

@@ -72,7 +72,7 @@ if(isset($_POST['action']))
 		</div>
     <div class="col-md-8">
       <div id="messages">
-        <table id="chats" class="table table-striped ja-small-font">
+        <table id="chats" class="table ja-small-font">
           <thead>
             <tr>
               <th colspan="4" scope="col"><strong>Chat Room</strong></th>
@@ -82,12 +82,10 @@ if(isset($_POST['action']))
             <?php
               foreach($allchatmessages as $chatmessage) {
                 echo '<tr>
-                  <td valign="top">
-                    <div><strong>' . $chatmessage['username'] . '</strong></div>
-                    <div>' . $chatmessage['msg'] . '</div>
-                  </td>
-                  <td valign="top" align="right">' . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . '</td>
-                </tr>';
+                        <td valign="top" align="left">' . $chatmessage['username'] . '</td>
+                        <td valign="top" align="right">' . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . '</td>
+                      </tr>
+                      <tr><td align="left" colspan="2">' . $chatmessage['msg'] . '</td></tr>';
               }
             ?>
             <!-- This is where the new messages will appear!  -->
