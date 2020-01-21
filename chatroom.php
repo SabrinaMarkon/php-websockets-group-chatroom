@@ -82,10 +82,12 @@ if(isset($_POST['action']))
             <?php
               foreach($allchatmessages as $chatmessage) {
                 echo '<tr>
-                        <td valign="top" align="left">' . $chatmessage['username'] . '</td>
+                        <td valign="top" align="left">
+                          <div>' . $chatmessage['username'] . '</div>
+                          <div>' . $chatmessage['msg'] . '</div>
+                        </td>
                         <td valign="top" align="right">' . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . '</td>
-                      </tr>
-                      <tr><td align="left" colspan="2">' . $chatmessage['msg'] . '</td></tr>';
+                      </tr>';
               }
             ?>
             <!-- This is where the new messages will appear!  -->
@@ -113,11 +115,11 @@ if(isset($_POST['action']))
 
     // onmessage received this is what happens:
     conn.onmessage = function(e) {
-      console.log(e.data);
       let data = JSON.parse(e.data);
+      // console.log(data);
       let row = `<tr>
-        <td valign="top">
-          <div><strong>${data.username}</strong></div>
+        <td valign="top" align="left">
+          <div>${data.username}</div>
           <div>${data.text}</div>
         </td>
         <td valign="top" align="right">${data.dt}</td>

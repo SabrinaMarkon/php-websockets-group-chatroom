@@ -17,7 +17,7 @@ CREATE TABLE `adminnotes` (
 
 create table chatroom (
 id integer unsigned not null primary key auto_increment,
-username varchar(255) not null unique,
+username varchar(255) not null,
 msg text not null,
 created_on datetime not null
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
