@@ -194,6 +194,12 @@ img {
 	color: #000;
 }
 
+/* Chat Screen */
+#chat-messages {
+	height: 50vh;
+	overflow: auto;
+}
+
 .ja-chat-container {
 	margin: 0;
 	background: #000;

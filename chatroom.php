@@ -71,12 +71,9 @@ if(isset($_POST['action']))
       </table>
 		</div>
     <div class="col-md-8">
-      <div id="messages">
+      <div id="chat-messages">
         <table id="chats" class="table ja-small-font">
           <thead>
-            <tr>
-              <th colspan="4" scope="col"><strong>Chat Room</strong></th>
-            </tr>
           </thead>
           <tbody>
             <?php
@@ -107,6 +104,9 @@ if(isset($_POST['action']))
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
+
+    $("#chat-messages").animate({ scrollTop: $('#chat-messages').prop("scrollHeight")}, 1000);
+
     let conn = new WebSocket('ws://collectorsscave.phpsitescripts.com:8080');
 
     conn.onopen = function(e) {
