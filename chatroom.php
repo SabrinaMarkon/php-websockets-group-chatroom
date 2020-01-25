@@ -36,8 +36,8 @@ if(isset($_POST['action']))
       <table class="table ja-small-font">
         <thead>
           <tr>
-            <td>
-              <div><?php echo $firstname . " " . $lastname ?></div>
+            <td align="left">
+              <div>Logged in as: <?php echo $firstname . " " . $lastname ?></div>
               <div><?php echo $email ?></div>
             </td>
             <td align="right" colspan="2">
@@ -45,11 +45,11 @@ if(isset($_POST['action']))
               name="leave-chat" value="Leave">
             </td>
           </tr>
-          <tr>
-            <th>Users</th>
-          </tr>
         </thead>
         <tbody>
+          <tr>
+            <th colspan="3">Users</th>
+          </tr>
         <?php
           foreach ($members as $member) {
             $color = "color: #f00";
@@ -105,7 +105,9 @@ if(isset($_POST['action']))
 <script type="text/javascript">
   $(document).ready(function() {
 
+    // Scroll chat box to the end.
     $("#chat-messages").animate({ scrollTop: $('#chat-messages').prop("scrollHeight")}, 1000);
+    // non-animated: $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
 
     let conn = new WebSocket('ws://collectorsscave.phpsitescripts.com:8080');
 

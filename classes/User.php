@@ -47,9 +47,10 @@ class User
 			$q = $pdo->prepare($sql);
 			$q->execute(array($username,$password,$accounttype,$firstname,$lastname,$email,$signupip));
 			Database::disconnect();
-
-			$subject = "Welcome to " . $settings['sitename'] . "!";
+			$code = uniqid(); // just a random temporary string for the verification code.
+			$subject = "Welcome to " . $settings['sitename'] . "! Please verify your email!";
 			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
+			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify?code=" . $code;
 			$sendsiteemail = new Email();
 			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
 
@@ -66,6 +67,34 @@ class User
 
 	}
 
+	public function userVerification() {
+		$code = $_GET['code'];
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+		$sql = "select * from members where verifiedcode=? limit 1";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($code));
+		$found = $q->rowCount();
+		if($found > 0)
+			{
+			# successful email verification.
+			$q->setFetchMode(PDO::FETCH_ASSOC);
+			$memberdetails = $q->fetch();
+			# update verification date & time.
+			$sql = "update members set verifiedcode=NULL, verified='yes', verifieddate=NOW() where verifiedcode=?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($code));
+				return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your email was successfully verified! 
+				You can now login with your username and password!</strong></div>";
+			}
+		else
+			{
+				# Invalid verification code.
+				return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>The username or email address you entered was not found.</strong></div>";
+			}
+		Database::disconnect();
+	}
+	
 	public function userLogin($username,$password) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
