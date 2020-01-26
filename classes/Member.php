@@ -119,6 +119,7 @@ class Member
     }
 
     public function resendMember($id, $settings) {
+        $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "select * from members where id=? limit 1";
         $q = $pdo->prepare($sql);
