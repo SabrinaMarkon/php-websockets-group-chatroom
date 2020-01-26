@@ -118,6 +118,35 @@ class Member
 
     }
 
+    public function resendMember($id, $settings) {
+        $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $sql = "select * from members where id=? limit 1";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($id));
+        $found = $q->rowCount();
+        if ($found > 0) {
+			$q->setFetchMode(PDO::FETCH_ASSOC);
+            $data = $q->fetch();
+            $username = $data['username'];
+            $email = $data['email'];
+            $verifiedcode = uniqid();
+            # resend validation email.
+            $subject = "Please re-verify your email!";
+            $message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
+            $sendsiteemail = new Email();
+            $send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+            $sql = "update members set verified=?, verifiedcode=? where email=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array('no', $verifiedcode, $email));
+            Database::disconnect();
+            return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Resent Verification Email to username " . $username . "!</strong></div>";
+        }
+        else {
+			Database::disconnect();
+			return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>This member was not found.</strong></div>";
+        }
+    }
+
     public function getGravatar($username,$email) {
 
         $emailhash = trim($email);

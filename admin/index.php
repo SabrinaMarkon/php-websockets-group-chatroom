@@ -122,7 +122,11 @@ if (isset($_POST['deletemember']))
     $delete = new Member();
     $showupdate = $delete->deleteMember($id);
 }
-
+if (isset($_POST['resendverify']))
+{
+    $resend = new Member();
+    $showupdate = $resend->resendMember($id, $settings);
+}
 // REFACTOR LATER to make better routes etc. like laravel
 //if (isset($_POST['_method'])) {
 //

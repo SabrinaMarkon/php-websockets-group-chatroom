@@ -139,7 +139,7 @@ class User
 			$verifiedcode = uniqid();
 			# resend validation email.
 			$subject = "Please re-verify your email!";
-			$message = "Please verify your email address by clicking here: " . $domain . "/verify/" . $verifiedcode . "\n\n";
+			$message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
 			$sendsiteemail = new Email();
 			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
 			$sql = "update members set verified=?, verifiedcode=? where email=?";
