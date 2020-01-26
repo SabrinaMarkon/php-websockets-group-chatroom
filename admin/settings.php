@@ -21,7 +21,7 @@ foreach ($settings as $key => $value)
             <form method="post" accept-charset="utf-8" class="form" role="form">
 
                 <label class="sr-only" for="adminuser">Your Website Name:</label>
-                <input type="text" name="adminuser" value="<?php echo $adminuser ?>" class="form-control input-lg" placeholder="Admin Username" required minlength="41" maxlength="255">
+                <input type="text" name="adminuser" value="<?php echo $adminuser ?>" class="form-control input-lg" placeholder="Admin Username" required minlength="6s" maxlength="255">
 
                 <label class="sr-only" for="adminpass">Admin Password</label>
                 <input type="password" name="adminpass" value="<?php echo $adminpass ?>" class="form-control input-lg" placeholder="Admin Password" required minlength="6" maxlength="255">
