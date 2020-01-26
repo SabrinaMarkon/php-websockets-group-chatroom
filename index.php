@@ -47,7 +47,12 @@ else
 if (isset($_POST['forgotlogin']))
 {
 $forgot = new User();
-$showforgot = $forgot->forgotLogin($sitename,$domain,$adminemail);
+$showforgot = $forgot->forgotLogin($settings);
+}
+if (isset($_POST['resendverify']))
+{
+$resend = new User();
+$showresend = $resend->resendVerificationEmail($settings);
 }
 if (isset($_POST['contactus']))
 {
@@ -62,7 +67,7 @@ $showregistration = $register->newSignup($settings);
 if (isset($_POST['saveprofile']))
 {
 $update = new User();
-$showupdate = $update->saveProfile($_SESSION['username']);
+$showupdate = $update->saveProfile($_SESSION['username'], $settings);
 }
 // if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
 // $loginstatus = new User();

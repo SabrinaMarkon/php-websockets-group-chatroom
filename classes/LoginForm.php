@@ -38,6 +38,7 @@ $content = <<<HEREDOC
 				<input type="password" name="password" value="" class="form-control input-lg" placeholder="Password" required minlength="6" maxlength="255">
 
 				<span class="help-block"><a href="/forgot">Forgot Password?</a></span>
+				<span class="help-block"><a href="/resend">Resend Verification Email</a></span>
 
 				<button class="btn btn-lg btn-primary" type="submit" name="login">Login</button>
 
