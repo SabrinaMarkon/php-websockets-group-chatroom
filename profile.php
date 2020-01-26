@@ -31,7 +31,8 @@ echo $showcontent->showPage('Members Area Profile Page');
 						<label class="sr-only" for="lastname">Last Name</label>
 						<input type="text" name="lastname" value="<?php echo $lastname ?>" class="form-control input-lg" placeholder="Last Name" required minlength="1" maxlength="255">
 
-						<label class="sr-only" for="email">Your Email</label>
+						<label class="sr-only" for="email">Your Email (if changed will need to verify)</label>
+						<input type="hidden" name="oldemail" value="<?php echo $email ?>">
 						<input type="email" name="email" value="<?php echo $email ?>" class="form-control input-lg" placeholder="Your Email" required minlength="4" maxlength="255">
 
 						<label class="sr-only" for="password">Password</label>

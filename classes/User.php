@@ -50,7 +50,7 @@ class User
 			$code = uniqid(); // just a random temporary string for the verification code.
 			$subject = "Welcome to " . $settings['sitename'] . "! Please verify your email!";
 			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
-			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $code;
+			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $code . "\n\n";
 			$sendsiteemail = new Email();
 			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
 
@@ -170,16 +170,27 @@ class User
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$email = $_POST['email'];
+		$oldemail = $_POST['oldemail'];
 		$signupip = $_SERVER['REMOTE_ADDR'];
 
 		# make sure fields filled in. Make sure email is valid. Make sure passwords match.
 		# make sure fields > x chars.
-
+		$verified = 'yes';
+		$verifiedcode = null;
+		if ($email !== $oldemail) {
+			$verified = 'no';
+			$verifiedcode = uniqid();
+			# resend validation email.
+			$subject = "Please re-verify your email!";
+			$message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
+			$sendsiteemail = new Email();
+			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+		}
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		$sql = "update members set password=?, firstname=?, lastname=?, email=?, signupip=? where username=?";
+		$sql = "update members set password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=? where username=?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($password, $firstname, $lastname, $email, $signupip, $username));
+		$q->execute(array($password, $firstname, $lastname, $email, $signupip, $username, $verified, $verifiedcode));
 		Database::disconnect();
 		$_SESSION['password'] = $password;
 		$_SESSION['firstname'] = $firstname;
@@ -187,7 +198,8 @@ class User
 		$_SESSION['email'] = $email;
 		$_SESSION['signupip'] = $signupip;
 
-		return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your Account Details Were Saved!</strong></div>";
+		return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your Account Details Were Saved!<br /> 
+		If you changed your email address you will need to re-verify.</strong></div>";
 
 	}
 
