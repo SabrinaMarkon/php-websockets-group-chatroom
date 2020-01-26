@@ -142,7 +142,10 @@ class User
 			$message = "Please verify your email address by clicking here: " . $domain . "/verify/" . $verifiedcode . "\n\n";
 			$sendsiteemail = new Email();
 			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
-		
+			$sql = "update members set verified=?, verifiedcode=? where email=?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array('no', $verifiedcode, $email));
+			Database::disconnect();
 			return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your verification email was resent to your email address.</strong></div>";
 			}
 		else

@@ -66,6 +66,7 @@ $members = $allmembers->getAllMembers('username');
                         <th class="text-center small">Signup IP</th>
                         <th class="text-center small">Last Login</th>
                         <th class="text-center small">Edit</th>
+                        <th class="text-center small">Resend Verification</th>
                         <th class="text-center small">Delete</th>
                     </tr>
                     </thead>
@@ -141,10 +142,16 @@ $members = $allmembers->getAllMembers('username');
                             </form>
                             <td>
                                 <form action="/admin/members/<?php echo $member['id']; ?>" method="POST" accept-charset="utf-8" class="form" role="form">
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <input type="hidden" name="username" value="<?php echo $member['username']; ?>">
+                                    <button class="btn btn-sm btn-primary" type="submit" name="resendverify">RESEND</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/admin/members/<?php echo $member['id']; ?>" method="POST" accept-charset="utf-8" class="form" role="form">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="username" value="<?php echo $member['username']; ?>">
                                     <button class="btn btn-sm btn-primary" type="submit" name="deletemember">DELETE</button>
-                                </form>
                                 </form>
                             </td>
                         </tr>
