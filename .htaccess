@@ -6,6 +6,8 @@ RewriteRule ^admin/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)[/]*$ /admin/index.php?page=$1
 RewriteRule ^admin/([A-Za-z0-9-]+)[/]*$ /admin/index.php?page=$1 [L,NC]
 # urls with only /admin go to the main admin page (logged in or not):
 RewriteRule ^(admin) - [L]
+# urls that are NOT in /admin have the page as the first parameter, and the verification code for the second parameter.
+RewriteRule ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)[/]*$ /index.php?page=$1&code=$2 [L,NC]
 # urls that are NOT in /admin have the page as the first parameter.
 RewriteRule ^([A-Za-z0-9]+)[/]*$ /index.php?page=$1 [L,NC]
 # Custom 404 page:

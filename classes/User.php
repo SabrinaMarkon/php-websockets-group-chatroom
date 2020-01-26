@@ -50,7 +50,7 @@ class User
 			$code = uniqid(); // just a random temporary string for the verification code.
 			$subject = "Welcome to " . $settings['sitename'] . "! Please verify your email!";
 			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
-			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify?code=" . $code;
+			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $code;
 			$sendsiteemail = new Email();
 			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
 
@@ -98,7 +98,7 @@ class User
 	public function userLogin($username,$password) {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		$sql = "select * from members where username=? and password=? limit 1";
+		$sql = "select * from members where username=? and password=? and verified='yes' limit 1";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($username,$password));
 		$valid = $q->rowCount();
