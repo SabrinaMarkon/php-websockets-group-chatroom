@@ -6,7 +6,7 @@ if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
     if ($newlogin === false)
     {
         $showcontent = new LoginForm();
-        echo $showcontent->showLoginForm(1);
+        echo $showcontent->showLoginForm(1, 1);
         $Layout = new Layout();
         $Layout->showFooter();
         exit;
@@ -15,7 +15,7 @@ if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
 else
 {
     $showcontent = new LoginForm();
-    echo $showcontent->showLoginForm(1);
+    echo $showcontent->showLoginForm(1, 1);
     $Layout = new Layout();
     $Layout->showFooter();
     exit;

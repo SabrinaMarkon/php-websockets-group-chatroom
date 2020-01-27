@@ -1,4 +1,4 @@
 <?php
 $showcontent = new LoginForm();
-echo $showcontent->showLoginForm(0);
+echo $showcontent->showLoginForm(0, 0);
 ?>

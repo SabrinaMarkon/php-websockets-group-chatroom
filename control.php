@@ -6,7 +6,7 @@ $newlogin = $logincheck->userLogin($_SESSION['username'],$_SESSION['password']);
  if ($newlogin === false)
 	{
 	$showcontent = new LoginForm();
-	echo $showcontent->showLoginForm(1);
+	echo $showcontent->showLoginForm(1, 0);
 	$Layout = new Layout();
 	$Layout->showFooter();
 	exit;
@@ -25,7 +25,7 @@ else
 else
 {
 $showcontent = new LoginForm();
-echo $showcontent->showLoginForm(1);
+echo $showcontent->showLoginForm(1, 0);
 $Layout = new Layout();
 $Layout->showFooter();
 exit;
