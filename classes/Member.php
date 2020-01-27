@@ -90,24 +90,28 @@ class Member
         $signupip = $_POST['signupip'];
         $verified = $_POST['verified'];
         $oldverified = $_POST['oldverified'];
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         if ($verified == 'yes' && $oldverified == 'no') {
             $verifiedcode = null;
             $verifieddate = date("Y-m-d H:i:s");
             $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $verifieddate, $id));
         } 
         elseif ($verified == 'no' && $oldverified == 'yes') {
             $verifiedcode = uniqid();
             $verifieddate = null;
             $this->resendMember($id, $verifiedcode, $settings); 
             $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $verifieddate, $id));
         }
         else {
             $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=? where id=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $id));
         }
-        $pdo = Database::connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $q = $pdo->prepare($sql);
-        $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $verifieddate, $id));
 
 //        if (!$q->execute(array($id, $username, $password, $firstname, $lastname, $email, $signupip, $verified))) {
 //            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
