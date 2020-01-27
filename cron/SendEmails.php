@@ -23,7 +23,7 @@ class SendEmails
     private $headers;
     private $pdo;
 
-    public function getMails($domain, $sitename, $adminemail, $adminname)
+    public function getMails($settings)
     {
         // get all mails that are marked as pending mailout.
         $pdo = Database::connect();
@@ -60,12 +60,12 @@ class SendEmails
 
                         // message disclaimer:
                         $disclaimer = "--------------------------------------------------------------<br><br>";
-                        $disclaimer .= "This is a message from ".$sitename.". You are receiving this because you are a double opted-in member of " . $sitename . " with username " . $username . "<br><br>";
-                        $disclaimer .= "You can opt out of receiving all emails from this website by logging in and deleting your account here:<br><br><a href=\"" . $domain . "/login\">" . $domain . "/login</a><br><br>";
+                        $disclaimer .= "This is a message from " . $settings['sitename'] . ". You are receiving this because you are a double opted-in member of " . $settings['sitename'] . " with username " . $username . "<br><br>";
+                        $disclaimer .= "You can opt out of receiving all emails from this website by logging in and deleting your account here:<br><br><a href=\"" . $settings['domain'] . "/login\">" . $settings['domain'] . "/login</a><br><br>";
                         $disclaimer .= "Kindly allow up to 24 hours to stop receiving mail once you delete your account.<br><br>";
-                        $disclaimer .= "Thank you,<br>" . $adminname . "<br>" . $sitename . "<br><br><br>";
-                        $disclaimer .= "Live Removal Assistance or Questions: <a href=\"mailto:" . $adminemail . "\">" . $adminemail ."</a><br><br>";
-                        $disclaimer .= "This email is sent in strict compliance with international spam laws.<br><br>";
+                        $disclaimer .= "Thank you,<br>" . $settings['adminname'] . "<br>" . $settings['sitename'] . "<br><br><br>";
+                        $disclaimer .= "Live Removal Assistance or Questions: <a href=\"mailto:" . $settings['adminemail'] .  "\">" . $settings['adminemail'] . "</a><br><br>";
+                        $disclaimer .= "This email is sent in strict compliance with International spam laws.<br><br>";
 
                         // full message and subject with disclaimer as well as this member's substitution:
                         $html = $message . "<br><br><br>" . $disclaimer;
@@ -103,17 +103,9 @@ class SendEmails
         }
         Database::disconnect();
     }
-
-
-
-
 }
 
 $sitesettings = new Settings();
 $settings = $sitesettings->getSettings();
-foreach ($settings as $key => $value)
-{
-    $$key = $value;
-}
 $mail = new SendEmails();
-$mail->getMails($domain, $sitename, $adminemail, $adminname);
+$mail->getMails($settings);

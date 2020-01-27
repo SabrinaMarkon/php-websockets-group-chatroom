@@ -224,7 +224,7 @@ class User
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 		$sql = "update members set password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=? where username=?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($password, $firstname, $lastname, $email, $signupip, $username, $verified, $verifiedcode));
+		$q->execute(array($password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $username));
 		Database::disconnect();
 		$_SESSION['password'] = $password;
 		$_SESSION['firstname'] = $firstname;
