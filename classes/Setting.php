@@ -23,6 +23,9 @@ class Setting
         $q = $pdo->prepare($sql);
         $q-> execute(array($adminuser, $adminpass, $adminemail, $sitename, $domain));
         Database::disconnect();
+        
+        $_SESSION['username'] = $adminuser;
+        $_SESSION['password'] = $adminpass;
 
         return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your Site Settings Were Saved!</strong></div>";
 
