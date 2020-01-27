@@ -39,10 +39,9 @@ class Member
         $email = $_POST['email'];
         $signupip = $_SERVER['REMOTE_ADDR'];
 
-        # error checking. - do with ajax so it looks cool ?
+        # error checking.
         # make sure fields filled in. Make sure email is valid. Make sure passwords match.
         # make sure fields > x chars.
-
 
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -58,13 +57,14 @@ class Member
         }
         else
         {
-            $sql = "insert into members (username,password,accounttype,firstname,lastname,email,signupdate,signupip) values (?,?,?,?,?,?,NOW(),?)";
+            $verifiedcode = uniqid(); // just a random temporary string for the verification code.
+            $sql = "insert into members (username,password,accounttype,firstname,lastname,email,signupdate,signupip,verifiedcode) values (?,?,?,?,?,?,NOW(),?,?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($username,$password,$accounttype,$firstname,$lastname,$email,$signupip));
+            $q->execute(array($username,$password,$accounttype,$firstname,$lastname,$email,$signupip,$verifiedcode));
             Database::disconnect();
-
-            $subject = "Welcome to " . $settings['sitename'] . "!";
-            $message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
+			$subject = "Welcome to " . $settings['sitename'] . "! Please verify your email!";
+			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
+            $message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
             $sendsiteemail = new Email();
             $send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings, '');
 
@@ -80,7 +80,7 @@ class Member
         }
     }
 
-    public function saveMember($id) {
+    public function saveMember($id, $settings) {
 
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -89,11 +89,19 @@ class Member
         $email = $_POST['email'];
         $signupip = $_POST['signupip'];
         $verified = $_POST['verified'];
+        if ($verified == 'yes') {
+            $verifiedcode = null;
+            $verifieddate = date("Y-m-d H:i:s");
+        } else {
+            $verifiedcode = uniqid();
+            $verifieddate = null;
+            $this->resendMember($id, $settings);
+        }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=? where id=?";
+        $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $id));
+        $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $verifieddate, $id));
 
 //        if (!$q->execute(array($id, $username, $password, $firstname, $lastname, $email, $signupip, $verified))) {
 //            echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;

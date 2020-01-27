@@ -115,7 +115,7 @@ if (isset($_POST['addmember']))
 if (isset($_POST['savemember']))
 {
     $update = new Member();
-    $showupdate = $update->saveMember($id);
+    $showupdate = $update->saveMember($id, $settings);
 }
 if (isset($_POST['deletemember']))
 {

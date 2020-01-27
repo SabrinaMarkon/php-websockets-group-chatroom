@@ -43,11 +43,11 @@ class User
 		}
 		else
 		{
-			$sql = "insert into members (username,password,accounttype,firstname,lastname,email,signupdate,signupip) values (?,?,?,?,?,?,NOW(),?)";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($username,$password,$accounttype,$firstname,$lastname,$email,$signupip));
-			Database::disconnect();
 			$verifiedcode = uniqid(); // just a random temporary string for the verification code.
+			$sql = "insert into members (username,password,accounttype,firstname,lastname,email,signupdate,signupip,verifiedcode) values (?,?,?,?,?,?,NOW(),?,?)";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($username,$password,$accounttype,$firstname,$lastname,$email,$signupip,$verifiedcode));
+			Database::disconnect();
 			$subject = "Welcome to " . $settings['sitename'] . "! Please verify your email!";
 			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
 			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";

@@ -39,7 +39,7 @@ foreach ($settings as $key => $value)
                 <input type="text" name="domain" value="<?php echo $domain ?>" class="form-control input-lg" placeholder="Website URL (start with https://)" required minlength="1" maxlength="255">
 
                 <label class="sr-only" for="domainemail">Domain Email (for sending site mails)</label>
-                <input type="email" name="domainemail" value="<?php echo $domainemail ?>" class="form-control input-lg" placeholder="Domain Email" required minlength="4" maxlength="255">
+                <input type="email" name="domainemail" value="<?php echo $domainemail ?>" class="form-control input-lg" placeholder="Domain Email (for sending site mails)" required minlength="4" maxlength="255">
 
                 <div class="ja-bottompadding"></div>
 
