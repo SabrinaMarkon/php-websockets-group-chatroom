@@ -3,7 +3,7 @@ if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
 {
 $logincheck = new User();
 $newlogin = $logincheck->userLogin($_SESSION['username'],$_SESSION['password']);
- if ($newlogin === false)
+ 	if ($newlogin === false)
 	{
 	$showcontent = new LoginForm();
 	echo $showcontent->showLoginForm(1, 0);
@@ -11,7 +11,7 @@ $newlogin = $logincheck->userLogin($_SESSION['username'],$_SESSION['password']);
 	$Layout->showFooter();
 	exit;
 	}
-else
+	else
 	{
 	# returned user details.
 	foreach ($newlogin as $key => $value)
@@ -19,6 +19,8 @@ else
 		$$key = $value;
 		$_SESSION[$key] = $value;
 		}
+		# This session should count for showing members area nav.
+		$_SESSION['isadmin'] = 'no';
 		$showgravatar = $logincheck->getGravatar($username,$email);
 	}
 }

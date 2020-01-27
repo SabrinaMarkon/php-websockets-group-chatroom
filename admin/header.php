@@ -23,7 +23,7 @@
 
         <div class="ja-desktopnav">
             <?php
-            if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
+            if (isset($_SESSION['username']) && isset($_SESSION['password']))
             {
                 ?>
                 <a href="/../" type="button" class="btn ja-navbutton ja-navbutton-first" role="button" target="_blank">SITE</a>

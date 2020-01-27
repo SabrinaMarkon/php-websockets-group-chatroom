@@ -37,7 +37,7 @@
 
 		<div class="ja-desktopnav">
 			<?php
-			if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
+			if (isset($_SESSION['username']) && isset($_SESSION['password']) && isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 'no')
 			{
 			?>
 			<a href="/main" type="button" class="btn ja-navbutton ja-navbutton-first" role="button">MAIN</a>

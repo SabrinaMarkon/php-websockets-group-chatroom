@@ -111,6 +111,8 @@ class User
 			$sql = "update members set lastlogin=NOW() where username=? and password=?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($username,$password));
+			# This session SHOULD count for showing members area nav.
+			$_SESSION['isadmin'] = 'no';
 			# return the member fields.
 			return $memberdetails;
 			}

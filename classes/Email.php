@@ -15,9 +15,10 @@ class Email
 	$headers .= "X-Mailer: PHP5\n";
 	$headers .= "X-Priority: 3\n";
 	$headers .= "Return-Path: <" . $adminemail . ">\n";
-    $headers .= $htmlheader;
+	
+	$headers .= $htmlheader;
 
-	@mail($toemail, $subject, wordwrap(stripslashes($message)), $headers, "-f$fromemail");
+	@mail($toemail, $subject, wordwrap(stripslashes($message)), $headers, "-f $fromemail");
 
 	}
 

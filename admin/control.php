@@ -10,6 +10,9 @@ if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
         $Layout = new Layout();
         $Layout->showFooter();
         exit;
+    } else {
+        # This session should NOT count for showing members area nav.
+        $_SESSION['isadmin'] = 'yes';
     }
 }
 else

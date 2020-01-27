@@ -21,6 +21,8 @@ class Admin
             # successful login.
             $q->setFetchMode(PDO::FETCH_ASSOC);
             $admindetails = $q->fetch();
+            # This session should NOT count for showing members area nav.
+            $_SESSION['isadmin'] = 'yes';
             return $admindetails;
         }
         else
