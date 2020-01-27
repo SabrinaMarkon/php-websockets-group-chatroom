@@ -1,4 +1,8 @@
 <?php
 $showcontent = new PageContent();
-echo $showcontent->showPage('Home Page');
+if (isset($_GET['page'])) {
+  echo $showcontent->showPage($_GET['page']);
+} else {
+  echo $showcontent->showPage('Home Page');
+}
 ?>
