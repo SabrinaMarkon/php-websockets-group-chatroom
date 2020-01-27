@@ -14,15 +14,13 @@ $pages = $allpages->getAllPages();
     tinymce.init({
         setup : function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '22px';
+                this.getDoc().body.style.fontSize = '16px';
                 this.getDoc().body.style.fontFamily = 'Calibri';
-                this.getDoc().body.style.backgroundColor = $('.ja-content').css('background-color');
-                this.getDoc().body.style.color = $('.ja-content').css('color');
+                this.getDoc().body.style.backgroundColor = '#ffffff';
             });
         },
         selector: 'textarea',  // change this value according to your HTML
-        body_id: 'elm1=htmlcode',
-        body_class: 'elm1=ja-content',
+        body_id: 'elm1=message',
         height: 600,
         theme: 'modern',
         plugins: [
@@ -39,9 +37,9 @@ $pages = $allpages->getAllPages();
             { title: 'Test template 2', content: 'Test 2' }
         ],
         content_css: [
-//            '/../css/bootstrap.min.css',
-//            '/../css/bootstrap-theme.min.css',
-//            '/../css/custom.css'
+        //    '/../css/bootstrap.min.css',
+        //    '/../css/bootstrap-theme.min.css',
+        //    '/../css/custom.css'
         ]
     });
 </script>
@@ -134,7 +132,7 @@ $pages = $allpages->getAllPages();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="htmlcode">Page HTML</label>
-                            <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" required minlength="1" maxlength="100000"><?php echo $showeditpage['htmlcode']; ?></textarea>
+                            <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" minlength="1" maxlength="100000"><?php echo $showeditpage['htmlcode']; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -188,7 +186,7 @@ $pages = $allpages->getAllPages();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="htmlcode">Page HTML</label>
-                                <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" required minlength="1" maxlength="100000"></textarea>
+                                <textarea name="htmlcode" id="htmlcode" placeholder="Page HTML" class="form-control" rows="30" minlength="1" maxlength="100000"></textarea>
                             </div>
                         </div>
                     </div>

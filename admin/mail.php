@@ -14,7 +14,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
     tinymce.init({
         setup : function(ed) {
             ed.on('init', function() {
-                this.getDoc().body.style.fontSize = '22px';
+                this.getDoc().body.style.fontSize = '16px';
                 this.getDoc().body.style.fontFamily = 'Calibri';
                 this.getDoc().body.style.backgroundColor = '#ffffff';
             });
@@ -37,9 +37,9 @@ $savedmails = $allsavedmails->getAllSavedMails();
             { title: 'Test template 2', content: 'Test 2' }
         ],
         content_css: [
-//            '/../css/bootstrap.min.css',
-//            '/../css/bootstrap-theme.min.css',
-//            '/../css/custom.css'
+        //    '/../css/bootstrap.min.css',
+        //    '/../css/bootstrap-theme.min.css',
+        //    '/../css/custom.css'
         ]
     });
 </script>
