@@ -191,7 +191,7 @@ class User
 
 		$emailhash = trim($email);
 		$emailhash = md5($emailhash);
-		$gravatarimagelg = "<img src=\"http://gravatar.com/avatar/" . $emailhash . "?s=130\" alt=\"" . $username . "\" class=\"avatar img-circle img-thumbnail gravatar-lg\">";
+		$gravatarimagelg = "<img src=\"https://gravatar.com/avatar/" . $emailhash . "?s=130\" alt=\"" . $username . "\" class=\"avatar img-circle img-thumbnail gravatar-lg\">";
 		return $gravatarimagelg;
 		
 	}
