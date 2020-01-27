@@ -99,7 +99,7 @@ Back them up before editing to be on the safe side, so if things go south fast, 
 
 How to set up a WebSockets daemon on the server (need root access to your VPS or server):
 
-1) Move /cron/chatSocket.conf to your /etc/init directory.
+1) Move /chatServer/chatSocket.conf to your /etc/init directory.
 
 2) SSH to your server and in the command line, run: service chatSocket start.
 
