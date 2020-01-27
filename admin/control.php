@@ -1,8 +1,6 @@
 <?php
-echo 'wtf';
 if ((isset($_SESSION['username'])) && (isset($_SESSION['password'])))
 {
-    echo $_SESSION['username'] . ' ' . $_SESSION['password'];
     $logincheck = new Admin();
     $newlogin = $logincheck->adminLogin($_SESSION['username'],$_SESSION['password']);
     if ($newlogin === false)
