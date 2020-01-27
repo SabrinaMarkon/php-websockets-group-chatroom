@@ -117,6 +117,7 @@ $members = $allmembers->getAllMembers('username');
                             </td>
                             <td>
                                 <label class="sr-only" for="verified">Verified:</label>
+                                <input type="hidden" name="oldverified" value="<?php echo $member['verified'] ?>">
                                 <select name="verified" class="form-control input-md">
                                     <option value="yes"<?php if ($member['verified'] === 'yes') { echo " selected"; } ?>>yes</option>
                                     <option value="no"<?php if ($member['verified'] !== 'yes') { echo " selected"; } ?>>no</option>

@@ -89,17 +89,23 @@ class Member
         $email = $_POST['email'];
         $signupip = $_POST['signupip'];
         $verified = $_POST['verified'];
-        if ($verified == 'yes') {
+        $oldverified = $_POST['oldverified'];
+        if ($verified == 'yes' && $oldverified == 'no') {
             $verifiedcode = null;
             $verifieddate = date("Y-m-d H:i:s");
-        } else {
+            $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
+        } 
+        elseif ($verified == 'no' && $oldverified == 'yes') {
             $verifiedcode = uniqid();
             $verifieddate = null;
-            $this->resendMember($id, $settings);
+            $this->resendMember($id, $verifiedcode, $settings); 
+            $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
+        }
+        else {
+            $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=? where id=?";
         }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        $sql = "update `members` set username=?, password=?, firstname=?, lastname=?, email=?, signupip=?, verified=?, verifiedcode=?, verifieddate=? where id=?";
         $q = $pdo->prepare($sql);
         $q->execute(array($username, $password, $firstname, $lastname, $email, $signupip, $verified, $verifiedcode, $verifieddate, $id));
 
@@ -126,7 +132,7 @@ class Member
 
     }
 
-    public function resendMember($id, $settings) {
+    public function resendMember($id, $validationcode, $settings) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "select * from members where id=? limit 1";
@@ -139,6 +145,10 @@ class Member
             $username = $data['username'];
             $email = $data['email'];
             $verifiedcode = uniqid();
+            # If we already have a validation code from a member profile update.
+            if ($validationcode) {
+                $verifiedcode = $validationcode;
+            } 
             # resend validation email.
             $subject = "Please re-verify your email!";
             $message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
