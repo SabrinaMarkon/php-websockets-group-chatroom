@@ -90,7 +90,7 @@ class User
 		else
 			{
 				# Invalid verification code.
-				return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>The username or email address you entered was not found.</strong></div>";
+				return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>The validation code " . $verifiedcode . " was not found in the system.</strong></div>";
 			}
 		Database::disconnect();
 	}
@@ -153,7 +153,7 @@ class User
 		else
 			{
 			Database::disconnect();
-			return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>The verification code was not found.</strong></div>";
+			return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>The username or email address you entered was not found.</strong></div>";
 			}
 	}
 	
