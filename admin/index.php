@@ -47,7 +47,7 @@ if (isset($_POST['login']))
 if (isset($_POST['forgotlogin']))
 {
     $forgot = new Admin();
-    $showforgot = $forgot->forgotLogin($sitename,$domain,$adminemail);
+    $showforgot = $forgot->forgotLogin($settings);
 }
 if (isset($_POST['saveadminnotes']))
 {

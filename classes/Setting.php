@@ -14,14 +14,15 @@ class Setting
         $adminuser = $_POST['adminuser'];
         $adminpass = $_POST['adminpass'];
         $adminemail = $_POST['adminemail'];
+        $domainemail = $_POST['domainemail'];
         $sitename = $_POST['sitename'];
         $domain = $_POST['domain'];
 
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "update adminsettings set adminuser=?, adminpass=?, adminemail=?, sitename=?, domain=?";
+        $sql = "update adminsettings set adminuser=?, adminpass=?, adminemail=?, domainemail=?, sitename=?, domain=?";
         $q = $pdo->prepare($sql);
-        $q-> execute(array($adminuser, $adminpass, $adminemail, $sitename, $domain));
+        $q-> execute(array($adminuser, $adminpass, $adminemail, $domainemail, $sitename, $domain));
         Database::disconnect();
         
         $_SESSION['username'] = $adminuser;

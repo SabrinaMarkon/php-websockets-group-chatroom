@@ -4,6 +4,7 @@ adminuser varchar(255) not null,
 adminpass varchar(255) not null,
 adminname varchar(255) not null,
 adminemail varchar(255) not null,
+domainemail varchar(255) not null,
 sitename varchar(255) not null,
 domain varchar(255) not null
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

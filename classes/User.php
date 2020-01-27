@@ -52,7 +52,7 @@ class User
 			$message = "Our Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
 			$message .= "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
 			$sendsiteemail = new Email();
-			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings, '');
 
 			return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Success! Thanks for Joining!</strong></div>";
 
@@ -143,7 +143,7 @@ class User
 			$subject = "Please re-verify your email!";
 			$message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
 			$sendsiteemail = new Email();
-			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings, '');
 			$sql = "update members set verified=?, verifiedcode=? where email=?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array('no', $verifiedcode, $email));
@@ -173,11 +173,11 @@ class User
 			$email = $data['email'];
 			$username = $data['username'];
 			$password = $data['password'];
-			$subject = "Your " . $sitename . " Login Details";
-			$message = "Login URL: " . $domain . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
+			$subject = "Your " . $settings['sitename'] . " Login Details";
+			$message = "Login URL: " . $settings['domain'] . "\nUsername: " . $username . "\nPassword: " . $password . "\n\n";
 			
 			$sendsiteemail = new Email();
-			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings, '');
 		
 			return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your login details were sent to your email address.</strong></div>";
 			}
@@ -218,7 +218,7 @@ class User
 			$subject = "Please re-verify your email!";
 			$message = "Please verify your email address by clicking here: " . $settings['domain'] . "/verify/" . $verifiedcode . "\n\n";
 			$sendsiteemail = new Email();
-			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings['sitename'], $settings['domain'], $settings['adminemail'], '');
+			$send = $sendsiteemail->sendEmail($email, $settings['adminemail'], $subject, $message, $settings, '');
 		}
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

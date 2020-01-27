@@ -22,10 +22,6 @@ class SendEmails
     private $message;
     private $headers;
     private $pdo;
-    public $domain;
-    public $sitename;
-    public $adminname;
-    public $adminemail;
 
     public function getMails($domain, $sitename, $adminemail, $adminname)
     {
@@ -88,7 +84,7 @@ class SendEmails
                         $htmlheader = "Content-Type: text/html; charset=windows-1252\n";
 
                         $sendsiteemail = new Email();
-                        $sendsiteemail->sendEmail($email, $adminemail, $subject, $html, $sitename, $adminemail, $htmlheader);
+                        $sendsiteemail->sendEmail($email, $adminemail, $subject, $html, $settings, $htmlheader);
                     }
                 }
 

@@ -34,7 +34,7 @@ class Admin
 
     }
 
-    public function forgotLogin($sitename,$domain,$adminemail) {
+    public function forgotLogin($settings) {
 
         $usernameoremail = $_POST['usernameoremail'];
         $pdo = Database::connect();
@@ -50,11 +50,11 @@ class Admin
             $adminemail = $data['adminemail'];
             $adminuser = $data['adminuser'];
             $adminpass = $data['adminpass'];
-            $subject = "Your " . $sitename . " Admin Details";
-            $message = "Login URL: " . $domain . "/admin\nUsername: " . $adminuser . "\nPassword: " . $adminpass . "\n\n";
+            $subject = "Your " . $settings['sitename'] . " Admin Details";
+            $message = "Login URL: " . $settings['domain'] . "/admin\nUsername: " . $settings['adminuser'] . "\nPassword: " . $settings['adminpass'] . "\n\n";
 
             $sendsiteemail = new Email();
-            $send = $sendsiteemail->sendEmail($adminemail,$adminemail,$subject,$message,$sitename,$domain,$adminemail, '');
+            $send = $sendsiteemail->sendEmail($settings['adminemail'],$settings['adminemail'],$subject,$message,$settings, '');
 
             return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your login details were sent to your email address.</strong></div>";
         }
