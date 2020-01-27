@@ -11,9 +11,9 @@
  * @param $adminemail The website admin's support email address.
  * @param @adminname The name of the website admin.
  */
-require_once('.../config/Database.php');
-require_once('.../config/Settings.php');
-require_once('.../classes/Email.php');
+require_once('../config/Database.php');
+require_once('../config/Settings.php');
+require_once('../classes/Email.php');
 
 class SendEmails
 {

@@ -96,7 +96,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                 <div class="col-sm-10 text-center"><br />
                     <p>Please use the personalization substitution below anywhere in your subject or message, typed EXACTLY as shown (cAsE sEnSiTiVe):</p><br />
                     <div class="table-responsive">
-                        <table class="table table-condensed table-bordered">
+                        <table class="table table-condensed table-bordered ja-white">
                             <tbody>
                                 <tr><td><strong>Type This:</strong></td><td><strong>To Substitute This:</strong></td></tr>
                                 <tr><td>~USERNAME~</td><td>Member's Username</td></tr>
@@ -129,32 +129,32 @@ $savedmails = $allsavedmails->getAllSavedMails();
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="sr-only" for="htmlcode">Email Message</label>
-                            <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" required minlength="1" maxlength="10000"><?php echo $showeditmail['message']; ?></textarea>
+                            <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" minlength="1" maxlength="10000"><?php echo $showeditmail['message']; ?></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
 
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-2">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-1">
                             <button class="btn btn-lg btn-primary" type="button" name="showallmail" onclick="parent.location = '/admin/mail'">RETURN</button>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-md-1">
                             <input type="hidden" name="_method" value="PATCH">
                             <button class="btn btn-lg btn-primary" type="submit" name="savemail">SAVE</button>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-md-1">
                             <button class="btn btn-lg btn-primary" type="submit" name="sendmail">SEND</button>
                         </div>
             </form>
-                        <div class="col-sm-2">
+                        <div class="col-md-1">
                             <form action="/admin/mail/<?php echo $showeditmail['id']; ?>" method="post" accept-charset="utf-8" class="form" role="form">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn btn-lg btn-primary" type="submit" name="deletemail">DELETE</button>
                             </form>
                         </div>
-                        <div class="col-sm-3"></div>
+                        <div class="col-md-4"></div>
 
                     </div>
                 </div>
@@ -177,7 +177,7 @@ $savedmails = $allsavedmails->getAllSavedMails();
                         <div class="row">
                             <div class="col-sm-12">
                                 <label class="sr-only" for="htmlcode">Email Message</label>
-                                <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" required minlength="1" maxlength="10000"></textarea>
+                                <textarea name="message" id="message" placeholder="Email Message" class="form-control" rows="30" minlength="1" maxlength="10000"></textarea>
                             </div>
                         </div>
                     </div>

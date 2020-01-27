@@ -7,9 +7,9 @@
  * @license LICENSE.md
  * 
  */
-require_once('.../config/Database.php');
-require_once('.../config/Settings.php');
-require_once('.../classes/Email.php');
+require_once('../config/Database.php');
+require_once('../config/Settings.php');
+require_once('../classes/Email.php');
 
 class CheckWebSocketsService {
 
