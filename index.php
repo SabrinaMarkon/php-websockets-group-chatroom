@@ -10,7 +10,10 @@ require_once "config/Settings.php";
 require_once "config/Layout.php";
 
 function php_autoloader($class) {
-	require "classes/" . $class . ".php";
+	$file = "classes/" . $class . ".php";
+	if (file_exists($file)) {
+			require($file);
+	}
 }
 spl_autoload_register("php_autoloader");
 

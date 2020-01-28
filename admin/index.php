@@ -11,7 +11,10 @@ require_once "../config/Layout.php";
 require_once "../classes/Email.php";
 
 function php_autoloader($class) {
-    require '../classes/' . $class . ".php";
+    $file = "../classes/" . $class . ".php";
+    if (file_exists($file)) {
+        require($file);
+    }
 }
 spl_autoload_register("php_autoloader");
 
@@ -43,11 +46,6 @@ if (isset($_POST['login']))
         $logout = new Admin();
         $logout->adminLogout();
     }
-}
-if (isset($_POST['forgotlogin']))
-{
-    $forgot = new Admin();
-    $showforgot = $forgot->forgotLogin($settings);
 }
 if (isset($_POST['saveadminnotes']))
 {

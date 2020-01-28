@@ -41,7 +41,7 @@ $content = <<<HEREDOC
 				<label class="sr-only" for="password">Password</label>
 				<input type="password" name="password" value="" class="form-control input-lg" placeholder="Password" required minlength="6" maxlength="255">
 
-				<span class="help-block"><a href="/forgot">Forgot Password?</a></span>
+				<span class="help-block"><a href="forgot">Forgot Password?</a></span>
 				
 				$showverificationlink
 

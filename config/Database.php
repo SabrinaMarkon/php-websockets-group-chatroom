@@ -6,7 +6,7 @@ class Database
 	private static $dbuser = "collectorsscave_collectorsscave";
 	private static $dbpass = "+u6Au(-Lm8T{";
 	private static $dbconn = null;
-	// const BASE_URL = "http://collectorsscave.phpsitescripts.com/";
+	const BASE_URL = "http://collectorsscave.phpsitescripts.com/";
 
 	public function __construct() {
 		die('Action not allowed'); 
@@ -18,7 +18,7 @@ class Database
 
 			try
 			{
-				self::$dbconn = new PDO("mysql:host=" . self::$dbhost . ";dbname=" . self::$dbname, self::$dbuser, self::$dbpass);
+				self::$dbconn = new \PDO("mysql:host=" . self::$dbhost . ";dbname=" . self::$dbname, self::$dbuser, self::$dbpass);
 			}
 			catch(PDOException $e)
 			{
