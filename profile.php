@@ -5,7 +5,7 @@ if (isset($showupdate))
 echo $showupdate;
 }
 $showcontent = new PageContent();
-echo $showcontent->showPage('Members Area Profile Page');
+echo $showcontent->showPage('profile');
 ?>
 
 <div class="container">

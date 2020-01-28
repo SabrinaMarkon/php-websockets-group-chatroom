@@ -26,3 +26,29 @@ logout nav link works
 
 ADMIN AREA:
 
+Admin area forgot login works and sends the email to the admin account.
+
+Admin login form works.
+
+Main admin area notes form works and saves a note.
+
+Clicking "SITE" admin navigation link opens a new window to the main url of the site.
+
+Settings save correctly, and changing the admin username and password is correctly updated in the session so the admin isn't logged out.
+
+In the admin area for mailing members, creating a new email and clicking Save saves it correctly.
+Recalling a saved email from the edit saved mail dropdown loads that email correctly back into the form.
+Editing a saved email and re-saving it works.
+The return button works, returning the admin to a blank form with no saved email loaded into it.
+Recalling a saved email, then clicking the Delete button correctly deletes that email.
+The form will not submit if you click Send and there is no subject line  ---- it still posts if the message body is blank though!!!
+Recalling a saved email, then clicking the Send button correctly sends that email to each member (assuming their inbox accepts it).
+Sending an email that has never been saved, then clicking the Send button also correctly sends the email to each member.
+
+-----Needs list of previously sent emails to see and delete when admin is satisfied they went out.
+
+
+
+
+
+

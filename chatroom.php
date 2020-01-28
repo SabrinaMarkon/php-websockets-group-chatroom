@@ -1,7 +1,7 @@
 <?php
 include "control.php";
 $showcontent = new PageContent();
-echo $showcontent->showPage('Members Area Chatroom Page');
+echo $showcontent->showPage('chatroom');
 
 // Get the members to show which ones are online and which aren't.
 $allmembers = new Member();

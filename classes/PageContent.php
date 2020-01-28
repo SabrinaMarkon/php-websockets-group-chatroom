@@ -2,15 +2,15 @@
 class PageContent
 {
 	public $content;
-	public $pagename;
+	public $slug;
 
-	public function showPage($pagename) {
+	public function showPage($slug) {
 		
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		$sql = "select htmlcode from pages where name=? or slug=?";
+		$sql = "select htmlcode from pages where slug=?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($pagename, $pagename));
+		$q->execute(array($slug));
 		$q->setFetchMode(PDO::FETCH_ASSOC);
 		$data = $q->fetch();
 		$content = $data['htmlcode'];

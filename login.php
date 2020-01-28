@@ -1,4 +1,6 @@
 <?php
-$showcontent = new LoginForm();
-echo $showcontent->showLoginForm(0, 0);
+$showcontent = new PageContent();
+echo $showcontent->showPage('login');
+$showloginform = new LoginForm();
+echo $showloginform->showLoginForm(0, 0);
 ?>

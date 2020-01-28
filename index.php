@@ -82,7 +82,7 @@ $logout = new User();
 $logout->updateChatLoginStatus($_SESSION['username'], 0);
 $logout->userLogout();
 $logoutpage = new PageContent();
-$showlogout = $logoutpage->showPage('Logout Page');
+$showlogout = $logoutpage->showPage('logout');
 }
 ######################################
 

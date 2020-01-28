@@ -3,13 +3,13 @@ if (isset($showregistration))
 {
 echo $showregistration;
 $showcontent = new PageContent();
-echo $showcontent->showPage('Thank You Page - New Member Signup');
+echo $showcontent->showPage('success');
 $Layout = new Layout();
 $Layout->showFooter();
 exit;
 }
 $showcontent = new PageContent();
-echo $showcontent->showPage('Registration Page');
+echo $showcontent->showPage('register');
 ?>
 
 <div class="container">
@@ -58,7 +58,7 @@ echo $showcontent->showPage('Registration Page');
 
 						<?php
 						$terms = new PageContent();
-						$showterms = $terms->showPage('Terms and Conditions Page');
+						$showterms = $terms->showPage('terms');
 						echo $showterms;
 						?>
 

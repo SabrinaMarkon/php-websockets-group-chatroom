@@ -77,4 +77,5 @@ INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Chatroom Pa
 INSERT INTO pages (name, htmlcode, slug, core) values ('Registration Page', '', 'register', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Logout Page', '', 'logout', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('About Us Page', '', 'aboutus', 'yes');
-
+INSERT INTO pages (name, htmlcode, slug, core) values ('Member Signed Up Successfully Page', '', 'success', 'yes');
+INSERT INTO pages (name, htmlcode, slug, core) values ('Custom 404 Not Found Page', '404 Not Found', '404', 'yes');
