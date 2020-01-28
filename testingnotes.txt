@@ -1,0 +1,28 @@
+TESTING
+
+--------------------------
+
+MEMBERS AREA:
+
+member/visitor contact form can send to admin properly. - needs validation stuff for form on php side.
+
+resend password request by member works. Email comes and has correct info.
+
+resend verification request by member works. Email comes and verification link works.
+
+updating profile from members area WITHOUT changing email works and doesn't log the user out.
+
+updating profile from members area WITH changing the email address works, and logs out the user because they have to re-verify. 
+The email comes that needs the member to re-verify, and the link works successfully.
+If the user was already logged in, they don't have to again it seems, but it could be confusing because the login link is gone (the members area
+nav is there already) - I've added a login link so they can either click that and login again, or click one of the members-only links in the nav. For clarity.
+
+logout nav link works
+
+
+
+
+--------------------------
+
+ADMIN AREA:
+

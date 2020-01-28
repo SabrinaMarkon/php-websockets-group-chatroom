@@ -1,6 +1,21 @@
 PHP Group Chat App - Members Only - made with <3 by Sabrina Markon :3 Have fun!
 ------------------------------------------------------------------------------------
 
+Server Requirements:
+
+IMPORTANT: 
+
+A websockets service is an infinite script that is ultimately set
+up using a command line (CLI).
+Thus, this script is meant to run on your own dedicated VPS where you have root access, NOT shared hosting.
+There are many reliable web hosts who offer inexpensive VPS hosting that you can request a root login for.
+
+- VPS Server with root login.
+- PHP 5.6+, PHP 7.2 if you want to run the PHPUnit 8 tests.
+- MySQL/MariaDB
+- Cron
+- Web Server (i.e. Apache 2)
+
 Stories:
 
 - Members must register to the website.
