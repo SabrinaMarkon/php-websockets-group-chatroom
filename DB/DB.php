@@ -68,7 +68,7 @@ insert into adminsettings (adminuser, adminpass, adminname, adminemail, sitename
 
 INSERT INTO `adminnotes` (`id`, `name`, `htmlcode`) values (1, 'Admin Notes', '');
 
-INSERT INTO pages (name, htmlcode, slug, core) values ('Home Page', '', '', 'yes');
+INSERT INTO pages (name, htmlcode, slug, core) values ('Home Page', '', 'index', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Login Page', '', 'login', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Terms and Conditions', '', 'terms', 'yes');
 INSERT INTO pages (name, htmlcode, slug, core) values ('Members Area Main Page', '', 'main', 'yes');

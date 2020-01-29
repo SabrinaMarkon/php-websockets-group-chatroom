@@ -1,4 +1,4 @@
 <?php
 $showcontent = new PageContent();
-echo $showcontent->showPage('');
+echo $showcontent->showPage('index');
 ?>

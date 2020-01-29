@@ -76,14 +76,6 @@ $showupdate = $update->saveProfile($_SESSION['username'], $settings);
 // $loginstatus = new User();
 // $loginstatus->updateChatLoginStatus($_SESSION['username'], 1);
 // }
-if (isset($_GET['page']) && ($_GET['page'] == "logout"))
-{
-$logout = new User();
-$logout->updateChatLoginStatus($_SESSION['username'], 0);
-$logout->userLogout();
-$logoutpage = new PageContent();
-$showlogout = $logoutpage->showPage('logout');
-}
 ######################################
 
 if ((!empty($_GET['page'])) and ((file_exists($_GET['page'] . ".php") and ($_GET['page'] != "index")))) {
