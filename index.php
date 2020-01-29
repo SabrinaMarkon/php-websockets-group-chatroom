@@ -86,7 +86,7 @@ $showlogout = $logoutpage->showPage('logout');
 }
 ######################################
 
-if ((!empty($_GET['page'])) and ((file_exists($_GET['page'] . ".php") and ($_GET['page'] != "index")))) {
+if ((!empty($_GET['page'])) && ((file_exists($_GET['page'] . ".php") && ($_GET['page'] != '')))) {
 
     $Layout = new Layout();
     $Layout->showHeader();
@@ -100,5 +100,4 @@ if ((!empty($_GET['page'])) and ((file_exists($_GET['page'] . ".php") and ($_GET
     $Layout->showHeader();
     include "home.php";
     $Layout->showFooter();
-
 }
