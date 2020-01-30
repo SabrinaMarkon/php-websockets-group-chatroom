@@ -44,9 +44,7 @@ Recalling a saved email, then clicking the Delete button correctly deletes that 
 The form will not submit if you click Send and there is no subject line  ---- it still posts if the message body is blank though!!!
 Recalling a saved email, then clicking the Send button correctly sends that email to each member (assuming their inbox accepts it).
 Sending an email that has never been saved, then clicking the Send button also correctly sends the email to each member.
-
------Needs list of previously sent emails to see and delete when admin is satisfied they went out.
-
+After the cronjob sends an admin mail, it is kept in the database if the admin saved it. If not, it is deleted after sending.
 
 
 

@@ -51,6 +51,9 @@ class Mail
 
         $subject = $_POST['subject'];
         $message = $_POST['message'];
+        if (empty($subject) || empty($message)) {
+            return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>Error: You need both a subject and a message for your email.</strong></div>";
+        }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "update mail set subject=?, message=?, save=1 where id=?";
@@ -65,6 +68,9 @@ class Mail
 
         $subject = $_POST['subject'];
         $message = $_POST['message'];
+        if (empty($subject) || empty($message)) {
+            return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>Error: You need both a subject and a message for your email.</strong></div>";
+        }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "insert into mail set subject=?, message=?, save=1";
