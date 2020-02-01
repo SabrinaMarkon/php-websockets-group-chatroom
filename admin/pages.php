@@ -111,12 +111,12 @@ $pages = $allpages->getAllPages();
                             <label class="sr-only" for="name">Page Slug (url)</label>
                             <?php
                             if ($showeditpage['core'] === 'yes') {
-                                $disabled = "disabled";
+                                $readonly = "readonly";
                             } else {
-                                $disabled = "";
+                                $readonly = "";
                             }
                             ?>
-                            <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12"<?php echo $disabled ?> value="<?php echo $showeditpage['slug']; ?>" required minlength="1" maxlength="255">
+                            <input type="text" name="slug" placeholder="Page Slug (url)" class="form-control" size="12"<?php echo $readonly ?> value="<?php echo $showeditpage['slug']; ?>" required minlength="1" maxlength="255">
                         </div>
                     </div>
                 </div>

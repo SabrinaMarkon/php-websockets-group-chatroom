@@ -72,7 +72,7 @@ class Page
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "update `pages` set name=?, htmlcode=?, slug=? where id=?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($name, $htmlcode, $id, $slug));
+        $q->execute(array($name, $htmlcode, $slug, $id));
         Database::disconnect();
         return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Website Content for Page " . $name . " was Saved!</strong></div>";
 

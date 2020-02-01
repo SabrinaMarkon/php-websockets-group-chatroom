@@ -54,6 +54,7 @@ The "create new" button for admin pages works by showing a blank form.
 Creating a new page and clicking the "Add" button saves it properly to the database.
 If the name or slug field is blank, the form gives an error.
 If a page is loaded into the form and the "Delete" button is clicked, the page is deleted properly.
+The form fields are validated in the Page class.
 
 
 
