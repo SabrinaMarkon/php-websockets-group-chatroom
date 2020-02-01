@@ -123,7 +123,7 @@ $pages = $allpages->getAllPages();
                 <div class="form-group">
                     <div class="row">
                         <div class="col-sm-12">
-                            Page URL: <a href="<?php echo $domain ?>/<?php echo $showeditpage['slug'] ?>" target="_blank"><?php echo $domain ?>/<?php echo $showeditpage['slug'] ?></a>
+                            Page URL: <a href="<?php echo $domain ?>/<?php echo $showeditpage['slug'] ?>" target="_blank"><?php echo $domain ?>/<?php if ($showeditpage['slug'] != 'index') { echo $showeditpage['slug']; } ?></a>
                             <div class="ja-bottompadding"></div>
                         </div>
                     </div>

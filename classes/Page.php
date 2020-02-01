@@ -47,13 +47,16 @@ class Page
         $name = $_POST['name'];
         $htmlcode = $_POST['htmlcode'];
         $slug = $_POST['slug'];
+        if (empty($name) || empty($slug) || empty($htmlcode)) {
+            return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>Error: You need complete all fields.</strong></div>";
+        }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "insert into `pages` set name=?, htmlcode=?, slug=?";
         $q = $pdo->prepare($sql);
         $q->execute(array($name, $htmlcode, $slug));
         Database::disconnect();
-        return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>New Page " . $name . " was Added!</strong><br>New URL: <a href=" . $domain . "/" . $slug . ">" . $domain . "/" . $slug . "</a></div>";
+        return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>New Page " . $name . " was Added!</strong><br>New URL: <a href=" . $domain . "/" . $slug . " target=\"_blank\">" . $domain . "/" . $slug . "</a></div>";
 
     }
 
@@ -62,6 +65,9 @@ class Page
         $name = $_POST['name'];
         $htmlcode = $_POST['htmlcode'];
         $slug = $_POST['slug'];
+        if (empty($name) || empty($slug) || empty($htmlcode)) {
+            return "<center><div class=\"alert alert-danger\" style=\"width:75%;\"><strong>Error: You need complete all fields.</strong></div>";
+        }
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $sql = "update `pages` set name=?, htmlcode=?, slug=? where id=?";

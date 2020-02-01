@@ -46,6 +46,15 @@ Recalling a saved email, then clicking the Send button correctly sends that emai
 Sending an email that has never been saved, then clicking the Send button also correctly sends the email to each member.
 After the cronjob sends an admin mail, it is kept in the database if the admin saved it. If not, it is deleted after sending.
 
+In the admin area for editing page content, when a saved page is selected from the dropdown and the edit button is clicked, the page name, slug,
+and content is loaded successfully into the form for editing.
+The link to the page shows the proper path. If the page is the home page, it does not show the 'index' slug correctly.
+Core pages cannot have their slug values edited, but dynamic pages added by the admin can.
+The "create new" button for admin pages works by showing a blank form.
+Creating a new page and clicking the "Add" button saves it properly to the database.
+If the name or slug field is blank, the form gives an error.
+If a page is loaded into the form and the "Delete" button is clicked, the page is deleted properly.
+
 
 
 
