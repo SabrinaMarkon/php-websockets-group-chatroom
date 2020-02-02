@@ -55,6 +55,8 @@ Creating a new page and clicking the "Add" button saves it properly to the datab
 If the name or slug field is blank, the form gives an error.
 If a page is loaded into the form and the "Delete" button is clicked, the page is deleted properly.
 The form fields are validated in the Page class.
+Editing and saving either a core or dynamic page works properly.
+
 
 
 

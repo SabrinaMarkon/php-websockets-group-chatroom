@@ -36,7 +36,7 @@ if(isset($_POST['action']))
       <table class="table ja-small-font">
         <thead>
           <tr>
-            <td align="left">
+            <td align="left" colspan="2">
               <div>Logged in as: <?php echo $firstname . " " . $lastname ?></div>
               <div><?php echo $email ?></div>
             </td>
@@ -48,7 +48,7 @@ if(isset($_POST['action']))
         </thead>
         <tbody>
           <tr>
-            <th colspan="3">Users</th>
+            <th colspan="4">Users</th>
           </tr>
         <?php
           foreach ($members as $member) {
@@ -59,14 +59,14 @@ if(isset($_POST['action']))
               $online = "Online";
             }
             $member_fullname = $member['firstname'] . " " . $member['lastname'];
-            
-            // ADD GRAVATAR (need user email) - change to uploaded photos later.
-
-            echo "<tr><td>" . $member_fullname . "</td>";
+            echo "<tr>";
+            echo "<td>" . $allmembers->getGravatar($member['username'], $member['email']) . "</td>";
+            echo "<td>" . $member_fullname . "</td>";
             echo "<td><span class=\"fas fa-circle\" style=\"" . $color . "\"></span>" . $online . "</td>";
-            echo "<td>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</td></tr>";
+            echo "<td>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</td>";
+            echo "</tr>";
           }
-        ?>       
+        ?>    
         </tbody>
       </table>
 		</div>
