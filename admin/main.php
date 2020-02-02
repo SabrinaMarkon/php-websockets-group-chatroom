@@ -11,9 +11,9 @@ $htmlcode = $adminnote->getAdminNote();
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-            <h1 class="ja-bottompadding">Welcome to your Admin Area, <?php echo $adminname ?></h1>
+            <h1 class="ja-bottompadding">Welcome to your Admin Area, <?php echo $adminname ?>!</h1>
 
-            <p class="text-left">You may use the text area below to save notes which are only visible to you.</p>
+            <p class="text-center">You may use the text area below to save notes which are only visible to you.</p>
 
             <form method="post" accept-charset="utf-8" class="form" role="form">
 

@@ -57,7 +57,9 @@ If a page is loaded into the form and the "Delete" button is clicked, the page i
 The form fields are validated in the Page class.
 Editing and saving either a core or dynamic page works properly.
 
-
+In the admin area for member management, adding a new member works.
+Editing an existing member works.
+Resending the validation email to a member works.
 
 
 
