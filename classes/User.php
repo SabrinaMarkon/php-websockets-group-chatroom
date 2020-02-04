@@ -77,14 +77,14 @@ class User
 		$found = $q->rowCount();
 		if($found > 0)
 			{
-			# successful email verification.
-			$q->setFetchMode(PDO::FETCH_ASSOC);
-			$memberdetails = $q->fetch();
-			# update verification date & time.
-			$sql = "update members set verifiedcode=NULL, verified='yes', verifieddate=NOW() where verifiedcode=?";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($verifiedcode));
-			return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your email was successfully verified!<br />
+				# successful email verification.
+				$q->setFetchMode(PDO::FETCH_ASSOC);
+				$memberdetails = $q->fetch();
+				# update verification date & time.
+				$sql = "update members set verifiedcode=NULL, verified='yes', verifieddate=NOW() where verifiedcode=?";
+				$q = $pdo->prepare($sql);
+				$q->execute(array($verifiedcode));
+				return "<center><div class=\"alert alert-success\" style=\"width:75%;\"><strong>Your email was successfully verified!<br />
 				You can now <a href=\"/login\">login</a>!</strong></div>";
 			}
 		else

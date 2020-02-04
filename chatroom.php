@@ -79,6 +79,9 @@ if(isset($_POST['action']))
             <?php
               foreach($allchatmessages as $chatmessage) {
                 echo '<tr>
+                        <td valign="top" align="left">' .
+                        $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) .
+                        '</td>
                         <td valign="top" align="left">
                           <div>' . $chatmessage['username'] . '</div>
                           <div>' . $chatmessage['msg'] . '</div>

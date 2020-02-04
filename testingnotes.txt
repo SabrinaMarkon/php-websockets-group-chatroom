@@ -61,6 +61,9 @@ In the admin area for member management, adding a new member works.
 Editing an existing member works.
 Resending the validation email to a member works.
 Deleting a member with the Delete button from the member admin area works.
+Changing a members verified status and saving from yes to no triggers resend of a validation email correctly.
+The resent validation email link works and validates the member if they click on it.
+
 
 
 
