@@ -202,35 +202,31 @@ img {
 }
 .ja-chat-container {
 	display: grid;
-	grid-gap: 1rem;
+	grid-gap: 2rem;
+	grid-template-areas: 
+		'title title'
+		'sidebar chatbox'
+		'sidebar chatbox'
+		'sidebar chatform';
+	justify-content: center;
+	align-content: center;
 	margin: 0;
 	background: #000;
 	opacity: 0.9;
 }
 .ja-chat-title {
-	grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 1;
-	grid-row-end: 2;
+	grid-area: title;
 }
 .ja-sidebar {
-	grid-column-start: 1;
-	grid-column-end: 2;
-	grid-row-start: 2;
-	grid-row-end: 4;
+	grid-area: sidebar;
 }
 .ja-chatbox {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 2;
-	grid-row-end: 3;
+	grid-area: chatbox;
 }
 .ja-chatform {
-	grid-column-start: 2;
-	grid-column-end: 3;
-	grid-row-start: 3;
-	grid-row-end: 4;
+	grid-area: chatform;
 }
+
 .ja-small-font { 
 	font-size: 1.4rem; 
 }
