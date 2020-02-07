@@ -196,10 +196,6 @@ img {
 }
 
 /* Chat Screen */
-#chat-messages {
-	height: 50vh;
-	overflow: auto;
-}
 .ja-chat-container {
 	border: 1px solid #fff;
 	display: grid;
@@ -228,6 +224,13 @@ img {
 .ja-chatbox {
 	grid-area: chatbox;
 	overflow: auto;
+}
+.ja-chat-messages {
+	height: 50vh;
+	overflow: auto;
+}
+.ja-chat-onemessage {
+	display: flex;
 }
 .ja-chatform {
 	grid-area: chatform;

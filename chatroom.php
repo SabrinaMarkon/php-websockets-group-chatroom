@@ -49,29 +49,17 @@ if(isset($_POST['action']))
           }
         ?>           
   </div>
-	<div class="ja-chatbox">
-    <div id="chat-messages">
-      <table id="chats" class="table ja-small-font">
-        <thead>
-        </thead>
-          <tbody>
-            <?php
-              foreach($allchatmessages as $chatmessage) {
-                echo '<tr>
-                        <td valign="top" align="left">' .
-                        $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) .
-                        '</td>
-                        <td valign="top" align="left">
-                          <div>' . $chatmessage['username'] . '</div>
-                          <div>' . $chatmessage['msg'] . '</div>
-                        </td>
-                        <td valign="top" align="right">' . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . '</td>
-                      </tr>';
-              }
-            ?>
-            <!-- This is where the new messages will appear!  -->
-          </tbody>
-        </table>
+	<div class="ja-chatbox ja-small-font">
+    <div class="ja-chat-messages">
+      <?php
+        foreach($allchatmessages as $chatmessage) {
+          echo "<div class=\"ja-chat-onemessage\">";
+            echo "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
+            echo "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
+            echo "<div>" . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . "</div>";
+          echo "</div>";
+        }
+      ?>
     </div>
   </div>
   <form class="ja-chatform" method="post" action="">
@@ -101,16 +89,14 @@ if(isset($_POST['action']))
     conn.onmessage = function(e) {
       let data = JSON.parse(e.data);
       // console.log(data);
-      let row = `<tr>
-        <td valign="top" align="left">
+      let row = `<div class="ja-chat-onemessage">
           <div>${data.username}</div>
           <div>${data.text}</div>
-        </td>
-        <td valign="top" align="right">${data.dt}</td>
-      </tr>
+          <div>${data.dt}</div>
+      </div>
       `;
       // Add the new message row to the chat box.
-      $('#chats > tbody').append(row); 
+      $('.ja-chat-messages').append(row); 
     }
 
     conn.onclose = function(e) {
