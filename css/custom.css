@@ -212,18 +212,34 @@ img {
 .ja-sidebar {
 	grid-area: sidebar;
 	overflow: auto;
-	background: #533174;
+	/* background: #533174; */
 	border: 1px solid #fff;
 }
 .ja-sidebar-thisuser {
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: left;
+	padding: 1rem;
+	margin: 1rem;
+	border: 1px solid #fff;
+	background: #533174;
 }
 .ja-sidebar-oneuser {
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: left;
+	padding: 1rem;
+	margin: 1rem;
+	border: 1px solid #fff;
+	background: #533174;
 }
 .ja-chatbox {
 	grid-area: chatbox;
 	overflow: auto;
+	border: 1px solid #fff;
+	padding: 1rem;
 }
 .ja-chat-messages {
 	height: 50vh;
@@ -231,6 +247,18 @@ img {
 }
 .ja-chat-onemessage {
 	display: flex;
+	align-items: center;
+	text-align: left;
+	padding: 1rem;
+	margin: 1rem;
+	border: 1px solid #fff;
+	background: #533174;
+}
+.ja-chat-onemessage div:first-child {
+	padding-right: 1rem;
+}
+.ja-chat-onemessage div:last-child {
+	margin-left: auto;
 }
 .ja-chatform {
 	grid-area: chatform;
@@ -257,6 +285,9 @@ img {
 }
 .ja-toppadding3 {
 	margin-top: 50px;
+}
+.ja-rightpadding1 {
+	padding-right: 2px;
 }
 .ja-horizontaldivider{
 	width:5px;

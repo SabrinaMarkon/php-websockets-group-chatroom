@@ -34,16 +34,19 @@ if(isset($_POST['action']))
       </div>      
       <?php
           foreach ($members as $member) {
-            $color = "color: #f00";
+            $dotcolor = "color: #f00";
+            $fontcolor = "color: #c0c0c0";
             $online = "Offline";
             if ($member['login_status'] === "1") {
-              $color = "color: #0f0";
+              $dotcolor = "color: #0f0";
+              $fontcolor = "color: #fff";
               $online = "Online";
             }
             echo "<div class=\"ja-sidebar-oneuser\">";
               echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
               echo "<div>" . $member['username'] . "<br />";
-              echo "<span class=\"fas fa-circle\" style=\"" . $color . "\"></span>" . $online . "</div>";
+              echo "<span class=\"fas fa-circle ja-rightpadding1\" style=\"" . $dotcolor . "\"></span>
+                    <span style=\"" . $fontcolor . "\">" . $online . "</span></div>";
               echo "<div>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</div>";
             echo "</div>";
           }
