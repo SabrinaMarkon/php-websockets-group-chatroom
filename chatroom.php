@@ -27,25 +27,12 @@ if(isset($_POST['action']))
 
 <div class="container ja-chat-container">
   <h1 class="ja-chat-title ja-bottompadding"><?php echo $sitename ?> Chat</h1>
-  <div class="ja-sidebar">
-      <table class="table ja-small-font">
-        <thead>
-          <tr>
-            <td align="left" colspan="2">
-              <div>Logged in as: <?php echo $firstname . " " . $lastname ?></div>
-              <div><?php echo $email ?></div>
-            </td>
-            <td align="right" colspan="2">
-              <input type="button" class="btn btn-warning" id="leave-chat" 
-              name="leave-chat" value="Leave">
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th colspan="4">Users</th>
-          </tr>
-        <?php
+  <div class="ja-sidebar ja-small-font">
+      <div class="ja-sidebar-thisuser">
+        <div>Logged in as: <?php echo $firstname . " " . $lastname . " (" . $username . ")"; ?></div>
+        <input type="button" class="btn btn-warning" id="leave-chat" name="leave-chat" value="Leave">
+      </div>      
+      <?php
           foreach ($members as $member) {
             $color = "color: #f00";
             $online = "Offline";
@@ -53,17 +40,14 @@ if(isset($_POST['action']))
               $color = "color: #0f0";
               $online = "Online";
             }
-            $member_fullname = $member['firstname'] . " " . $member['lastname'];
-            echo "<tr>";
-            echo "<td>" . $allmembers->getGravatar($member['username'], $member['email']) . "</td>";
-            echo "<td>" . $member_fullname . "</td>";
-            echo "<td><span class=\"fas fa-circle\" style=\"" . $color . "\"></span>" . $online . "</td>";
-            echo "<td>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</td>";
-            echo "</tr>";
+            echo "<div class=\"ja-sidebar-oneuser\">";
+              echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
+              echo "<div>" . $member['username'] . "<br />";
+              echo "<span class=\"fas fa-circle\" style=\"" . $color . "\"></span>" . $online . "</div>";
+              echo "<div>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</div>";
+            echo "</div>";
           }
-        ?>    
-        </tbody>
-      </table>
+        ?>           
   </div>
 	<div class="ja-chatbox">
     <div id="chat-messages">

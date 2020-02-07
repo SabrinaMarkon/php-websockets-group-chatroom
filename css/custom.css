@@ -204,12 +204,6 @@ img {
 	border: 1px solid #fff;
 	display: grid;
 	grid-gap: 1rem;
-	grid-template-columns: 1fr 3fr;
-	grid-template-areas: 
-		'title title'
-		'sidebar chatbox'
-		'sidebar chatbox'
-		'sidebar chatform';
 	justify-content: center;
 	align-content: center;
 	margin: 0;
@@ -222,12 +216,22 @@ img {
 .ja-sidebar {
 	grid-area: sidebar;
 	overflow: auto;
+	background: #533174;
+	border: 1px solid #fff;
+}
+.ja-sidebar-thisuser {
+	display: flex;
+}
+.ja-sidebar-oneuser {
+	display: flex;
 }
 .ja-chatbox {
 	grid-area: chatbox;
+	overflow: auto;
 }
 .ja-chatform {
 	grid-area: chatform;
+	overflow: auto;
 }
 
 .ja-small-font { 
@@ -299,6 +303,17 @@ border-color: #d0e3f0;
 	.hamburger { visibility: visible; display: block; }
 	.ja-navbutton { visibility: hidden; display: none; }
 	#ja-heading-title { font-size: 6rem; }
+	.ja-chat-container {
+		grid-template-columns: 1fr;
+		grid-template-areas: 
+			'title'
+			'sidebar'
+			'chatbox'
+			'chatform';
+	}
+	.ja-sidebar {
+		max-height: 10vh;
+	}
 }
 @media (min-width:700px)
 {
@@ -312,6 +327,17 @@ border-color: #d0e3f0;
 	.ja-navbutton { font-size: 60%; border-right: 1px solid #a0a0a0; }
 	.ja-content { font-size: 120%; border-right: 1px solid #a0a0a0; }
 	h1 { font-size: 160%; }
+	.ja-chat-container {
+		grid-template-columns: 1fr 3fr;
+		grid-template-areas: 
+			'title title'
+			'sidebar chatbox'
+			'sidebar chatbox'
+			'sidebar chatform';
+	}
+	.ja-sidebar {
+		max-height: 100vh;
+	}
 }
 @media (min-width:900px)
 {
