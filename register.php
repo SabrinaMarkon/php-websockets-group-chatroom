@@ -23,25 +23,31 @@ echo $showcontent->showPage('register');
 						<div class="row">
 							<div class="col-xs-6 col-md-6">
 								<label class="sr-only" for="firstname">First Name</label>
-								<input type="text" name="firstname" value="" class="form-control input-lg" placeholder="First Name" required minlength="1" maxlength="255">
+								<input type="text" name="firstname" value="" class="form-control input-lg" 
+								placeholder="First Name" required minlength="1" maxlength="255" autocomplete="given-name">
 							</div>
 							<div class="col-xs-6 col-md-6">
 								<label class="sr-only" for="lastname">Last Name</label>
-								<input type="text" name="lastname" value="" class="form-control input-lg" placeholder="Last Name" required minlength="1" maxlength="255">
+								<input type="text" name="lastname" value="" class="form-control input-lg" 
+								placeholder="Last Name" required minlength="1" maxlength="255" autocomplete="family-name">
 							</div>
 						</div>
 				
 						<label class="sr-only" for="email">Your Email</label>
-						<input type="email" name="email" value="" class="form-control input-lg" placeholder="Your Email" required minlength="4" maxlength="255">
+						<input type="email" name="email" value="" class="form-control input-lg" 
+						placeholder="Your Email" required minlength="4" maxlength="255" autocomplete="email">
 
 						<label class="sr-only" for="username">Username</label>
-						<input type="text" name="username" value="" class="form-control input-lg" placeholder="Username" required minlength="4" maxlength="255">
+						<input type="text" name="username" value="" class="form-control input-lg" 
+						placeholder="Username" required minlength="4" maxlength="255" autocomplete="username">
 
 						<label class="sr-only" for="password">Password</label>
-						<input type="password" name="password" value="" class="form-control input-lg" placeholder="Password" required minlength="6" maxlength="255">
+						<input type="password" name="password" value="" class="form-control input-lg" 
+						placeholder="Password" required minlength="6" maxlength="255" autocomplete="new_password">
 
 						<label class="sr-only" for="confirm_password">Confirm Password</label>
-						<input type="password" name="confirm_password" value="" class="form-control input-lg" placeholder="Confirm Password" required minlength="6" maxlength="255">
+						<input type="password" name="confirm_password" value="" class="form-control input-lg" 
+						placeholder="Confirm Password" required minlength="6" maxlength="255" autocomplete="new_password">
 
 						<span class="help-block ja-white">By clicking Create My Account, you agree to our <a href="#" data-toggle="modal" data-target="#termsModal">Terms</a></span>
 						

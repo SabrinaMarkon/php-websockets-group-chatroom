@@ -36,10 +36,12 @@ $content = <<<HEREDOC
 				$showloginerror
 
 				<label class="sr-only" for="username">Username</label>
-				<input type="text" name="username" value="" class="form-control input-lg" placeholder="Username" required minlength="4" maxlength="255">
+				<input type="text" name="username" value="" class="form-control input-lg" 
+				placeholder="Username" required minlength="4" maxlength="255" autocomplete="username">
 
 				<label class="sr-only" for="password">Password</label>
-				<input type="password" name="password" value="" class="form-control input-lg" placeholder="Password" required minlength="6" maxlength="255">
+				<input type="password" name="password" value="" class="form-control input-lg" 
+				placeholder="Password" required minlength="6" maxlength="255" autocomplete="current-password">
 
 				<span class="help-block"><a href="forgot">Forgot Password?</a></span>
 				

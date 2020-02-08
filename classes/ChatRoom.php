@@ -33,7 +33,7 @@ class ChatRoom {
 
 	public function updateChatLoginStatus($username, $loginstatus) {
 		$sql = "update members set login_status=? where username=?";
-		$q = $pdo->prepare($sql);
+		$q = $this->pdo->prepare($sql);
 		$q->execute(array($loginstatus,$username));	
   }
   

@@ -25,12 +25,13 @@ foreach ($settings as $key => $value)
 }
 
 if (isset($_SESSION['username'])) {
-# User should not be logged into the CHAT page unless they are properly logged in AND their browser is at /chatroom.
+# User should not show as online in the chatroom unless they are properly logged into the site AND page is /chatroom.
 $logoutchat = new ChatRoom();
 $logoutchat->updateChatLoginStatus($_SESSION['username'], 0);
 }
 
-######################################
+################################
+######
 if (isset($_POST['login']))
 {
 $_SESSION['username'] = $_REQUEST['username'];
@@ -79,12 +80,17 @@ if (isset($_POST['saveprofile']))
 $update = new User();
 $showupdate = $update->saveProfile($_SESSION['username'], $settings);
 }
+if (isset($_GET['page']) && ($_GET['page'] == 'chatroom') && isset($_SESSION['username'])) {
+	# Update chat online status to 1 if the user is in the chatroom.
+	$loginchat = new ChatRoom();
+	$loginchat->updateChatLoginStatus($_SESSION['username'], 1);
+}
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
-$logout = new User();
-$logout->userLogout();
-$logoutpage = new PageContent();
-$showlogout = $logoutpage->showPage('logout');
+	$logout = new User();
+	$logout->userLogout();
+	$logoutpage = new PageContent();
+	$showlogout = $logoutpage->showPage('logout');
 }
 ######################################
 
@@ -92,7 +98,7 @@ if ((!empty($_GET['page'])) && ((file_exists($_GET['page'] . ".php") && ($_GET['
 
     $Layout = new Layout();
     $Layout->showHeader();
-    $page = $_REQUEST['page'];
+		$page = $_REQUEST['page'];
     include $page . ".php";
     $Layout->showFooter();
 

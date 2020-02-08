@@ -9,8 +9,6 @@ $members = $allmembers->getAllMembers('login_status desc');
 
 // Get class for chatroom database handling.
 $chatroom = new ChatRoom();
-// Update login_status to 1 when user arrives on this page.
-$chatroom->updateChatLoginStatus($username, 1);
 // Load chat message history.
 $allchatmessages = $chatroom->loadChatRoom();
 
@@ -95,8 +93,9 @@ $wsdomain = $wsdomain_array[1];
   $(document).ready(function() {
 
     // Scroll chat box to the end.
-    $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
-    // non-animated: $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight);
+    // $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
+    // non-animated: 
+    $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight);
 
     // Refresh PHP session so user is not automatically logged out while they have the chat open.
     setInterval(function() { $.post('refreshchatsession.php'); }, 600000);
@@ -144,10 +143,8 @@ $wsdomain = $wsdomain_array[1];
       $('#msg').val(''); // reset the form field to be empty.
     });
 
+    // Update chat login status to 0 by redirecting from /chatroom.
     $('#leave-chat').click(function() {
-      let username = '<?php echo $username ?>';
-      console.log(username);
-      $.post('userleavechat.php');
       window.location.href = '/main';
     });
 

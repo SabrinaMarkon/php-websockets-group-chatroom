@@ -13,7 +13,8 @@ echo $showresend;
 		<form action="/resend" method="post" accept-charset="utf-8" class="form" role="form">
 
 			<label class="sr-only" for="usernameoremail">Your Username or Email Address</label>
-			<input type="text" name="usernameoremail" value="" class="form-control input-lg" placeholder="Your Username or Email Address" required minlength="4" maxlength="255">
+			<input type="text" name="usernameoremail" value="" class="form-control input-lg" 
+			placeholder="Your Username or Email Address" required minlength="4" maxlength="255" autocomplete="email">
 
 			<div class="ja-bottompadding"></div>
 

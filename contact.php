@@ -13,10 +13,12 @@ echo $sentcontact;
 		<form action="/contact" method="post" accept-charset="utf-8" class="form" role="form">
 
 			<label class="sr-only" for="username">Username</label>
-			<input type="text" name="username" value="<?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?>" class="form-control input-lg" placeholder="Username" maxlength="255">
+			<input type="text" name="username" value="<?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } ?>" 
+			class="form-control input-lg" placeholder="Username" maxlength="255" autocomplete="username">
 
 			<label class="sr-only" for="email">Email</label>
-			<input type="email" name="email" value="<?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>" class="form-control input-lg" placeholder="Email" required minlength="4" maxlength="255">
+			<input type="email" name="email" value="<?php if (isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>" class="form-control input-lg" 
+			placeholder="Email" required minlength="4" maxlength="255" autocomplete="email">
 
 			<label class="sr-only" for="subject">Message Subject</label>
 			<input type="text" name="subject" value="" class="form-control input-lg" placeholder="Message Subject" required minlength="1" maxlength="255">

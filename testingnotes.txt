@@ -19,6 +19,12 @@ nav is there already) - I've added a login link so they can either click that an
 
 logout nav link works
 
+The chatroom loads the first 100 messages and auto-scrolls to the bottom of the chatbox to see the most recent messages.
+The dates of messages and the dates that users were last online show as the time only when it is within the last day.
+If the date the user was last online is more than a day ago, just the month-day-year is shown.
+If the date of a chat message is more than a day ago, the entire date and time are shown.
+The LEAVE chat button updates the online status of the user to 0 (logged out) by simply redirecting away from /chatroom. Any other
+page ensures that the online status is set to 0. Upon visiting /chatroom, the online status is set to 1 (logged in) in index.php successfully.
 
 
 

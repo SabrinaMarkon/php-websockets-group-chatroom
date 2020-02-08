@@ -26,20 +26,26 @@ echo $showcontent->showPage('profile');
 					<form action="/profile" method="post" accept-charset="utf-8" class="form" role="form">
 
 						<label class="sr-only" for="firstname">First Name</label>
-						<input type="text" name="firstname" value="<?php echo $firstname ?>" class="form-control input-lg" placeholder="First Name" required minlength="1" maxlength="255">
+						<input type="text" name="firstname" value="<?php echo $firstname ?>" class="form-control input-lg" 
+						placeholder="First Name" required minlength="1" maxlength="255" autocomplete="given-name">
 
 						<label class="sr-only" for="lastname">Last Name</label>
-						<input type="text" name="lastname" value="<?php echo $lastname ?>" class="form-control input-lg" placeholder="Last Name" required minlength="1" maxlength="255">
+						<input type="text" name="lastname" value="<?php echo $lastname ?>" class="form-control input-lg" 
+						placeholder="Last Name" required minlength="1" maxlength="255" autocomplete="family-name">
 
 						<label class="sr-only" for="email">Your Email (if changed will need to verify)</label>
 						<input type="hidden" name="oldemail" value="<?php echo $email ?>">
-						<input type="email" name="email" value="<?php echo $email ?>" class="form-control input-lg" placeholder="Your Email (if changed, you will be logged out and need to re-verify!)" required minlength="4" maxlength="255">
+						<input type="email" name="email" value="<?php echo $email ?>" class="form-control input-lg" 
+						placeholder="Your Email (if changed, you will be logged out and need to re-verify!)" required 
+						minlength="4" maxlength="255" autocomplete="email">
 
 						<label class="sr-only" for="password">Password</label>
-						<input type="password" name="password" value="<?php echo $password ?>" class="form-control input-lg" placeholder="Password" required minlength="6" maxlength="255">
+						<input type="password" name="password" value="<?php echo $password ?>" class="form-control input-lg" 
+						placeholder="Password" required minlength="6" maxlength="255" autocomplete="current_password">
 
 						<label class="sr-only" for="confirm_password">Confirm Password</label>
-						<input type="password" name="confirm_password" value="<?php echo $password ?>" class="form-control input-lg" placeholder="Confirm Password" required minlength="6" maxlength="255">
+						<input type="password" name="confirm_password" value="<?php echo $password ?>" class="form-control input-lg" 
+						placeholder="Confirm Password" required minlength="6" maxlength="255" autocomplete="current_password">
 
 						<div class="ja-bottompadding"></div>
 
