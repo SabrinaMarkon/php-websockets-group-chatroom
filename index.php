@@ -24,11 +24,18 @@ foreach ($settings as $key => $value)
 	$$key = $value;
 }
 
+if (isset($_SESSION['username'])) {
+# User should not be logged into the CHAT page unless they are properly logged in AND their browser is at /chatroom.
+$logoutchat = new ChatRoom();
+$logoutchat->updateChatLoginStatus($_SESSION['username'], 0);
+}
+
 ######################################
 if (isset($_POST['login']))
 {
 $_SESSION['username'] = $_REQUEST['username'];
 $_SESSION['password'] = $_REQUEST['password'];
+# Check if this is even a valid user.
 $logincheck = new User();
 $newlogin = $logincheck->userLogin($_SESSION['username'],$_SESSION['password']);
  if ($newlogin === false)
@@ -74,8 +81,6 @@ $showupdate = $update->saveProfile($_SESSION['username'], $settings);
 }
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
-$logoutchat = new ChatRoom();
-$logoutchat->updateChatLoginStatus($_SESSION['username'], 0);
 $logout = new User();
 $logout->userLogout();
 $logoutpage = new PageContent();

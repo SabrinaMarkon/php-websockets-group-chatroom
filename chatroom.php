@@ -14,17 +14,6 @@ $chatroom->updateChatLoginStatus($username, 1);
 // Load chat message history.
 $allchatmessages = $chatroom->loadChatRoom();
 
-// User class to update login_status.
-$user = new User();
-
-// Manually leaves the chat by clicking the Leave button.
-if(isset($_POST['action'])) 
-{
-  $action = $_POST['action'];
-  if ($action === 'leave') {
-    $user->updateChatLoginStatus($username, 0);
-  }
-}
 $wsdomain_array = explode("//", $domain);
 $wsdomain = $wsdomain_array[1];
 ?>
@@ -112,6 +101,13 @@ $wsdomain = $wsdomain_array[1];
     // Refresh PHP session so user is not automatically logged out while they have the chat open.
     setInterval(function() { $.post('refreshchatsession.php'); }, 600000);
 
+    // When the user scrolls to the top of the chatbox, load more messages.
+    $('#ja-chat-messages').scroll(function() {
+      if ($(this).scrollTop() == 0) {
+        console.log('hey how are ya?');
+      }   
+    });
+
     let wsdomain = '<?php echo $wsdomain ?>';
     let conn = new WebSocket("ws://" + wsdomain + ":8080");
 
@@ -152,21 +148,7 @@ $wsdomain = $wsdomain_array[1];
       let username = '<?php echo $username ?>';
       console.log(username);
       $.post('userleavechat.php');
-
-      // $.ajax({
-      //   // url: "", // Leave empty if we are posting to the same page.
-      //   method: "post",
-      //   data: `action=leave`
-      // }).done(function(result) {
-      //   // Send message to all users that this user has left the chat.
-      //   let data = {
-      //   'username': username,
-      //   'text': `${username} has left the chat.`
-      //   };
-        // conn.send(JSON.stringify(data) );
-        // conn.close(); // Calls conn.onclose above.
-        // console.log(result);
-      // });
+      window.location.href = '/main';
     });
 
   });
