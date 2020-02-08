@@ -98,8 +98,11 @@ $wsdomain = $wsdomain_array[1];
     // Scroll chat box to the end.
     $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
     // non-animated: $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight);
-    let wsdomain = '<?php echo $wsdomain ?>';
 
+    // Refresh PHP session so user is not automatically logged out while they have the chat open.
+    setInterval(function() { $.post('refreshchatsession.php'); }, 600000);
+
+    let wsdomain = '<?php echo $wsdomain ?>';
     let conn = new WebSocket("ws://" + wsdomain + ":8080");
 
     conn.onopen = function(e) {

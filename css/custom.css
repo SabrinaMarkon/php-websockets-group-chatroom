@@ -243,13 +243,12 @@ img {
 }
 .ja-chatbox {
 	grid-area: chatbox;
-	overflow-y: scroll;
 	border: 1px solid #fff;
 	padding: 1rem;
 }
 #ja-chat-messages {
 	height: 50vh;
-	overflow: auto;
+	overflow-y: scroll;
 }
 .ja-chat-onemessage {
 	display: flex;
