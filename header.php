@@ -73,7 +73,7 @@
 					?>
 					<li class="list-item navmobilelink"><a href="/main">MAIN</a></li>
 					<li class="list-item navmobilelink"><a href="/profile">PROFILE</a></li>
-					<li class="list-item navmobilelink"><a href="/chatroom">JOIN CHAT!</a></li>
+					<li class="list-item navmobilelink"><a href="/chatroom">CHAT!</a></li>
 					<li class="list-item navmobilelink"><a href="/contact">CONTACT</a></li>
 					<li class="list-item navmobilelink"><a href="/logout">LOGOUT</a></li>
 					<?php
