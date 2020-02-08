@@ -212,6 +212,7 @@ img {
 .ja-sidebar {
 	grid-area: sidebar;
 	overflow: auto;
+	min-height: 0;
 	border: 1px solid #fff;
 }
 .ja-sidebar-thisuser {
@@ -234,13 +235,20 @@ img {
 	border: 1px solid #fff;
 	background: #533174;
 }
+.ja-sidebar-oneuser div:nth-child(2) {
+	margin-left: 1rem;
+}
+.ja-sidebar-oneuser div:last-child {
+	margin-left: auto;
+}
 .ja-chatbox {
 	grid-area: chatbox;
 	overflow: auto;
+	min-height: 0;
 	border: 1px solid #fff;
 	padding: 1rem;
 }
-.ja-chat-messages {
+#ja-chat-messages {
 	height: 50vh;
 	overflow: auto;
 }

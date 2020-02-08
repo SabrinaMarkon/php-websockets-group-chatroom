@@ -23,6 +23,8 @@ if(isset($_POST['action']))
     $user->updateChatLoginStatus($username, 0);
   }
 }
+$wsdomain_array = explode("//", $domain);
+$wsdomain = $wsdomain_array[1];
 ?>
 
 <div class="container ja-chat-container">
@@ -42,24 +44,40 @@ if(isset($_POST['action']))
               $fontcolor = "color: #fff";
               $online = "Online";
             }
+            // show the time if the user last logged in today, otherwise show the date only.
+            $lastlogindate = strtotime($member['lastlogin']);
+            $onedayago = strtotime('-1 day');
+            if ($lastlogindate < $onedayago) {
+              $showdate = date("M-d-Y", strtotime($member['lastlogin']));
+            } else {
+              $showdate = date("g:i A", strtotime($member['lastlogin']));
+            }
             echo "<div class=\"ja-sidebar-oneuser\">";
               echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
               echo "<div>" . $member['username'] . "<br />";
               echo "<span class=\"fas fa-circle ja-rightpadding1\" style=\"" . $dotcolor . "\"></span>
                     <span style=\"" . $fontcolor . "\">" . $online . "</span></div>";
-              echo "<div>" . date("M-d-Y h:i:s A", strtotime($member['lastlogin'])) . "</div>";
+              echo "<div>" . $showdate . "</div>";
             echo "</div>";
           }
         ?>           
   </div>
 	<div class="ja-chatbox ja-small-font">
-    <div class="ja-chat-messages">
+    <div id="ja-chat-messages">
       <?php
         foreach($allchatmessages as $chatmessage) {
+          // show the time if the message was sent today, otherwise show the date and time.
+          $messagedatestr = strtotime($chatmessage['created_on']);
+          $onedayagostr = strtotime('-1 day');
+          if ($messagedatestr < $onedayagostr) {
+            $messagedate = date("M-d-Y g:i A", strtotime($chatmessage['created_on']));
+          } else {
+            $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
+          }
           echo "<div class=\"ja-chat-onemessage\">";
             echo "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
             echo "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
-            echo "<div>" . date("M-d-Y h:i:s A", strtotime($chatmessage['created_on'])) . "</div>";
+            echo "<div>" . $messagedate . "</div>";
           echo "</div>";
         }
       ?>
@@ -78,11 +96,11 @@ if(isset($_POST['action']))
   $(document).ready(function() {
 
     // Scroll chat box to the end.
-    $("#chat-messages").animate({ scrollTop: $('#chat-messages').prop("scrollHeight")}, 1000);
-    // non-animated: $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-    
-    let wsdomain = explode('//', $domain);
-    let conn = new WebSocket('ws://' . $wsdomain . ':8080');
+    $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
+    // non-animated: $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight);
+    let wsdomain = '<?php echo $wsdomain ?>';
+
+    let conn = new WebSocket("ws://" + wsdomain + ":8080");
 
     conn.onopen = function(e) {
       console.log("Connection established!");
@@ -99,7 +117,7 @@ if(isset($_POST['action']))
       </div>
       `;
       // Add the new message row to the chat box.
-      $('.ja-chat-messages').append(row); 
+      $('#ja-chat-messages').append(row); 
     }
 
     conn.onclose = function(e) {
