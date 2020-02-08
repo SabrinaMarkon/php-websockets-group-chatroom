@@ -3,6 +3,7 @@ body {
 	margin: 0;
 	background: #000;
 	font-family: 'Roboto', 'Tahoma', 'Arial', sans-serif;
+	overflow-y: scroll;
 }
 .container {
 	padding: 0;
@@ -211,8 +212,7 @@ img {
 }
 .ja-sidebar {
 	grid-area: sidebar;
-	overflow: auto;
-	min-height: 0;
+	overflow-y: scroll;
 	border: 1px solid #fff;
 }
 .ja-sidebar-thisuser {
@@ -243,8 +243,7 @@ img {
 }
 .ja-chatbox {
 	grid-area: chatbox;
-	overflow: auto;
-	min-height: 0;
+	overflow-y: scroll;
 	border: 1px solid #fff;
 	padding: 1rem;
 }
@@ -368,6 +367,17 @@ border-color: #d0e3f0;
 	.ja-navbutton { font-size: 60%; border-right: 1px solid #a0a0a0; }
 	.ja-content { font-size: 120%; border-right: 1px solid #a0a0a0; }
 	h1 { font-size: 160%; }
+}
+@media (min-width:900px)
+{
+	.ja-navbutton { font-size: 80%; border-right: 1px solid #a0a0a0; }
+	.ja-content { font-size: 140%; border-right: 1px solid #a0a0a0; }
+	h1 { font-size: 160%; }
+	.navmobile, .hamburger { visibility: hidden; display: none; }
+	.ja-navbutton { visibility: visible; display: inline-block; }
+	#ja-heading-title { font-size: 10rem; }
+}
+@media (min-width:960px) {
 	.ja-chat-container {
 		grid-template-columns: 1fr 3fr;
 		grid-template-areas: 
@@ -379,15 +389,6 @@ border-color: #d0e3f0;
 	.ja-sidebar {
 		max-height: 100vh;
 	}
-}
-@media (min-width:900px)
-{
-	.ja-navbutton { font-size: 80%; border-right: 1px solid #a0a0a0; }
-	.ja-content { font-size: 140%; border-right: 1px solid #a0a0a0; }
-	h1 { font-size: 160%; }
-	.navmobile, .hamburger { visibility: hidden; display: none; }
-	.ja-navbutton { visibility: visible; display: inline-block; }
-	#ja-heading-title { font-size: 10rem; }
 }
 @media (min-width:1000px)
 {
