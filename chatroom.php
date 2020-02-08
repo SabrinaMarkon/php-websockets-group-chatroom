@@ -9,12 +9,14 @@ $members = $allmembers->getAllMembers('login_status desc');
 
 // Get class for chatroom database handling.
 $chatroom = new ChatRoom();
+// Update login_status to 1 when user arrives on this page.
+$chatroom->updateChatLoginStatus($username, 1);
+// Load chat message history.
 $allchatmessages = $chatroom->loadChatRoom();
 
 // User class to update login_status.
 $user = new User();
-// Update login_status to 1 when user arrives on this page.
-$user->updateChatLoginStatus($username, 1);
+
 // Manually leaves the chat by clicking the Leave button.
 if(isset($_POST['action'])) 
 {
@@ -33,7 +35,11 @@ $wsdomain = $wsdomain_array[1];
       <div class="ja-sidebar-thisuser">
         <div>Logged in as: <?php echo $firstname . " " . $lastname . " (" . $username . ")"; ?></div>
         <input type="button" class="btn btn-warning" id="leave-chat" name="leave-chat" value="Leave">
-      </div>      
+      </div>
+      <div class="ja-sidebar-headings">
+        <div>User</div>
+        <div>Last Logged In</div>
+      </div>   
       <?php
           foreach ($members as $member) {
             $dotcolor = "color: #f00";
@@ -47,7 +53,9 @@ $wsdomain = $wsdomain_array[1];
             // show the time if the user last logged in today, otherwise show the date only.
             $lastlogindate = strtotime($member['lastlogin']);
             $onedayago = strtotime('-1 day');
-            if ($lastlogindate < $onedayago) {
+            if ($member['lastlogin'] == null) {
+              $showdate = "N/A";
+            } elseif ($lastlogindate < $onedayago) {
               $showdate = date("M-d-Y", strtotime($member['lastlogin']));
             } else {
               $showdate = date("g:i A", strtotime($member['lastlogin']));
@@ -139,21 +147,24 @@ $wsdomain = $wsdomain_array[1];
     });
 
     $('#leave-chat').click(function() {
-      let username = "<?php echo $username ?>";
-      $.ajax({
-        // url: "", // Leave empty if we are posting to the same page.
-        method: "post",
-        data: `action=leave`
-      }).done(function(result) {
-        // Send message to all users that this user has left the chat.
-        let data = {
-        'username': username,
-        'text': `${username} has left the chat.`
-        };
-        conn.send(JSON.stringify(data) );
-        conn.close(); // Calls conn.onclose above.
+      let username = '<?php echo $username ?>';
+      console.log(username);
+      $.post('userleavechat.php');
+
+      // $.ajax({
+      //   // url: "", // Leave empty if we are posting to the same page.
+      //   method: "post",
+      //   data: `action=leave`
+      // }).done(function(result) {
+      //   // Send message to all users that this user has left the chat.
+      //   let data = {
+      //   'username': username,
+      //   'text': `${username} has left the chat.`
+      //   };
+        // conn.send(JSON.stringify(data) );
+        // conn.close(); // Calls conn.onclose above.
         // console.log(result);
-      });
+      // });
     });
 
   });

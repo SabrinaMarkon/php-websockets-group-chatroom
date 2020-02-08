@@ -72,14 +72,11 @@ if (isset($_POST['saveprofile']))
 $update = new User();
 $showupdate = $update->saveProfile($_SESSION['username'], $settings);
 }
-// if (isset($_GET['page']) && ($_GET['page'] == "chatroom")) {
-// $loginstatus = new User();
-// $loginstatus->updateChatLoginStatus($_SESSION['username'], 1);
-// }
 if (isset($_GET['page']) && ($_GET['page'] == "logout"))
 {
+$logoutchat = new ChatRoom();
+$logoutchat->updateChatLoginStatus($_SESSION['username'], 0);
 $logout = new User();
-$logout->updateChatLoginStatus($_SESSION['username'], 0);
 $logout->userLogout();
 $logoutpage = new PageContent();
 $showlogout = $logoutpage->showPage('logout');

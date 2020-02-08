@@ -215,7 +215,7 @@ img {
 	overflow-y: scroll;
 	border: 1px solid #fff;
 }
-.ja-sidebar-thisuser {
+.ja-sidebar-thisuser, .ja-sidebar-headings {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -224,6 +224,9 @@ img {
 	margin: 1rem;
 	border: 1px solid #fff;
 	background: #533174;
+}
+.ja-sidebar-headings {
+	background: #402659;
 }
 .ja-sidebar-oneuser {
 	display: flex;
