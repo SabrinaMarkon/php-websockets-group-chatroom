@@ -44,10 +44,12 @@ $wsdomain = $wsdomain_array[1];
           foreach ($members as $member) {
             $dotcolor = "color: #f00";
             $fontcolor = "color: #c0c0c0";
+            $background = "background: #402659";
             $online = "Offline";
             if ($member['login_status'] === "1") {
               $dotcolor = "color: #0f0";
               $fontcolor = "color: #fff";
+              $background = "background: #533174";
               $online = "Online";
             }
             // show the time if the user last logged in today, otherwise show the date only.
@@ -60,7 +62,7 @@ $wsdomain = $wsdomain_array[1];
             } else {
               $showdate = date("g:i A", strtotime($member['lastlogin']));
             }
-            echo "<div class=\"ja-sidebar-oneuser\">";
+            echo "<div class=\"ja-sidebar-oneuser\" style=\"" . $background . "\">";
               echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
               echo "<div>" . $member['username'] . "<br />";
               echo "<span class=\"fas fa-circle ja-rightpadding1\" style=\"" . $dotcolor . "\"></span>

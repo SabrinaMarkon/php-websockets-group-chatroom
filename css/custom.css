@@ -253,6 +253,12 @@ img {
 	height: 50vh;
 	overflow-y: scroll;
 }
+#ja-chat-messages div:nth-child(even) {
+	background: #533174;
+}
+#ja-chat-messages div:nth-child(odd) {
+	background: #402659;
+}
 .ja-chat-onemessage {
 	display: flex;
 	align-items: center;
@@ -260,7 +266,7 @@ img {
 	padding: 1rem;
 	margin: 1rem;
 	border: 1px solid #fff;
-	background: #533174;
+	/* background: #533174; */
 }
 .ja-chat-onemessage div:first-child {
 	padding-right: 1rem;
