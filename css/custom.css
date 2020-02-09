@@ -253,10 +253,10 @@ img {
 	height: 50vh;
 	overflow-y: scroll;
 }
-#ja-chat-messages div:nth-child(even) {
+#ja-chat-messages .ja-chat-onemessage:nth-child(even) {
 	background: #533174;
 }
-#ja-chat-messages div:nth-child(odd) {
+#ja-chat-messages .ja-chat-onemessage:nth-child(odd) {
 	background: #402659;
 }
 .ja-chat-onemessage {

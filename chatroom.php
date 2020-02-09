@@ -45,7 +45,7 @@ $wsdomain = $wsdomain_array[1];
             if ($member['lastlogin'] == null) {
               $showdate = "N/A";
             } elseif ($lastlogindate < $onedayago) {
-              $showdate = date("M-d-Y", strtotime($member['lastlogin']));
+              $showdate = date("M d, Y", strtotime($member['lastlogin']));
             } else {
               $showdate = date("g:i A", strtotime($member['lastlogin']));
             }
@@ -67,7 +67,7 @@ $wsdomain = $wsdomain_array[1];
           $messagedatestr = strtotime($chatmessage['created_on']);
           $onedayagostr = strtotime('-1 day');
           if ($messagedatestr < $onedayagostr) {
-            $messagedate = date("M-d-Y g:i A", strtotime($chatmessage['created_on']));
+            $messagedate = date("M d, Y g:i A", strtotime($chatmessage['created_on']));
           } else {
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
