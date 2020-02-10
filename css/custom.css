@@ -244,6 +244,24 @@ img {
 .ja-sidebar-oneuser div:last-child {
 	margin-left: auto;
 }
+.onlinestatus-dot-red {
+	color: #f00;
+}
+.onlinestatus-dot-green {
+	color: #0f0;
+}
+.onlinestatus-word-grey {
+	color: #c0c0c0;
+}
+.onlinestatus-word-white {
+	color: #fff;
+}
+.onlinestatus-background-dark {
+	background: #402659;
+}
+.onlinestatus-background-light {
+	background: #533174;
+}
 .ja-chatbox {
 	grid-area: chatbox;
 	border: 1px solid #fff;

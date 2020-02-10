@@ -29,14 +29,15 @@ $wsdomain = $wsdomain_array[1];
       </div>   
       <?php
           foreach ($members as $member) {
-            $dotcolor = "color: #f00";
-            $fontcolor = "color: #c0c0c0";
-            $background = "background: #402659";
+            $dotclass = "onlinestatus-dot-red";
+            $wordclass = "onlinestatus-word-grey";
+            $userclass = "onlinestatus-background-dark";
             $online = "Offline";
             if ($member['login_status'] === "1") {
-              $dotcolor = "color: #0f0";
+              $dotclass = "onlinestatus-dot-green";
               $fontcolor = "color: #fff";
-              $background = "background: #533174";
+              $wordclass = "onlinestatus-word-white";
+              $userclass = "onlinestatus-background-light";
               $online = "Online";
             }
             // show the time if the user last logged in today, otherwise show the date only.
@@ -49,11 +50,11 @@ $wsdomain = $wsdomain_array[1];
             } else {
               $showdate = date("g:i A", strtotime($member['lastlogin']));
             }
-            echo "<div class=\"ja-sidebar-oneuser\" style=\"" . $background . "\">";
+            echo "<div class=\"ja-sidebar-oneuser " . $userclass . "\">";
               echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
               echo "<div>" . $member['username'] . "<br />";
-              echo "<span class=\"fas fa-circle ja-rightpadding1\" style=\"" . $dotcolor . "\"></span>
-                    <span style=\"" . $fontcolor . "\">" . $online . "</span></div>";
+              echo "<span class=\"fas fa-circle ja-rightpadding1 " . $dotclass . "\"></span>
+                    <span class=\"" . $wordclass . "\">" . $online . "</span></div>";
               echo "<div>" . $showdate . "</div>";
             echo "</div>";
           }
