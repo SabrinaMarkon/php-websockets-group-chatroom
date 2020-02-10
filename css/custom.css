@@ -23,6 +23,11 @@ img {
 .table > tbody > tr > td {
 	vertical-align: middle;
 }
+#loader {
+	margin: auto;
+	width: 75px;
+	display: none;
+}
 
 /* Video Background */
 #videoBG {

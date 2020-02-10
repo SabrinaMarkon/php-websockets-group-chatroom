@@ -64,6 +64,7 @@ $wsdomain = $wsdomain_array[1];
   </div>
 	<div class="ja-chatbox ja-small-font">
     <div id="ja-chat-messages">
+      <div id="loader"><img src='images/loader.gif' alt="Loading..."></div>
       <?php
         foreach($allchatmessages as $chatmessage) {
           // show the time if the message was sent today, otherwise show the date and time.
@@ -109,6 +110,7 @@ $wsdomain = $wsdomain_array[1];
     // When the user scrolls to the top of the chatbox, load more messages.
     $('#ja-chat-messages').scroll(function() {
       if ($(this).scrollTop() == 0) {
+        $('#loader').show();
         $.ajax({
           type: "GET",
           url: "loadmorechatmessages.php",
@@ -119,6 +121,9 @@ $wsdomain = $wsdomain_array[1];
           success: function(data) {
             $('#ja-chat-messages').prepend(data);
             flag += limit;
+            $('#loader').hide();
+            // Reset scroll
+            $(this).scrollTop(30);
           }
         });
       }   
