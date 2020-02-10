@@ -10,9 +10,8 @@ $members = $allmembers->getAllMembers('login_status desc');
 // Get class for chatroom database handling.
 $chatroom = new ChatRoom();
 // Load chat message history.
-$offset = 0;
 const MESSAGE_LIMIT_PER_SCROLL = 50;
-$allchatmessages_array = $chatroom->loadChatRoom($offset, MESSAGE_LIMIT_PER_SCROLL);
+$allchatmessages_array = $chatroom->loadChatRoom(0, MESSAGE_LIMIT_PER_SCROLL);
 $allchatmessages = array_reverse($allchatmessages_array);
 
 $wsdomain_array = explode("//", $domain);
@@ -96,6 +95,9 @@ $wsdomain = $wsdomain_array[1];
 <script type="text/javascript">
   $(document).ready(function() {
 
+    let limit = <?php echo MESSAGE_LIMIT_PER_SCROLL ?>;
+    let flag = limit; // The page already loaded the first 'limit' messages starting at offset = 0 above.
+
     // Scroll chat box to the end.
     // $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
     // non-animated: 
@@ -107,16 +109,17 @@ $wsdomain = $wsdomain_array[1];
     // When the user scrolls to the top of the chatbox, load more messages.
     $('#ja-chat-messages').scroll(function() {
       if ($(this).scrollTop() == 0) {
-        console.log('hey how are ya?');
         $.ajax({
           type: "GET",
           url: "loadmorechatmessages.php",
           data: {
-            offset: <?php echo $offset; ?>,
-            limit: <?php echo MESSAGE_LIMIT_PER_SCROLL ?>
+            offset: flag,
+            limit: limit
           },
           success: function(data) {
             $('#ja-chat-messages').prepend(data);
+            flag += limit;
+            console.log(limit + ' ' + offset);
           }
         });
       }   
