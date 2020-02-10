@@ -10,7 +10,9 @@ $members = $allmembers->getAllMembers('login_status desc');
 // Get class for chatroom database handling.
 $chatroom = new ChatRoom();
 // Load chat message history.
-$allchatmessages = $chatroom->loadChatRoom();
+$offset = 0;
+const MESSAGE_LIMIT_PER_SCROLL = 50;
+$allchatmessages = $chatroom->loadChatRoom($offset, MESSAGE_LIMIT_PER_SCROLL);
 
 $wsdomain_array = explode("//", $domain);
 $wsdomain = $wsdomain_array[1];
@@ -63,6 +65,7 @@ $wsdomain = $wsdomain_array[1];
 	<div class="ja-chatbox ja-small-font">
     <div id="ja-chat-messages">
       <?php
+        $counter = 1;
         foreach($allchatmessages as $chatmessage) {
           // show the time if the message was sent today, otherwise show the date and time.
           $messagedatestr = strtotime($chatmessage['created_on']);
@@ -73,10 +76,11 @@ $wsdomain = $wsdomain_array[1];
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
           echo "<div class=\"ja-chat-onemessage\">";
-            echo "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
+            echo "<div>{$counter} - " . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
             echo "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
             echo "<div>" . $messagedate . "</div>";
           echo "</div>";
+          $counter++;
         }
       ?>
     </div>
@@ -105,6 +109,17 @@ $wsdomain = $wsdomain_array[1];
     $('#ja-chat-messages').scroll(function() {
       if ($(this).scrollTop() == 0) {
         console.log('hey how are ya?');
+        $.ajax({
+          type: "GET",
+          url: "loadmorechatmessages.php",
+          data: {
+            offset: <?php echo $offset ?>,
+            limit: <?php echo MESSAGE_LIMIT_PER_SCROLL ?>
+          },
+          success: function(data) {
+            $('#ja-chat-messages').append(data);
+          }
+        });
       }   
     });
 

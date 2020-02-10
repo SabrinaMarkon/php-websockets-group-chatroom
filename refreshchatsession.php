@@ -5,4 +5,3 @@ if ((isset($_SESSION['username'])) && (isset($_SESSION['password']))) {
   $_SESSION['username'] = $_SESSION['username'];
   $_SESSION['password'] = $_SESSION['password'];
 } 
-?>
