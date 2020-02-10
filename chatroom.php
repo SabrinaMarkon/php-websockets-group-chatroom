@@ -123,7 +123,7 @@ $wsdomain = $wsdomain_array[1];
             flag += limit;
             $('#loader').hide();
             // Reset scroll
-            $(this).scrollTop(30);
+            $('#ja-chat-messages').scrollTop(50);
           }
         });
       }   
