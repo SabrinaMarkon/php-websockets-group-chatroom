@@ -119,7 +119,6 @@ $wsdomain = $wsdomain_array[1];
           success: function(data) {
             $('#ja-chat-messages').prepend(data);
             flag += limit;
-            console.log(limit + ' ' + offset);
           }
         });
       }   
