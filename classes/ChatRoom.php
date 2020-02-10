@@ -21,7 +21,7 @@ class ChatRoom {
   }
 
   public function loadChatRoom($offset = 0, $limit = 50) {
-    $sql = "select chatroom.*, members.email from chatroom, members where chatroom.username = members.username order by id limit {$limit} offset {$offset}";
+    $sql = "select chatroom.*, members.email from chatroom, members where chatroom.username = members.username order by id desc limit {$limit} offset {$offset}";
     $q = $this->pdo->prepare($sql);
     $q->execute();
     $q->setFetchMode(PDO::FETCH_ASSOC);

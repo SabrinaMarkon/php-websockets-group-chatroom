@@ -18,8 +18,9 @@ if (isset($_GET['offset']) && isset($_GET['limit'])) {
   require_once "config/Database.php";
   $allmembers = new Member();
   $chatroom = new ChatRoom();
-  $morechatmessages = $chatroom->loadChatRoom($_GET['offset'], $_GET['limit']);
-  $appendtochat = '';
+  $morechatmessages_array = $chatroom->loadChatRoom($_GET['offset'], $_GET['limit']);
+  $morechatmessages = array_reverse($morechatmessages_array);
+  $prependtochat = '';
   foreach($morechatmessages as $chatmessage) {
     // show the time if the message was sent today, otherwise show the date and time.
     $messagedatestr = strtotime($chatmessage['created_on']);
@@ -29,11 +30,11 @@ if (isset($_GET['offset']) && isset($_GET['limit'])) {
     } else {
       $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
     }
-    $appendtochat .= "<div class=\"ja-chat-onemessage\">";
-    $appendtochat .= "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
-    $appendtochat .= "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
-    $appendtochat .= "<div>" . $messagedate . "</div>";
-    $appendtochat .= "</div>";
+    $prependtochat .= "<div class=\"ja-chat-onemessage\">";
+    $prependtochat .= "<div>{$chatmessage['id']}" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
+    $prependtochat .= "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
+    $prependtochat .= "<div>" . $messagedate . "</div>";
+    $prependtochat .= "</div>";
   }
-  echo $appendtochat;
+  echo $prependtochat;
 }
