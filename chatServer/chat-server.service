@@ -8,6 +8,7 @@ ExecStart=/usr/local/bin/php -f /home/collectorsscave/public_html/chatServer/cha
 TimeoutStartSec=0
 User=collectorsscave
 Group=collectorsscave
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

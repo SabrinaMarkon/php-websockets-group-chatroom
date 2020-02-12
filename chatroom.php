@@ -142,7 +142,6 @@ $wsdomain = $wsdomain_array[1];
     // onmessage received this is what happens:
     conn.onmessage = function(e) {
       let data = JSON.parse(e.data);
-      console.log(data);
       let row = `<div class="ja-chat-onemessage">
           <div>${data.gravatar}</div>
           <div>${data.username}<br />${data.text}</div>
