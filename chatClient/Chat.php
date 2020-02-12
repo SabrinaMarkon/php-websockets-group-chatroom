@@ -9,10 +9,9 @@
 namespace chatClient;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
-// use \classes\ChatRoom;
 
-require_once "config/Database.php";
-require_once "classes/ChatRoom.php";
+require_once(__DIR__ . '/../config/Database.php');
+require_once(__DIR__ . '/../classes/ChatRoom.php');
 
 class Chat implements MessageComponentInterface {
     protected $clients;
