@@ -112,12 +112,36 @@ Back them up before editing to be on the safe side, so if things go south fast, 
 
 ------------------------------------------------------------------------------------
 
-How to set up a WebSockets daemon on the server (need root access to your VPS or server):
+How to set up a WebSockets daemon on the server that will start up when the server boots, and
+restart automatically when it fails. (need root access to your VPS or server).
 
-1) Move /chatServer/chatSocket.conf to your /etc/init directory.
+In CentOS/RHEL 5 and 6, we were using automatic startup feature with /etc/rc.d/init.d to run any script at system boot.
+This is for For CentOS/RHEL 7+:
 
-2) SSH to your server and in the command line, run: service chatSocket start.
+1) Open /chatServer/chat-server.service and change the "ExecStart" path. It should point to the /chatServer/chat.server.php in your own hosting account.
 
-3) If you want the service to run automatically when your server starts, ......
+2) SSH into your VPS or dedicated server as root, and move /chatServer/chat-server.service to /etc/systemd/system/chat-server.service.
 
-NEED TO EDIT MORE IN THIS FILE.
+3) Make sure that /chatServer/chat-server.php has execute permissions. Change into your /chatServer directory and enter:
+chmod +x chat-server.php
+
+4) Now check that you have execute permissions on that same file with:
+ls -lrt chat-server.php
+
+5) Open /chatServer/chat-server.php and change the line below to your own domain name (without http) instead of the default one:
+$checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com';
+
+6) Enable the systemd service unit (source: https://www.thegeekdiary.com/centos-rhel-7-how-to-make-custom-script-to-run-automatically-during-boot/)
+		
+		1. Reload the systemd process to consider newly created chat-server.service OR every time when chat-server.service gets modified. Type:
+		systemctl daemon-reload
+
+		2. Enable this service to start after reboot automatically. Type:
+		systemctl enable chat-server.service
+
+		3. Start the service. Type: 
+		systemctl start chat-server.service
+
+		4. Reboot the host to verify whether the scripts are starting as expected during system boot. Type:
+		systemctl reboot
+

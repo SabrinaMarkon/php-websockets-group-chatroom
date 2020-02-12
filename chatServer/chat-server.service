@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs Ratchet WebSocket service for Chat website.
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/collectorsscave/public_html/chatServer/chat-server.php
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
