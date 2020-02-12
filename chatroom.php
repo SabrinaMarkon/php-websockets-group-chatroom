@@ -16,10 +16,16 @@ $allchatmessages = array_reverse($allchatmessages_array);
 
 $wsdomain_array = explode("//", $domain);
 $wsdomain = $wsdomain_array[1];
+
+$output = `systemctl status chat-server`;
+
 ?>
 
 <div class="container ja-chat-container">
   <h1 class="ja-chat-title ja-bottompadding"><?php echo $sitename ?> Chat</h1>
+  <div>
+    <?php echo $output ?>
+  </div>
   <div class="ja-sidebar ja-small-font">
       <div class="ja-sidebar-thisuser">
         <div>Logged in as: <?php echo $firstname . " " . $lastname . " (" . $username . ")"; ?></div>

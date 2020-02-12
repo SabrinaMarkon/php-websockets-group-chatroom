@@ -157,7 +157,7 @@ This will help secure your websockets server from man-in-the-middle attacks wher
 		7. If you can't get it running, make sure that the port you chose (default 8081 for the secure wss protocol) is open on your server's firewall.
 		For instance, if you use CSF firewall in WHM/cPanel, you need to go to the firewall configuration setting in the WHM interface and add your wss (or ws)
 		port to the "incoming TCP" list of ports, save it, then restart CSF. Otherwise, you will be puzzling and scratching your melon about why
-		everything seems fine except your chat still can't connect! (ask me how I know..lol).
+		everything seems fine except your chat still can't connect! (ask me how I know..).
 
 		8. Make sure the port number in chatroom.php and chat-server.php are the SAME! (default 8081).
 
