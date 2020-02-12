@@ -4,8 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/php /home/collectorsscave/public_html/chatServer/chat-server.php >> /home/collectorsscave/public_html/chatServer/chat-server.log 2>&1 
+ExecStart=/usr/local/bin/php -f /home/collectorsscave/public_html/chatServer/chat-server.php > /home/collectorsscave/public_html/chatServer/chat-server.log
 TimeoutStartSec=0
+User=collectorsscave
+Group=collectorsscave
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
