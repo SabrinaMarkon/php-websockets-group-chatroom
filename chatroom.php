@@ -141,15 +141,17 @@ $wsdomain = $wsdomain_array[1];
     // onmessage received this is what happens:
     conn.onmessage = function(e) {
       let data = JSON.parse(e.data);
-      // console.log(data);
+      console.log(data);
       let row = `<div class="ja-chat-onemessage">
-          <div>${data.username}</div>
-          <div>${data.text}</div>
+          <div>${data.gravatar}</div>
+          <div>${data.username}<br />${data.text}</div>
           <div>${data.dt}</div>
       </div>
       `;
       // Add the new message row to the chat box.
       $('#ja-chat-messages').append(row); 
+      // scroll to the bottom.
+      $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight); 
     }
 
     conn.onclose = function(e) {
@@ -158,10 +160,12 @@ $wsdomain = $wsdomain_array[1];
 
     $('#send').click(function() {
       let username = "<?php echo $username ?>";
-      let msg = $('#msg').val();
+      let email = "<?php echo $email ?>";
+      let text = $('#msg').val();
       let data = {
         'username': username,
-        'text': msg
+        'email': email,
+        'text': text
       };
       conn.send(JSON.stringify(data) );
       $('#msg').val(''); // reset the form field to be empty.

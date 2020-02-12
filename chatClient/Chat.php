@@ -12,6 +12,7 @@ use Ratchet\ConnectionInterface;
 
 require_once(__DIR__ . '/../config/Database.php');
 require_once(__DIR__ . '/../classes/ChatRoom.php');
+require_once(__DIR__ . '/../classes/User.php');
 
 class Chat implements MessageComponentInterface {
     protected $clients;
@@ -28,7 +29,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        // $msg is the data = {'username': username, 'text': msg} sent from the jQuery in chatroom.php. 
+        // $msg is the data = {'username': username, 'email': email, 'text': text} sent from the jQuery in chatroom.php. 
         $numRecv = count($this->clients) - 1;
         $userobj = json_decode($msg);
         echo sprintf('Connection %d with username %s sending message "%s" to %d other connection%s' . "\n"
@@ -36,15 +37,20 @@ class Chat implements MessageComponentInterface {
             // $numRecv == 1 ? '' : 's' just makes 'connections' word plural or not depending on $numRecv.
 
         // Add the date/time to the $data object:
-         $userobj->dt = date("M-d-Y h:i:s A");
+        $userobj->dt = date("M-d-Y h:i:s A");
 
+        // Create the user gravatar image and add to the $data object.
+        $allmembers = new \Member();
+        $gravatar = $allmembers->getGravatar($userobj->username, $userobj->email);
+        $userobj->gravatar = $gravatar;
+
+        $chathistory = new \ChatRoom();
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
                 // Uncomment if we don't want users to see their own messages.
                 $client->send(json_encode($userobj));
             // }
         // Add the message to the database chatroom history.
-        $chathistory = new \ChatRoom();
         $chathistory->saveChatRoom($userobj->username, $userobj->text);
         }
     }

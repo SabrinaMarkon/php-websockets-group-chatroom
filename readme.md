@@ -145,3 +145,13 @@ $checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com';
 		4. Reboot the host to verify whether the scripts are starting as expected during system boot. Type:
 		systemctl reboot
 
+		5. You can check to see if the chat-server service is running on the port you chose (default 8080) by typing:
+		lsof -i :8080
+
+		6. You can check to make sure the service is running with:
+		systemctl status chat-server.service
+
+		7. If you can't get it running, make sure that the port you chose (default 8080) is open on your server's firewall.
+
+		
+
