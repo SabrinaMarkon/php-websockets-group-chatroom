@@ -86,10 +86,11 @@ $wsdomain = $wsdomain_array[1];
   </div>
   <form class="ja-chatform" method="post" action="">
     <div class="form-group">
-      <textarea class="form-control" id="msg" name="msg" placeholder="Enter Message"></textarea>
+      <input type="text" id="msg" name="msg" class="form-control" 
+      placeholder="Enter Message" required minlength="1" maxlength="500">
     </div>
     <div class="form-group">
-      <input type="button" value="Send" class="btn btn-success btn-block" id="send" name="send">
+      <input type="submit" value="Send" class="btn btn-success btn-block" id="send" name="send">
     </div>
   </form>
 </div>
@@ -122,7 +123,7 @@ $wsdomain = $wsdomain_array[1];
             $('#ja-chat-messages').prepend(data);
             flag += limit;
             $('#loader').hide();
-            // Reset scroll
+            // Reset scroll if we have NOT reached the last message.
             if (data != '') {
               $('#ja-chat-messages').scrollTop(50);
             }
@@ -158,17 +159,19 @@ $wsdomain = $wsdomain_array[1];
       console.log("Connection Closed!");
     }
 
-    $('#send').click(function() {
-      let username = "<?php echo $username ?>";
-      let email = "<?php echo $email ?>";
-      let text = $('#msg').val();
-      let data = {
-        'username': username,
-        'email': email,
-        'text': text
-      };
-      conn.send(JSON.stringify(data) );
-      $('#msg').val(''); // reset the form field to be empty.
+    // Submitted chat message with enter key or send button.
+    $('.ja-chatform').submit(function(e) {
+        e.preventDefault();
+        let username = "<?php echo $username ?>";
+        let email = "<?php echo $email ?>";
+        let text = $('#msg').val();
+        let data = {
+          'username': username,
+          'email': email,
+          'text': text
+        };
+        conn.send(JSON.stringify(data) );
+        $('#msg').val(''); // reset the form field to be empty.
     });
 
     // Update chat login status to 0 by redirecting from /chatroom.
