@@ -76,7 +76,7 @@ $wsdomain = $wsdomain_array[1];
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
           echo "<div class=\"ja-chat-onemessage\">";
-            echo "<div>{$chatmessage['id']} - " . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
+            echo "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
             echo "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
             echo "<div>" . $messagedate . "</div>";
           echo "</div>";

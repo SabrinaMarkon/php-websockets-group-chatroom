@@ -278,6 +278,7 @@ img {
 }
 #ja-chat-messages .ja-chat-onemessage:nth-child(even) {
 	background: #533174;
+	/* background: #af456e; */
 }
 #ja-chat-messages .ja-chat-onemessage:nth-child(odd) {
 	background: #402659;

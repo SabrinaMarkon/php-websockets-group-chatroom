@@ -25,6 +25,7 @@ If the date the user was last online is more than a day ago, just the month-day-
 If the date of a chat message is more than a day ago, the entire date and time are shown.
 The LEAVE chat button updates the online status of the user to 0 (logged out) by simply redirecting away from /chatroom. Any other
 page ensures that the online status is set to 0. Upon visiting /chatroom, the online status is set to 1 (logged in) in index.php successfully.
+There is reverse infinity scrolling in the chat box with a loader gif when more messages must be loaded. 
 
 
 

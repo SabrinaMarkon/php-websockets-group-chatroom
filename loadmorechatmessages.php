@@ -31,7 +31,7 @@ if (isset($_GET['offset']) && isset($_GET['limit'])) {
       $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
     }
     $prependtochat .= "<div class=\"ja-chat-onemessage\">";
-    $prependtochat .= "<div>{$chatmessage['id']}" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
+    $prependtochat .= "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
     $prependtochat .= "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
     $prependtochat .= "<div>" . $messagedate . "</div>";
     $prependtochat .= "</div>";
