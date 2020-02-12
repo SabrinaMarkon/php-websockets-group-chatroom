@@ -15,7 +15,7 @@ use chatClient\Chat;
 
     $server = IoServer::factory(
         new HttpServer($checkedApp),
-        8080
+        8081
     );
 
     $server->run();

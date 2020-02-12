@@ -133,7 +133,7 @@ $wsdomain = $wsdomain_array[1];
     });
 
     let wsdomain = '<?php echo $wsdomain ?>';
-    let conn = new WebSocket("ws://" + wsdomain + ":8080");
+    let conn = new WebSocket("ws://" + wsdomain + ":8081");
 
     conn.onopen = function(e) {
       console.log("Connection established!");

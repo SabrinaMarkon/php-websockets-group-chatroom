@@ -115,10 +115,11 @@ Back them up before editing to be on the safe side, so if things go south fast, 
 How to set up a WebSockets daemon on the server that will start up when the server boots, and
 restart automatically when it fails. (need root access to your VPS or server).
 
-In CentOS/RHEL 5 and 6, we were using automatic startup feature with /etc/rc.d/init.d to run any script at system boot.
-This is for For CentOS/RHEL 7+:
+CentOS/RHEL 5 and 6: Create the daemon with /etc/rc.d/init.d to run any script at system boot.
 
-1) Open /chatServer/chat-server.service and change the "ExecStart" path. It should point to the ABSOLUTE path to /chatServer/chat.server.php in your own hosting account.
+CentOS/RHEL 7:
+
+1) Open /chatServer/chat-server.service and change the "ExecStart" path. It should point to the ABSOLUTE path to /chatServer/chat-server.php in your own hosting account. i.e. /home/youruseraccount/public_html/chatServer/chat-server.php.
 
 2) SSH into your VPS or dedicated server as root, and move /chatServer/chat-server.service to /etc/systemd/system/chat-server.service.
 
@@ -128,10 +129,11 @@ chmod +x chat-server.php
 4) Now check that you have execute permissions on that same file with:
 ls -lrt chat-server.php
 
-5) Open /chatServer/chat-server.php and change the line below to your own domain name (without http) instead of the default one:
+5) Open /chatServer/chat-server.php and change the line below to your own domain name (without http) instead of the default one.
 $checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com';
+This will help secure your websockets server from man-in-the-middle attacks where people can connect from anywhere.
 
-6) Enable the systemd service unit (source: https://www.thegeekdiary.com/centos-rhel-7-how-to-make-custom-script-to-run-automatically-during-boot/)
+6) Enable your systemd service unit (which will be your chat-server.service) 
 		
 		1. Reload the systemd process to consider newly created chat-server.service OR every time when chat-server.service gets modified. Type:
 		systemctl daemon-reload
@@ -143,15 +145,22 @@ $checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com';
 		systemctl start chat-server.service
 
 		4. Reboot the host to verify whether the scripts are starting as expected during system boot. Type:
-		systemctl reboot
+		systemctl reboot 
+		(this will reboot the server!)
 
-		5. You can check to see if the chat-server service is running on the port you chose (default 8080) by typing:
-		lsof -i :8080
+		5. You can check to see if the chat-server service is running on the port you chose (default 8081) by typing:
+		lsof -i :8081
 
 		6. You can check to make sure the service is running with:
 		systemctl status chat-server.service
 
-		7. If you can't get it running, make sure that the port you chose (default 8080) is open on your server's firewall.
+		7. If you can't get it running, make sure that the port you chose (default 8081 for the secure wss protocol) is open on your server's firewall.
+		For instance, if you use CSF firewall in WHM/cPanel, you need to go to the firewall configuration setting in the WHM interface and add your wss (or ws)
+		port to the "incoming TCP" list of ports, save it, then restart CSF. Otherwise, you will be puzzling and scratching your melon about why
+		everything seems fine except your chat still can't connect! (ask me how I know..lol).
 
-		
+		8. Make sure the port number in chatroom.php and chat-server.php are the SAME! (default 8081).
+
+(Reference: https://www.thegeekdiary.com/centos-rhel-7-how-to-make-custom-script-to-run-automatically-during-boot/)
+
 
