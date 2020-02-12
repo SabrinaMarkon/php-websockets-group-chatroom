@@ -118,7 +118,7 @@ restart automatically when it fails. (need root access to your VPS or server).
 In CentOS/RHEL 5 and 6, we were using automatic startup feature with /etc/rc.d/init.d to run any script at system boot.
 This is for For CentOS/RHEL 7+:
 
-1) Open /chatServer/chat-server.service and change the "ExecStart" path. It should point to the /chatServer/chat.server.php in your own hosting account.
+1) Open /chatServer/chat-server.service and change the "ExecStart" path. It should point to the ABSOLUTE path to /chatServer/chat.server.php in your own hosting account.
 
 2) SSH into your VPS or dedicated server as root, and move /chatServer/chat-server.service to /etc/systemd/system/chat-server.service.
 
