@@ -38,7 +38,7 @@ class ChatRoom {
   public function addWebSocketsResourceId($username, $resourceId) {
     $sql = "update members set resourceId=?, login_status=1 where username=?";
     $q = $this->pdo->prepare($sql);
-    $q->execute(array($username, $resourceId));
+    $q->execute(array($resourceId, $username));
   }
   
   public function removeWebSocketsResourceId($resourceId) {

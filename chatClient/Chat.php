@@ -47,6 +47,7 @@ class Chat implements MessageComponentInterface {
         $chathistory = new \ChatRoom();
         // Assign the resourceId to the username in the members table.
         $chathistory->addWebSocketsResourceId($userobj->username, $from->resourceId);
+
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
                 // Uncomment if we don't want users to see their own messages.
