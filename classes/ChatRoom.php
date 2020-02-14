@@ -34,7 +34,19 @@ class ChatRoom {
 		$q = $this->pdo->prepare($sql);
 		$q->execute(array($loginstatus,$username));	
   }
+
+  public function addWebSocketsResourceId($username, $resourceId) {
+    $sql = "update members set resourceId=?, login_status=1 where username=?";
+    $q = $this->pdo->prepare($sql);
+    $q->execute(array($username, $resourceId));
+  }
   
+  public function removeWebSocketsResourceId($resourceId) {
+    $sql = "update members set resourceId=NULL, login_status=-0 where resourceId=?";
+    $q = $this->pdo->prepare($sql);
+    $q->execute(array($resourceId));
+  }
+
   public function __destruct() {
     Database::disconnect();
   }

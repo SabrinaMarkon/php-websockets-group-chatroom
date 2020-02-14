@@ -161,6 +161,3 @@ This will help secure your websockets server from man-in-the-middle attacks wher
 
 		8. Make sure the port number in chatroom.php and chat-server.php are the SAME! (default 8081).
 
-(Reference: https://www.thegeekdiary.com/centos-rhel-7-how-to-make-custom-script-to-run-automatically-during-boot/)
-
-

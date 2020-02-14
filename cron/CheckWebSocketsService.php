@@ -15,10 +15,12 @@ class CheckWebSocketsService {
     $checkifdead = stripos($output, 'dead');
     $checkifinactive = stripos($output, 'inactive');
     $checkifkilled = stripos($output, 'killed');
-    if ($checkifdead || $checkifinactive || $checkifkilled) {
+    $checkifstopped = stripos($output, 'stopped');
+    if ($checkifdead || $checkifinactive || $checkifkilled || $checkifstopped) {
       // The chat-server.service isn't running, so start it.
-      $startup = `systemctl start chat-server`;
+      $startup = `systemctl start chat-server`; // DOESN'T WORK because of permissions yet (we don't want php running as root).
     }
+    echo $output;
   }
 }
 
