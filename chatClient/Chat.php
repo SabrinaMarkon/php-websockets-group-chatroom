@@ -29,7 +29,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        // $msg is the data = {'username': username, 'email': email, 'text': text} sent from the jQuery in chatroom.php. 
+        // $msg is the data = {'username': username, 'email': email, 'text': text, 'leftchat': leftchat} sent from the jQuery in chatroom.php. 
         $numRecv = count($this->clients) - 1;
         $userobj = json_decode($msg);
         echo sprintf('Connection %d with username %s sending message "%s" to %d other connection%s' . "\n"
@@ -59,6 +59,9 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
+        foreach ($this->clients as $client) {
+                $client->send(json_encode($userobj));
+        }
         // The connection is closed, remove it, as we can no longer send it messages
         $this->clients->detach($conn);
         // Remove the websockets resourceId from the members table.

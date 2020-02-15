@@ -142,12 +142,20 @@ $wsdomain = $wsdomain_array[1];
     // onmessage received this is what happens:
     conn.onmessage = function(e) {
       let data = JSON.parse(e.data);
-      let row = `<div class="ja-chat-onemessage">
+      let row = '';
+      if (data.leftchat == true) {
+        row = `<div class="ja-chat-onemessage-leftchat">
+          <div>${data.text}</div>
+          </div>
+          `;
+      } else {
+        row = `<div class="ja-chat-onemessage">
           <div>${data.gravatar}</div>
           <div>${data.username}<br />${data.text}</div>
           <div>${data.dt}</div>
-      </div>
-      `;
+          </div>
+          `;
+      }
       // Add the new message row to the chat box.
       $('#ja-chat-messages').append(row); 
       // scroll to the bottom.
@@ -167,7 +175,8 @@ $wsdomain = $wsdomain_array[1];
         let data = {
           'username': username,
           'email': email,
-          'text': text
+          'text': text,
+          'leftchat': false
         };
         conn.send(JSON.stringify(data) );
         $('#msg').val(''); // reset the form field to be empty.
@@ -175,6 +184,15 @@ $wsdomain = $wsdomain_array[1];
 
     // Update chat login status to 0 by redirecting from /chatroom.
     $('#leave-chat').click(function() {
+      let username = "<?php echo $username ?>";
+      let email = "<?php echo $email ?>";
+      let data = {
+        'username': username,
+        'email': email,
+        'text': username + ' <em>has left the chat</em>',
+        'leftchat': true
+      };
+      conn.send(JSON.stringify(data) );
       window.location.href = '/main';
     });
 

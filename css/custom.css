@@ -278,12 +278,11 @@ img {
 }
 #ja-chat-messages .ja-chat-onemessage:nth-child(even) {
 	background: #533174;
-	/* background: #af456e; */
 }
 #ja-chat-messages .ja-chat-onemessage:nth-child(odd) {
 	background: #402659;
 }
-.ja-chat-onemessage {
+.ja-chat-onemessage,.ja-chat-onemessage-leftchat {
 	display: flex;
 	align-items: center;
 	text-align: left;
@@ -296,6 +295,9 @@ img {
 }
 .ja-chat-onemessage div:last-child {
 	margin-left: auto;
+}
+.ja-chat-onemessage-leftchat {
+	background: #313574;
 }
 .ja-chatform {
 	grid-area: chatform;

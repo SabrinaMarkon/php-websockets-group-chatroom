@@ -26,7 +26,9 @@ If the date of a chat message is more than a day ago, the entire date and time a
 The LEAVE chat button updates the online status of the user to 0 (logged out) by simply redirecting away from /chatroom. Any other
 page ensures that the online status is set to 0. Upon visiting /chatroom, the online status is set to 1 (logged in) in index.php successfully.
 There is reverse infinity scrolling in the chat box with a loader gif when more messages must be loaded. 
-
+Multiple users can chat and see all messages.
+When a user posts, the resourceId for their websockets connection is stored in the members table with their username.
+When a user leaves the chat, the resourceId field in the members table for their username is set to null.
 
 
 --------------------------
