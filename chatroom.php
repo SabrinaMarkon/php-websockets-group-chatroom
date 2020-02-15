@@ -163,7 +163,7 @@ $wsdomain = $wsdomain_array[1];
           `;
         $('#' + data.username).removeClass('onlinestatus-background-light').addClass('onlinestatus-background-dark');
         $('#' + data.username + '-dot').removeClass('onlinestatus-dot-green').addClass('onlinestatus-dot-red');
-        $('#' + data.username + '-word').removeClass('onlinestatus-word-white').addClass('onlinestatus-word-grey');
+        $('#' + data.username + '-word').removeClass('onlinestatus-word-white').addClass('onlinestatus-word-grey').text('Offline');
       } else if (data.chatstatus == 'joined') {
         row = `<div class="ja-chat-onemessage-chatstatus">
           <div>${data.text}</div>
@@ -171,7 +171,7 @@ $wsdomain = $wsdomain_array[1];
           `;
         $('#' + data.username).removeClass('onlinestatus-background-dark').addClass('onlinestatus-background-light');
         $('#' + data.username + '-dot').removeClass('onlinestatus-dot-red').addClass('onlinestatus-dot-green');
-        $('#' + data.username + '-word').removeClass('onlinestatus-word-grey').addClass('onlinestatus-word-white');
+        $('#' + data.username + '-word').removeClass('onlinestatus-word-grey').addClass('onlinestatus-word-white').text('Online');
       } else {
         row = `<div class="ja-chat-onemessage">
           <div>${data.gravatar}</div>
