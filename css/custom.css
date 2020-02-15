@@ -282,7 +282,7 @@ img {
 #ja-chat-messages .ja-chat-onemessage:nth-child(odd) {
 	background: #402659;
 }
-.ja-chat-onemessage,.ja-chat-onemessage-leftchat {
+.ja-chat-onemessage,.ja-chat-onemessage-chatstatus {
 	display: flex;
 	align-items: center;
 	text-align: left;
@@ -296,7 +296,7 @@ img {
 .ja-chat-onemessage div:last-child {
 	margin-left: auto;
 }
-.ja-chat-onemessage-leftchat {
+.ja-chat-onemessage-chatstatus {
 	background: #313574;
 }
 .ja-chatform {

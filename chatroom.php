@@ -52,11 +52,11 @@ $wsdomain = $wsdomain_array[1];
             } else {
               $showdate = date("g:i A", strtotime($member['lastlogin']));
             }
-            echo "<div class=\"ja-sidebar-oneuser " . $userclass . "\">";
+            echo "<div id=\"" . $member['username'] . "\" class=\"ja-sidebar-oneuser " . $userclass . "\">";
               echo "<div>" . $allmembers->getGravatar($member['username'], $member['email']) . "</div>";
               echo "<div>" . $member['username'] . "<br />";
-              echo "<span class=\"fas fa-circle ja-rightpadding1 " . $dotclass . "\"></span>
-                    <span class=\"" . $wordclass . "\">" . $online . "</span></div>";
+              echo "<span id=\"" . $member['username'] . "-dot\" class=\"fas fa-circle ja-rightpadding1 " . $dotclass . "\"></span>
+                    <span id=\"" . $member['username'] . "-word\" class=\"" . $wordclass . "\">" . $online . "</span></div>";
               echo "<div>" . $showdate . "</div>";
             echo "</div>";
           }
@@ -76,7 +76,7 @@ $wsdomain = $wsdomain_array[1];
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
           if ($chatmessage['msg'] == $chatmessage['username'] . ' <em>has left the chat</em>') {
-            echo "<div class=\"ja-chat-onemessage-leftchat\">";
+            echo "<div class=\"ja-chat-onemessage-chatstatus\">";
             echo "<div>" . $chatmessage['msg'] . "</div>";
             echo "</div>";
           } else {
@@ -107,8 +107,6 @@ $wsdomain = $wsdomain_array[1];
     let flag = limit; // The page already loaded the first 'limit' messages starting at offset = 0 above.
 
     // Scroll chat box to the end.
-    // $("#ja-chat-messages").animate({ scrollTop: $('#ja-chat-messages').prop("scrollHeight")}, 1000);
-    // non-animated: 
     $('#ja-chat-messages').scrollTop($('#ja-chat-messages')[0].scrollHeight);
 
     // Refresh PHP session so user is not automatically logged out while they have the chat open.
@@ -149,11 +147,22 @@ $wsdomain = $wsdomain_array[1];
     conn.onmessage = function(e) {
       let data = JSON.parse(e.data);
       let row = '';
-      if (data.leftchat == true) {
-        row = `<div class="ja-chat-onemessage-leftchat">
+      if (data.chatstatus == 'left') {
+        row = `<div class="ja-chat-onemessage-chatstatus">
           <div>${data.text}</div>
           </div>
           `;
+        $('#' + data.username).removeClass('onlinestatus-background-light').addClass('onlinestatus-background-dark');
+        $('#' + data.username + '-dot').removeClass('onlinestatus-dot-green').addClass('onlinestatus-dot-red');
+        $('#' + data.username + '-word').removeClass('onlinestatus-word-white').addClass('onlinestatus-word-grey');
+      } else if (data.chatstatus == 'joined') {
+        row = `<div class="ja-chat-onemessage-chatstatus">
+          <div>${data.text}</div>
+          </div>
+          `;
+        $('#' + data.username).removeClass('onlinestatus-background-dark').addClass('onlinestatus-background-light');
+        $('#' + data.username + '-dot').removeClass('onlinestatus-dot-red').addClass('onlinestatus-dot-green');
+        $('#' + data.username + '-word').removeClass('onlinestatus-word-grey').addClass('onlinestatus-word-white');
       } else {
         row = `<div class="ja-chat-onemessage">
           <div>${data.gravatar}</div>
@@ -182,7 +191,7 @@ $wsdomain = $wsdomain_array[1];
           'username': username,
           'email': email,
           'text': text,
-          'leftchat': false
+          'chatstatus': 'post'
         };
         conn.send(JSON.stringify(data) );
         $('#msg').val(''); // reset the form field to be empty.
@@ -196,7 +205,7 @@ $wsdomain = $wsdomain_array[1];
         'username': username,
         'email': email,
         'text': username + ' <em>has left the chat</em>',
-        'leftchat': true
+        'chatstatus': 'left'
       };
       conn.send(JSON.stringify(data) );
       window.location.href = '/main';

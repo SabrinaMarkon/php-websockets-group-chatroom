@@ -29,7 +29,7 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-        // $msg is the data = {'username': username, 'email': email, 'text': text, 'leftchat': leftchat} sent from the jQuery in chatroom.php. 
+        // $msg is the data = {'username': username, 'email': email, 'text': text, 'chatstatus': chatstatus} sent from the jQuery in chatroom.php. 
         $numRecv = count($this->clients) - 1;
         $userobj = json_decode($msg);
         echo sprintf('Connection %d with username %s sending message "%s" to %d other connection%s' . "\n"
