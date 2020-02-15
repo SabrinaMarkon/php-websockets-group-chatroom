@@ -141,6 +141,15 @@ $wsdomain = $wsdomain_array[1];
 
     conn.onopen = function(e) {
       console.log("Connection established!");
+      let username = "<?php echo $username ?>";
+      let email = "<?php echo $email ?>";
+      let data = {
+        'username': username,
+        'email': email,
+        'text': username + ' <em>has joined the chat</em>',
+        'chatstatus': 'joined'
+      };
+      conn.send(JSON.stringify(data) );
     }
 
     // onmessage received this is what happens:
