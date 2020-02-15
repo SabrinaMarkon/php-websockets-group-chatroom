@@ -38,15 +38,18 @@ class Chat implements MessageComponentInterface {
 
         // Add the date/time to the $data object:
         $userobj->dt = date("M-d-Y h:i:s A");
-
         // Create the user gravatar image and add to the $data object.
         $allmembers = new \Member();
         $gravatar = $allmembers->getGravatar($userobj->username, $userobj->email);
         $userobj->gravatar = $gravatar;
 
         $chathistory = new \ChatRoom();
-        // Assign the resourceId to the username in the members table.
-        $chathistory->addWebSocketsResourceId($userobj->username, $from->resourceId);
+        if ($userobj->chatstatus == 'left') {
+            $chathistory->removeWebSocketsResourceId($conn->resourceId);
+        } else if ($userobj->chatstatus == 'joined') {
+            // Assign the resourceId to the username in the members table.
+            $chathistory->addWebSocketsResourceId($userobj->username, $from->resourceId);
+        }
 
         foreach ($this->clients as $client) {
             // if ($from !== $client) {
@@ -59,20 +62,15 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
-        foreach ($this->clients as $client) {
-                $client->send(json_encode($userobj));
-        }
+        // foreach ($this->clients as $client) {
+        //         $client->send(json_encode($userobj));
+        // }
         // The connection is closed, remove it, as we can no longer send it messages
         $this->clients->detach($conn);
         // Remove the websockets resourceId from the members table.
         $chat = new \ChatRoom();
         $chat->removeWebSocketsResourceId($conn->resourceId);
         echo "Connection {$conn->resourceId} has disconnected\n";
-
-        // IMPORTANT - ADD field to database for resourceId, and update that value
-        // for a username when they connect. When onClose is received here, 
-        // look up that resourceId in the database and set login_status=0 and resourceId=0
-        // for that username.
 
         // RIGHT NOW IF A USER CLOSES THE BROWSER, THEY STILL SHOW AS ONLINE IN THE CHAT!!! This should say "user left the chat" or
         // "user joined the chat".

@@ -299,6 +299,9 @@ img {
 .ja-chat-onemessage-chatstatus {
 	background: #313574;
 }
+.ja-chat-onemessage-chatstatus div:last-child {
+	margin-left: auto;
+}
 .ja-chatform {
 	grid-area: chatform;
 	overflow: auto;

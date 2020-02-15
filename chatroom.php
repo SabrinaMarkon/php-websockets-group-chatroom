@@ -75,9 +75,11 @@ $wsdomain = $wsdomain_array[1];
           } else {
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
-          if ($chatmessage['msg'] == $chatmessage['username'] . ' <em>has left the chat</em>') {
+          if ($chatmessage['msg'] == $chatmessage['username'] . ' <em>has left the chat</em>' || 
+              $chatmessage['msg'] == $chatmessage['username'] . ' <em>has joined the chat</em>') {
             echo "<div class=\"ja-chat-onemessage-chatstatus\">";
             echo "<div>" . $chatmessage['msg'] . "</div>";
+            echo "<div>" . $messagedate . "</div>";
             echo "</div>";
           } else {
             echo "<div class=\"ja-chat-onemessage\">";
@@ -159,6 +161,7 @@ $wsdomain = $wsdomain_array[1];
       if (data.chatstatus == 'left') {
         row = `<div class="ja-chat-onemessage-chatstatus">
           <div>${data.text}</div>
+          <div>${data.dt}</div>
           </div>
           `;
         $('#' + data.username).removeClass('onlinestatus-background-light').addClass('onlinestatus-background-dark');
@@ -167,6 +170,7 @@ $wsdomain = $wsdomain_array[1];
       } else if (data.chatstatus == 'joined') {
         row = `<div class="ja-chat-onemessage-chatstatus">
           <div>${data.text}</div>
+          <div>${data.dt}</div>
           </div>
           `;
         $('#' + data.username).removeClass('onlinestatus-background-dark').addClass('onlinestatus-background-light');
