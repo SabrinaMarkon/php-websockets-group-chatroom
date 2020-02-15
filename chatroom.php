@@ -75,11 +75,17 @@ $wsdomain = $wsdomain_array[1];
           } else {
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
-          echo "<div class=\"ja-chat-onemessage\">";
+          if ($chatmessage['msg'] == $chatmessage['username'] . ' <em>has left the chat</em>') {
+            echo "<div class=\"ja-chat-onemessage-leftchat\">";
+            echo "<div>" . $chatmessage['msg'] . "</div>";
+            echo "</div>";
+          } else {
+            echo "<div class=\"ja-chat-onemessage\">";
             echo "<div>" . $allmembers->getGravatar($chatmessage['username'], $chatmessage['email']) . "</div>";
             echo "<div>" . $chatmessage['username'] . "<br />" . $chatmessage['msg'] . "</div>";
             echo "<div>" . $messagedate . "</div>";
-          echo "</div>";
+            echo "</div>";
+          }
         }
       ?>
     </div>
