@@ -62,15 +62,12 @@ class Chat implements MessageComponentInterface {
     }
 
     public function onClose(ConnectionInterface $conn) {
-        // foreach ($this->clients as $client) {
-        //         $client->send(json_encode($userobj));
-        // }
         // The connection is closed, remove it, as we can no longer send it messages
         $this->clients->detach($conn);
         // Remove the websockets resourceId from the members table.
         $chat = new \ChatRoom();
         $chat->removeWebSocketsResourceId($conn->resourceId);
-        echo "Connection {$conn->resourceId} has disconnected\n";
+        echo "Connection {$conn->resourceId} has disconnected";
 
         // RIGHT NOW IF A USER CLOSES THE BROWSER, THEY STILL SHOW AS ONLINE IN THE CHAT!!! This should say "user left the chat" or
         // "user joined the chat".

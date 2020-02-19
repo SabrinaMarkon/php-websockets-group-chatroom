@@ -92,10 +92,13 @@ $wsdomain = $wsdomain_array[1];
       ?>
     </div>
   </div>
-  <form class="ja-chatform" method="post" action="">
+  <form class="ja-chatform" method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
       <input type="text" id="msg" name="msg" class="form-control" 
       placeholder="Enter Message" required minlength="1" maxlength="500">
+    </div>
+    <div class="form-group">
+      <input type="file" value="Upload" class="btn btn-primary btn-block" id="fileInput" name="file">
     </div>
     <div class="form-group">
       <input type="submit" value="Send" class="btn btn-success btn-block" id="send" name="send">
