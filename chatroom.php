@@ -75,8 +75,8 @@ $wsdomain = $wsdomain_array[1];
           } else {
             $messagedate = date("g:i A", strtotime($chatmessage['created_on']));
           }
-          if ($chatmessage['msg'] == $chatmessage['username'] . ' <em>has left the chat</em>' || 
-              $chatmessage['msg'] == $chatmessage['username'] . ' <em>has joined the chat</em>') {
+          if ($chatmessage['msg'] == $chatmessage['username'] . ' has left the chat' || 
+              $chatmessage['msg'] == $chatmessage['username'] . ' has joined the chat') {
             echo "<div class=\"ja-chat-onemessage-chatstatus\">";
             echo "<div>" . $chatmessage['msg'] . "</div>";
             echo "<div>" . $messagedate . "</div>";
@@ -153,7 +153,7 @@ $wsdomain = $wsdomain_array[1];
       let data = {
         'username': username,
         'email': email,
-        'text': username + ' <em>has joined the chat</em>',
+        'text': username + ' has joined the chat',
         'chatstatus': 'joined'
       };
       conn.send(JSON.stringify(data) );
@@ -204,7 +204,9 @@ $wsdomain = $wsdomain_array[1];
     document.querySelector('#chatImageInput').addEventListener('change', function() {
       // 'files' array contains the images the user chose.
       let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[0]);
-      let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} alt="Preview Thumbnail" class="imageThumbnail"><span class="removeImageThumbnail">x</span></div>`;
+      let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
+      alt="Preview Thumbnail" class="imageThumbnail">
+      <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
       $('#previewImages').append(previewImage);
     });
 
@@ -231,7 +233,7 @@ $wsdomain = $wsdomain_array[1];
       let data = {
         'username': username,
         'email': email,
-        'text': username + ' <em>has left the chat</em>',
+        'text': username + ' has left the chat',
         'chatstatus': 'left'
       };
       conn.send(JSON.stringify(data) );

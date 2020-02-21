@@ -316,22 +316,19 @@ img {
 }
 .imageThumbnailDiv {
 	position: relative;
+	display: inline-block;
 	margin: 15px 7px 0 7px;
 }
 .imageThumbnail {
 	max-width: 100px;
 }
-/* .removeImageThumbnail:before {
-	content: 'x';
-	height: 5px;
-} */
 .removeImageThumbnail {
   position: absolute;
   top: 0;
 	right: 0;
-	background: #000;
-	color: #fff;
-  cursor: pointer;
+	padding: 0;
+	margin: 0;
+	width: 20px;
 }
 #chatImageInput {
   border: 0;
