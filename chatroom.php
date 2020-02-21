@@ -204,7 +204,7 @@ $wsdomain = $wsdomain_array[1];
     document.querySelector('#chatImageInput').addEventListener('change', function() {
       // 'files' array contains the images the user chose.
       let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[0]);
-      let previewImage = `<img src=${imageObjectUrl} alt="Preview Thumbnail" class="imageThumbnail">`;
+      let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} alt="Preview Thumbnail" class="imageThumbnail"><span class="removeImageThumbnail">x</span></div>`;
       $('#previewImages').append(previewImage);
     });
 
