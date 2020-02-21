@@ -306,6 +306,9 @@ img {
 	grid-area: chatform;
 	overflow: auto;
 }
+#chatImageInput {
+	display: none;
+}
 
 .ja-small-font { 
 	font-size: 1.4rem; 

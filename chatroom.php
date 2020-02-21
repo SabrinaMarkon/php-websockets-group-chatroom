@@ -92,13 +92,15 @@ $wsdomain = $wsdomain_array[1];
       ?>
     </div>
   </div>
-  <form class="ja-chatform" method="post" action="" enctype="multipart/form-data">
+  <form class="ja-chatform" method="post" action="uploadimages.php" enctype="multipart/form-data">
     <div class="form-group">
       <input type="text" id="msg" name="msg" class="form-control" 
       placeholder="Enter Message" required minlength="1" maxlength="500">
     </div>
     <div class="form-group">
-      <input type="file" value="Upload" class="btn btn-primary btn-block" id="fileInput" name="file">
+      <input type="file" value="Upload" id="chatImageInput" name="chatImageInput" multiple accept="image/jpeg, image/png, image/gif">
+      <button id="includeImageButton" class="btn btn-primary btn-block">Include Images</button>
+      <div id="previewImages"></div>
     </div>
     <div class="form-group">
       <input type="submit" value="Send" class="btn btn-success btn-block" id="send" name="send">
@@ -196,6 +198,19 @@ $wsdomain = $wsdomain_array[1];
     conn.onclose = function(e) {
       console.log("Connection Closed!");
     }
+
+    // Include an image in a chat message:
+    // Use custom button instead of default file upload button (looks nicer).
+    document.querySelector('#includeImageButton').addEventListener('click', function() {
+      document.querySelector('#chatImageInput').click();
+    });
+    // When the user selects files, validate the file with the change event.
+    document.querySelector('#chatImageInput').addEventListener('change', function() {
+      // 'files' array contains the images the user chose.
+      let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[0]);
+      let previewImage = `<img src=${imageObjectUrl} alt="Preview" width="100" style="display:inline;">`;
+      $('#previewImages').appendChild(previewImage);
+    });
 
     // Submitted chat message with enter key or send button.
     $('.ja-chatform').submit(function(e) {
