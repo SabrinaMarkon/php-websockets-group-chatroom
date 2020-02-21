@@ -305,10 +305,28 @@ img {
 .ja-chatform {
 	grid-area: chatform;
 	overflow: auto;
+	width: 99%;
+}
+
+/* Image Upload Area  */
+#previewImages {
+	display: flex;
+	flex-wrap: wrap;
+	align-items : center;
+}
+.imageThumbnail {
+	max-width: 100px;
+	margin: 15px 7px 0 7px;
 }
 #chatImageInput {
-	display: none;
-}
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+	white-space: nowrap;
+}	
 
 .ja-small-font { 
 	font-size: 1.4rem; 
