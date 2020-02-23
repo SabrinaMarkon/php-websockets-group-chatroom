@@ -202,8 +202,11 @@ conn.onclose = function(e) {
 
 // Include an image(s) in a chat message:
 // When the user selects files, validate the file with the change event.
+const imagesArray = [];
 document.querySelector('#chatImageInput').addEventListener('change', function() {
-  // 'files' array contains the images the user chose.
+  imagesArray.push($('#chatImageInput').val().split('\\').pop()); // Add to list of images.
+  console.log(imagesArray);
+  // Make an object for the image preview's url since browser won't allow path from user's system for the src.
   let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[0]);
   let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
   alt="Preview Thumbnail" class="imageThumbnail">
@@ -212,8 +215,9 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
 });
 // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
 // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
-// that existed already when the page loaded. 
+// that existed already when the page loaded.s 
 $('#previewImages').on("click", ".removeImageThumbnail", function(){
+    // console.log($(this).parent().children('img').attr('src'));
     $(this).parent().remove();
 });
 
