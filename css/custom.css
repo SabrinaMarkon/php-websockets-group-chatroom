@@ -339,6 +339,9 @@ img {
   position: absolute !important;
 	white-space: nowrap;
 }
+#chatErrorMessage {
+	display: none;
+}
 
 .ja-small-font { 
 	font-size: 1.4rem; 

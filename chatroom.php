@@ -103,6 +103,7 @@ $wsdomain = $wsdomain_array[1];
         </div>
 	    </div>
     </div>
+    <div id="chatErrorMessage"></div>
     <div class="form-group">
       <div id="previewImages"></div>
     </div>
@@ -208,10 +209,13 @@ conn.onclose = function(e) {
 let imageFilenameList = []; // Array of image files the user chose.
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
-    ///////// When the user selects files, validate the file with the change event.
-
     // check file type.
-
+    mimeTypes = [ 'image/jpeg', 'image/png', 'image/gif' ];
+    if(mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
+      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessage').innerText = 'Error : Only JPEG, PNG, or GIF files allowed';
+      return;
+	  }
     // check file size.
 
     // check number of files (max 10).
