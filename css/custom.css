@@ -335,10 +335,10 @@ img {
   clip: rect(0, 0, 0, 0);
   height: 1px;
   overflow: hidden;
-  padding: 0;
+	padding: 0;
   position: absolute !important;
 	white-space: nowrap;
-}	
+}
 
 .ja-small-font { 
 	font-size: 1.4rem; 

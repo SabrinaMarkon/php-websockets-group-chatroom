@@ -93,13 +93,17 @@ $wsdomain = $wsdomain_array[1];
     </div>
   </div>
   <form class="ja-chatform" method="post" action="uploadimages.php" enctype="multipart/form-data">
-    <div class="form-group">
-      <input type="text" id="msg" name="msg" class="form-control" 
+    <div class="input-group">
+      <input type="text" id="msg" name="msg" class="form-control text_element_width" 
       placeholder="Enter Message" required minlength="1" maxlength="500">
+      <div class="input-group-btn">
+        <label for="chatImageInput" class="btn btn-primary btn-block">Add Images</label>
+        <div class="">
+          <input type="file" value="Upload" id="chatImageInput" name="chatImageInput[]" multiple accept="image/jpeg, image/png, image/gif">
+        </div>
+	    </div>
     </div>
     <div class="form-group">
-      <label for="chatImageInput" class="btn btn-primary btn-block">Add Images</label>
-      <div><input type="file" value="Upload" id="chatImageInput" name="chatImageInput[]" multiple accept="image/jpeg, image/png, image/gif"></div>
       <div id="previewImages"></div>
     </div>
     <div class="form-group">
@@ -202,10 +206,18 @@ conn.onclose = function(e) {
 
 // Include an image(s) in a chat message:
 let imageFilenameList = []; // Array of image files the user chose.
-///////// When the user selects files, validate the file with the change event.
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
+    ///////// When the user selects files, validate the file with the change event.
+
+    // check file type.
+
+    // check file size.
+
+    // check number of files (max 10).
+
     imageFilenameList.push($(this).get(0).files[i].name);
+    // Make an object for the image preview's url since browser won't allow path from user's system for the src.
     let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[i]);
     let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
     alt="Preview Thumbnail" class="imageThumbnail">
@@ -213,13 +225,10 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     $('#previewImages').append(previewImage);
   }
   console.log(imageFilenameList);
-  // imageFilenameList.push($('#chatImageInput').val().split('\\').pop()); // Add to list of images.
-  // Make an object for the image preview's url since browser won't allow path from user's system for the src.
-
 });
 // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
 // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
-// that existed already when the page loaded.s 
+// that existed already when the page loaded. Remove from list of files to upload when submitted.
 $('#previewImages').on("click", ".removeImageThumbnail", function(){
     // console.log($(this).parent().children('img').attr('src'));
     $(this).parent().remove();
