@@ -213,17 +213,23 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     mimeTypes = [ 'image/jpeg', 'image/png', 'image/gif' ];
     if(mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
       document.querySelector('#chatErrorMessage').style.display = 'block';
-      document.querySelector('#chatErrorMessage').innerText = 'Error : Only JPEG, PNG, or GIF files allowed';
+      document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, or GIF files allowed.`;
       return;
 	  }
     // check file size (maximum 10 MB)
     const maximumImageSize = 10;
     if($(this).get(0).files[i].size > maximumImageSize*1024*1024) {
       document.querySelector('#chatErrorMessage').style.display = 'block';
-      document.querySelector('#chatErrorMessage').innerText = `Error : Exceeded size ${maximumImageSize}MB`;
+      document.querySelector('#chatErrorMessage').innerText = `Error : Exceeded size ${maximumImageSize}MB.`;
       return;
 	  }
-    // check number of files (max 10).
+    // check number of files (maximum allowed).
+    const maximumNumberOfImages = 10;
+    if (imageFilenameList.length >= maximumNumberOfImages) {
+      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessage').innerText = `Error : Maximum ${maximumNumberOfImages} images per chat message.`;
+      return;  
+    }
 
     imageFilenameList.push($(this).get(0).files[i].name);
     // Make an object for the image preview's url since browser won't allow path from user's system for the src.
