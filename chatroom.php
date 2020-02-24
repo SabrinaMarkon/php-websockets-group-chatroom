@@ -103,7 +103,9 @@ $wsdomain = $wsdomain_array[1];
         </div>
 	    </div>
     </div>
-    <div id="chatErrorMessage"></div>
+    <div id="chatErrorMessageDiv" class="form-group">
+      <div id="chatErrorMessage" class="alert alert-danger ja-small-font"></div>
+    </div>
     <div class="form-group">
       <div id="previewImages"></div>
     </div>
@@ -212,21 +214,21 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     // check file type.
     mimeTypes = [ 'image/jpeg', 'image/png', 'image/gif' ];
     if(mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
-      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, or GIF files allowed.`;
       return;
 	  }
     // check file size (maximum 10 MB)
     const maximumImageSize = 10;
     if($(this).get(0).files[i].size > maximumImageSize*1024*1024) {
-      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Exceeded size ${maximumImageSize}MB.`;
       return;
 	  }
     // check number of files (maximum allowed).
     const maximumNumberOfImages = 10;
     if (imageFilenameList.length >= maximumNumberOfImages) {
-      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Maximum ${maximumNumberOfImages} images per chat message.`;
       return;  
     }

@@ -339,8 +339,13 @@ img {
   position: absolute !important;
 	white-space: nowrap;
 }
-#chatErrorMessage {
+#chatErrorMessageDiv {
 	display: none;
+	margin-top: 1rem;
+	margin-bottom: 0;
+}
+#chatErrorMessage {
+	margin-bottom: 0;
 }
 
 .ja-small-font { 
