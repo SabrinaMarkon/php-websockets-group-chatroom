@@ -238,10 +238,10 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
       hideErrorMessages();
       return;  
     }
-
-    imageFilenameList.push($(this).get(0).files[i].name);
+    // imageFilenameList.push($(this).get(0).files[i].name);
     // Make an object for the image preview's url since browser won't allow path from user's system for the src.
     let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[i]);
+    imageFilenameList.push(imageObjectUrl);
     let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
     alt="Preview Thumbnail" class="imageThumbnail">
     <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
@@ -252,8 +252,14 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
 // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
 // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
 // that existed already when the page loaded. Remove from list of files to upload when submitted.
-$('#previewImages').on("click", ".removeImageThumbnail", function(){
-    // console.log($(this).parent().children('img').attr('src'));
+$('#previewImages').on("click", ".removeImageThumbnail", function() {
+    // Removes from imageFilenameList array.
+    let imageSrcFile = $(this).parent().children('img').attr('src');
+    let imageIndex = imageFilenameList.indexOf(imageSrcFile);
+    imageFilenameList.splice(imageIndex, 1);
+    console.log(imageFilenameList);
+    console.log(imageSrcFile);
+    // Removes from view.
     $(this).parent().remove();
 });
 
