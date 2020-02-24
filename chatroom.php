@@ -216,8 +216,13 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
       document.querySelector('#chatErrorMessage').innerText = 'Error : Only JPEG, PNG, or GIF files allowed';
       return;
 	  }
-    // check file size.
-
+    // check file size (maximum 10 MB)
+    const maximumImageSize = 10;
+    if($(this).get(0).files[i].size > maximumImageSize*1024*1024) {
+      document.querySelector('#chatErrorMessage').style.display = 'block';
+      document.querySelector('#chatErrorMessage').innerText = `Error : Exceeded size ${maximumImageSize}MB`;
+      return;
+	  }
     // check number of files (max 10).
 
     imageFilenameList.push($(this).get(0).files[i].name);
