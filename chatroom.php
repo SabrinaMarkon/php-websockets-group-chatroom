@@ -211,7 +211,7 @@ conn.onclose = function(e) {
 function hideErrorMessages() {
   setTimeout(() => document.querySelector('#chatErrorMessageDiv').style.display = 'none', 5000);
 }
-let imageFilenameList = []; // Array of image files the user chose.
+let imageFilenameList = []; // Array of image files the user chose as blobs.
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
     // check file type.
@@ -266,9 +266,30 @@ $('#previewImages').on("click", ".removeImageThumbnail", function() {
 // Submitted chat message with enter key or send button.
 $('.ja-chatform').submit(function(e) {
     e.preventDefault();
+    let attachedImagesHtml = '';
+    // Handle any images attached to the message:
+    if (imageFilenameList.length > 0) {
+    // Start progress bar if there are images.
+
+      // Upload any images to uploads directory.
+      var formData = new FormData(this);
+      $.ajax({
+        url: 'uploadimages.php',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            alert(data)
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+      });
+    // Attach new image urls to text to add to the data object.
+
+    }
     let username = "<?php echo $username ?>";
     let email = "<?php echo $email ?>";
-    let text = $('#msg').val();
+    let text = $('#msg').val() + attachedImagesHtml;
     let data = {
       'username': username,
       'email': email,
@@ -294,6 +315,4 @@ $('#leave-chat').click(function() {
 });
 
 });
-
-
 </script>
