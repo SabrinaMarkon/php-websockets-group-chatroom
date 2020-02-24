@@ -208,6 +208,9 @@ conn.onclose = function(e) {
 }
 
 // Include an image(s) in a chat message:
+function hideErrorMessages() {
+  setTimeout(() => document.querySelector('#chatErrorMessageDiv').style.display = 'none', 5000);
+}
 let imageFilenameList = []; // Array of image files the user chose.
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
@@ -216,6 +219,7 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     if(mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
       document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, or GIF files allowed.`;
+      hideErrorMessages();
       return;
 	  }
     // check file size (maximum 10 MB)
@@ -223,6 +227,7 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     if($(this).get(0).files[i].size > maximumImageSize*1024*1024) {
       document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Exceeded size ${maximumImageSize}MB.`;
+      hideErrorMessages();
       return;
 	  }
     // check number of files (maximum allowed).
@@ -230,6 +235,7 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
     if (imageFilenameList.length >= maximumNumberOfImages) {
       document.querySelector('#chatErrorMessageDiv').style.display = 'block';
       document.querySelector('#chatErrorMessage').innerText = `Error : Maximum ${maximumNumberOfImages} images per chat message.`;
+      hideErrorMessages();
       return;  
     }
 
