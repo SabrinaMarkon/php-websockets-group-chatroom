@@ -284,8 +284,10 @@ $('.ja-chatform').submit(function(e) {
         contentType: false,
         processData: false
       });
-    // Attach new image urls to text to add to the data object.
+      // Attach new image urls to text to add to the data object.
 
+      
+      
     }
     let username = "<?php echo $username ?>";
     let email = "<?php echo $email ?>";
@@ -297,7 +299,8 @@ $('.ja-chatform').submit(function(e) {
       'chatstatus': 'post'
     };
     conn.send(JSON.stringify(data) );
-    $('#msg').val(''); // reset the form field to be empty.
+    $('#msg').val(''); // Reset the form field to be empty.
+    $('#previewImages').empty(); // Remove images from the preview area.
 });
 
 // Update chat login status to 0 by redirecting from /chatroom.

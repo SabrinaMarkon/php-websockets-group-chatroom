@@ -4,11 +4,12 @@ $uploadDirectory = "/uploads/";
 // print_r($_POST);
 // ($_FILES);
 // print_r($_FILES['chatImageInput']);
-$count = 0;
+$imageCount = 0;
 foreach($_FILES['chatImageInput']['name'] as $name) {
-  $count++;
+  $imageCount++;
+  echo $name;
 }
-echo $count;
+echo $imageCount;
 exit;
 
 $errors = [];
@@ -31,8 +32,8 @@ if (isset($_POST['msg'])) {
     if ($fileSize > $maximumImageSize*1024*1024) {
       $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
     }
-    if ($asdfdasfasdf >= $maximumNumberOfImages) {
-      
+    if ($imageCount >= $maximumNumberOfImages) {
+      $errors[] = `Error : Maximum {$maximumNumberOfImages} images per chat message.`;
     }
 
     if (empty($errors)) {
