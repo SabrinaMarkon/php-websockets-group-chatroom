@@ -1,22 +1,35 @@
 <?php
 $currentDirectory = getcwd();
 $uploadDirectory = "/uploads/";
-// var_dump($_POST);
-$data = json_decode($_POST['imageFilenameList']);
-if ($data == null) {
-  echo json_last_error();
-} else {
-  echo var_dump($data[0]); // Each object (one index) in the imageFileNameList array.
-  echo "\n--------------------------------4\n";
-  echo $data[0]->imageName;
-}
-echo "\n--------------------------------\n";
-exit;
-
 $errors = [];
 $mimeTypes = ['jpeg','jpg','png'];
 $maximumImageSize = 10;
 $maximumNumberOfImages = 10;
+
+// var_dump($_POST);
+var_dump($_FILES);
+
+$data = json_decode($_POST['imageFilenameList']); // imageFilenameList was stringified.
+if ($data == null) {
+  echo json_last_error(); // There was no imageFilenameList content.
+  exit;
+}
+// echo var_dump($data[0]); // Each object (one index) in the imageFileNameList array.
+// echo $data[0]->imageName; // Filename of one uploaded image.
+foreach ($data as $imageUploaded) {
+  $imageName = $imageUploaded->imageName; // Each imageName in the $data array.
+  echo $imageName;
+
+
+
+
+}
+$numberOfUploadedImages = count($data); // How many images are being uploaded.
+exit;
+
+
+
+
 
 $fileName = $_FILES['file']['name'];
 $fileSize = $_FILES['file']['size'];
@@ -33,7 +46,7 @@ if (isset($_POST['msg'])) {
     if ($fileSize > $maximumImageSize*1024*1024) {
       $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
     }
-    if ($imageCount >= $maximumNumberOfImages) {
+    if ($numberOfUploadedImages >= $maximumNumberOfImages) {
       $errors[] = `Error : Maximum {$maximumNumberOfImages} images per chat message.`;
     }
 

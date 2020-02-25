@@ -310,7 +310,7 @@ $('.ja-chatform').submit(function(e) {
     conn.send(JSON.stringify(data) );
     $('#msg').val(''); // Reset the form field to be empty.
     $('#previewImages').empty(); // Remove images from the preview area.
-    $imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
+    imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
 });
 
 // Update chat login status to 0 by redirecting from /chatroom.
