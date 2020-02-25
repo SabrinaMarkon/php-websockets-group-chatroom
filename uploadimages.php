@@ -1,15 +1,16 @@
 <?php
 $currentDirectory = getcwd();
 $uploadDirectory = "/uploads/";
-// print_r($_POST);
-// ($_FILES);
-// print_r($_FILES['chatImageInput']);
-$imageCount = 0;
-foreach($_FILES['chatImageInput']['name'] as $name) {
-  $imageCount++;
-  echo $name;
+// var_dump($_POST);
+$data = json_decode($_POST['imageFilenameList']);
+if ($data == null) {
+  echo json_last_error();
+} else {
+  echo var_dump($data[0]); // Each object (one index) in the imageFileNameList array.
+  echo "\n--------------------------------4\n";
+  echo $data[0]->imageName;
 }
-echo $imageCount;
+echo "\n--------------------------------\n";
 exit;
 
 $errors = [];

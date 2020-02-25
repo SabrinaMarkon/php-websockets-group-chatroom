@@ -277,13 +277,17 @@ $('.ja-chatform').submit(function(e) {
       // Upload any images to uploads directory.
       var formData = new FormData(this);
       // Attach the list of image file objects to compare with $_FILES in the upload script.
-      formData.append('imageFilenameList', imageFilenameList);
+      formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
+      
       $.ajax({
         url: 'uploadimages.php',
         type: 'POST',
         data: formData,
         success: function (data) {
             alert(data)
+        },
+        error: function (err) {
+            alert(err);
         },
         cache: false,
         contentType: false,
