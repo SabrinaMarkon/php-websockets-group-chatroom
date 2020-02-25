@@ -211,7 +211,8 @@ conn.onclose = function(e) {
 function hideErrorMessages() {
   setTimeout(() => document.querySelector('#chatErrorMessageDiv').style.display = 'none', 5000);
 }
-let imageFilenameList = []; // Array of image files the user chose as blobs.
+// Array of image files the user chose (original file name + blob url).
+let imageFilenameList = [];
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
     // check file type.
@@ -238,10 +239,9 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
       hideErrorMessages();
       return;  
     }
-    // imageFilenameList.push($(this).get(0).files[i].name);
     // Make an object for the image preview's url since browser won't allow path from user's system for the src.
     let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[i]);
-    imageFilenameList.push(imageObjectUrl);
+    imageFilenameList.push({ imageName: $(this).get(0).files[i].name, blobName: imageObjectUrl });
     let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
     alt="Preview Thumbnail" class="imageThumbnail">
     <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
@@ -252,13 +252,16 @@ document.querySelector('#chatImageInput').addEventListener('change', function() 
 // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
 // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
 // that existed already when the page loaded. Remove from list of files to upload when submitted.
+function findImageToDelete(imageSrcFile) {
+    return function (element) {
+        return element.blobName === imageSrcFile;
+    }
+}
 $('#previewImages').on("click", ".removeImageThumbnail", function() {
     // Removes from imageFilenameList array.
     let imageSrcFile = $(this).parent().children('img').attr('src');
-    let imageIndex = imageFilenameList.indexOf(imageSrcFile);
-    imageFilenameList.splice(imageIndex, 1);
+    imageFilenameList.splice(imageFilenameList.findIndex(findImageToDelete(imageSrcFile)), 1);
     console.log(imageFilenameList);
-    console.log(imageSrcFile);
     // Removes from view.
     $(this).parent().remove();
 });
@@ -273,6 +276,8 @@ $('.ja-chatform').submit(function(e) {
 
       // Upload any images to uploads directory.
       var formData = new FormData(this);
+      // Attach the list of image file objects to compare with $_FILES in the upload script.
+      formData.append('imageFilenameList', imageFilenameList);
       $.ajax({
         url: 'uploadimages.php',
         type: 'POST',
@@ -301,6 +306,7 @@ $('.ja-chatform').submit(function(e) {
     conn.send(JSON.stringify(data) );
     $('#msg').val(''); // Reset the form field to be empty.
     $('#previewImages').empty(); // Remove images from the preview area.
+    $imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
 });
 
 // Update chat login status to 0 by redirecting from /chatroom.
