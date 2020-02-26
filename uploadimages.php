@@ -50,15 +50,19 @@ foreach ($numberOfUploadedFiles as $index => $file) {
     $fileTmpName = $_FILES['chatImageInput']['tmp_name'][$index]; 
     $fileName = $_FILES['chatImageInput']['name'][$index]; 
     $fileSize = $_FILES['chatImageInput']['size'][$index]; 
-    $fileExtension = strtolower(end(explode('.',$fileName)));
-   
+    // $fileExtension = strtolower(end(explode('.',$fileName)));
+    $fileNameArray = explode(".", $fileName);
+    $fileExtension = strtolower(array_pop($fileNameArray));
+
     $uploadPath = $currentDirectory . $uploadDirectory . $fileName;
     
-    if (! in_array($fileExtension, $mimeTypes)) {
-      $errors[] = "Error : Only JPEG, PNG, or GIF files allowed.";
+    if (!in_array($fileExtension, $mimeTypes)) {
+      $errors[] = `Error : Only JPEG, PNG, or GIF files allowed.`;
+      echo `Error : Only JPEG, PNG, or GIF files allowed. ${fileExtension}`;
     }
     if ($fileSize > $maximumImageSize*1024*1024) {
       $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
+      echo `Error : Exceeded size {$maximumImageSize}MB. ${fileSize}`;
     }
 
     if (empty($errors)) {

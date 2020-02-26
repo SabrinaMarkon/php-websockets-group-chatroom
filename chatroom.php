@@ -279,20 +279,21 @@ $('.ja-chatform').submit(function(e) {
       // Attach the list of image file objects to compare with $_FILES in the upload script.
       formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
     
-      // async
+      // ASYNC - MAKE SURE IMAGES ARE UPLOADED before message loads them - have progress bar for this.
       $.ajax({
         url: 'uploadimages.php',
         type: 'POST',
         data: formData,
         success: function (data) {
-            alert(data)
+          console.log(data);
         },
         error: function (err) {
-            alert(err);
+          console.log(err);
         },
         cache: false,
         contentType: false,
-        processData: false
+        processData: false,
+        async: false
       });
       // Attach new image urls to text to add to the data object below that we send over websockets.
       attachedImagesHtml += `<div class="chatMessageImage">`;
