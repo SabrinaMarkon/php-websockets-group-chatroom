@@ -7,7 +7,7 @@ $maximumImageSize = 10;
 $maximumNumberOfImages = 10;
 
 // var_dump($_POST);
-var_dump($_FILES);
+// var_dump($_FILES);
 
 $data = json_decode($_POST['imageFilenameList']); // imageFilenameList was stringified.
 if ($data == null) {
@@ -16,20 +16,43 @@ if ($data == null) {
 }
 // echo var_dump($data[0]); // Each object (one index) in the imageFileNameList array.
 // echo $data[0]->imageName; // Filename of one uploaded image.
+
+$numberOfUploadedImages = count($data); // How many images are being uploaded.
+
+if ($numberOfUploadedImages == 0) {
+  $errors[] = `Error : No images were included.`;
+}
+
+if ($numberOfUploadedImages >= $maximumNumberOfImages) {
+  $errors[] = `Error : Maximum {$maximumNumberOfImages} images allowed per chat message.`;
+}
+
+$imageNameList = [];
+
 foreach ($data as $imageUploaded) {
   $imageName = $imageUploaded->imageName; // Each imageName in the $data array.
-  echo $imageName;
-
-
-
-
+  if ($imageName)
+  array_push($imageNameList, $imageName);
 }
-$numberOfUploadedImages = count($data); // How many images are being uploaded.
+// Remove duplicate filenames.
+$imageNameList = array_unique($imageNameList);
+
+// print_r($imageNameList);
+
+$numberOfUploadedFiles = $_FILES['chatImageInput'][name];
+// echo count($numberOfUploadedFiles);
+
+foreach ($numberOfUploadedFiles as $file) {
+  echo $file;
+  $key = array_search($file, $imageNameList);
+  echo $key;
+  // $key !== false makes sure that key 0 is not regarded as false.
+  if($key !== false) { 
+    // The filename was found in the imageNameList, so proceed:
+
+  }
+}
 exit;
-
-
-
-
 
 $fileName = $_FILES['file']['name'];
 $fileSize = $_FILES['file']['size'];
@@ -64,3 +87,8 @@ if (isset($_POST['msg'])) {
       }
     }
   }
+
+
+
+
+
