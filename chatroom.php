@@ -278,7 +278,8 @@ $('.ja-chatform').submit(function(e) {
       var formData = new FormData(this);
       // Attach the list of image file objects to compare with $_FILES in the upload script.
       formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
-      
+    
+      // async
       $.ajax({
         url: 'uploadimages.php',
         type: 'POST',
@@ -294,13 +295,11 @@ $('.ja-chatform').submit(function(e) {
         processData: false
       });
       // Attach new image urls to text to add to the data object below that we send over websockets.
-      if (imageFilenameList.length > 0) {
-        attachedImagesHtml += `<div class="chatMessageImage">`;
+      attachedImagesHtml += `<div class="chatMessageImage">`;
         for(let i = 0; i < imageFilenameList.length; i++) {
           attachedImagesHtml += `<div><img src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
         }
-        attachedImagesHtml += `</div>`;
-      }      
+      attachedImagesHtml += `</div>`;     
     }
 
     let username = "<?php echo $username ?>";
