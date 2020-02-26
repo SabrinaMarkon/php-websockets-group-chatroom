@@ -293,11 +293,16 @@ $('.ja-chatform').submit(function(e) {
         contentType: false,
         processData: false
       });
-      // Attach new image urls to text to add to the data object.
-
-      
-      
+      // Attach new image urls to text to add to the data object below that we send over websockets.
+      if (imageFilenameList.length > 0) {
+        attachedImagesHtml += `<div class="chatMessageImage">`;
+        for(let i = 0; i < imageFilenameList.length; i++) {
+          attachedImagesHtml += `<div><img src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
+        }
+        attachedImagesHtml += `</div>`;
+      }      
     }
+
     let username = "<?php echo $username ?>";
     let email = "<?php echo $email ?>";
     let text = $('#msg').val() + attachedImagesHtml;

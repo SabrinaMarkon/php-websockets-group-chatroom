@@ -54,26 +54,24 @@ foreach ($numberOfUploadedFiles as $index => $file) {
    
     $uploadPath = $currentDirectory . $uploadDirectory . $fileName;
     
-    if (isset($_POST['msg'])) {
-      if (! in_array($fileExtension, $mimeTypes)) {
-        $errors[] = "Error : Only JPEG, PNG, or GIF files allowed.";
-      }
-      if ($fileSize > $maximumImageSize*1024*1024) {
-        $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
-      }
-  
-      if (empty($errors)) {
-        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-        if ($didUpload) {
-          echo "The file " . basename($fileName) . " has been uploaded";
-        } else {
-          echo "An error occurred. Please contact the administrator.";
-        }
+    if (! in_array($fileExtension, $mimeTypes)) {
+      $errors[] = "Error : Only JPEG, PNG, or GIF files allowed.";
+    }
+    if ($fileSize > $maximumImageSize*1024*1024) {
+      $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
+    }
+
+    if (empty($errors)) {
+      $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+      if ($didUpload) {
+        echo "The file " . basename($fileName) . " has been uploaded";
       } else {
-          echo "There were problems uploading the image(s):\n\n";
-          foreach($errors as $error) {
-          echo $error . "\n";
-        }
+        echo "An error occurred. Please contact the administrator.";
+      }
+    } else {
+      echo "There were problems uploading the image(s):\n\n";
+      foreach($errors as $error) {
+      echo $error . "\n";
       }
     }
 

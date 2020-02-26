@@ -348,6 +348,19 @@ img {
 	margin-bottom: 0;
 }
 
+/* Chat Message Image HTML  */
+.chatMessageImage {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: top;
+}
+.chatMessageImage > div {
+	max-width: 300px;
+	position: relative;
+	display: inline-block;
+	margin: 15px 7px 0 7px;
+}
+
 .ja-small-font { 
 	font-size: 1.4rem; 
 }
