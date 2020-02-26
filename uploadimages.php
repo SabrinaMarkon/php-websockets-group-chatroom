@@ -42,53 +42,40 @@ $imageNameList = array_unique($imageNameList);
 $numberOfUploadedFiles = $_FILES['chatImageInput'][name];
 // echo count($numberOfUploadedFiles);
 
-foreach ($numberOfUploadedFiles as $file) {
-  echo $file;
-  $key = array_search($file, $imageNameList);
-  echo $key;
+foreach ($numberOfUploadedFiles as $index => $file) {
+  $key = array_search($file, $imageNameList); // Finds index of item in array.
   // $key !== false makes sure that key 0 is not regarded as false.
   if($key !== false) { 
-    // The filename was found in the imageNameList, so proceed:
+    // The filename was found in imageNameList, so proceed:
+    $fileTmpName = $_FILES['chatImageInput']['tmp_name'][$index]; 
+    $fileName = $_FILES['chatImageInput']['name'][$index]; 
+    $fileSize = $_FILES['chatImageInput']['size'][$index]; 
+    $fileExtension = strtolower(end(explode('.',$fileName)));
+   
+    $uploadPath = $currentDirectory . $uploadDirectory . $fileName;
+    
+    if (isset($_POST['msg'])) {
+      if (! in_array($fileExtension, $mimeTypes)) {
+        $errors[] = "Error : Only JPEG, PNG, or GIF files allowed.";
+      }
+      if ($fileSize > $maximumImageSize*1024*1024) {
+        $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
+      }
+  
+      if (empty($errors)) {
+        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+        if ($didUpload) {
+          echo "The file " . basename($fileName) . " has been uploaded";
+        } else {
+          echo "An error occurred. Please contact the administrator.";
+        }
+      } else {
+          echo "There were problems uploading the image(s):\n\n";
+          foreach($errors as $error) {
+          echo $error . "\n";
+        }
+      }
+    }
 
   }
 }
-exit;
-
-$fileName = $_FILES['file']['name'];
-$fileSize = $_FILES['file']['size'];
-$fileTmpName  = $_FILES['file']['tmp_name'];
-$fileType = $_FILES['file']['type'];
-$fileExtension = strtolower(end(explode('.',$fileName)));
-
-$uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
-
-if (isset($_POST['msg'])) {
-    if (! in_array($fileExtension,$mimeTypes)) {
-      $errors[] = "Error : Only JPEG, PNG, or GIF files allowed.";
-    }
-    if ($fileSize > $maximumImageSize*1024*1024) {
-      $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
-    }
-    if ($numberOfUploadedImages >= $maximumNumberOfImages) {
-      $errors[] = `Error : Maximum {$maximumNumberOfImages} images per chat message.`;
-    }
-
-    if (empty($errors)) {
-      $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-      if ($didUpload) {
-        echo "The file " . basename($fileName) . " has been uploaded";
-      } else {
-        echo "An error occurred. Please contact the administrator.";
-      }
-    } else {
-        echo "There were problems with the uploaded image(s):\n\n";
-        foreach($errors as $error) {
-        echo $error . "\n";
-      }
-    }
-  }
-
-
-
-
-
