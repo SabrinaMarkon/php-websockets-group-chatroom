@@ -284,7 +284,7 @@ img {
 }
 .ja-chat-onemessage,.ja-chat-onemessage-chatstatus {
 	display: flex;
-	align-items: center;
+	align-items: top;
 	text-align: left;
 	padding: 1rem;
 	margin: 1rem;
@@ -351,8 +351,9 @@ img {
 /* Chat Message Image HTML  */
 .chatMessageImage {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: top;
+	flex-flow: row, wrap;
+	justify-content: space-between;
+	align-content: flex-start;
 }
 .chatMessageImage > div {
 	max-width: 300px;
