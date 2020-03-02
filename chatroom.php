@@ -216,10 +216,10 @@ let imageFilenameList = [];
 document.querySelector('#chatImageInput').addEventListener('change', function() {
   for (let i = 0; i < $(this).get(0).files.length; i++) {
     // check file type.
-    mimeTypes = [ 'image/jpeg', 'image/png', 'image/gif' ];
+    mimeTypes = [ 'image/jpeg', 'image/png', 'image/gif', 'image/jfif' ];
     if(mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
       document.querySelector('#chatErrorMessageDiv').style.display = 'block';
-      document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, or GIF files allowed.`;
+      document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, JFIF, or GIF files allowed.`;
       hideErrorMessages();
       return;
 	  }

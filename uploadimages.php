@@ -2,7 +2,7 @@
 $currentDirectory = getcwd();
 $uploadDirectory = "/uploads/";
 $errors = [];
-$mimeTypes = ['jpeg','jpg','png'];
+$mimeTypes = ['jpeg','jpg','png','jfif'];
 $maximumImageSize = 10;
 $maximumNumberOfImages = 10;
 
