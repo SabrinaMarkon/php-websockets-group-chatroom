@@ -280,7 +280,7 @@ $wsdomain = $wsdomain_array[1];
       // Handle any images attached to the message:
       if (imageFilenameList.length > 0) {
         // Start progress bar if there are images.
-        $('#progress-bar').addClass('show');
+        $('#progress-bar').show();
 
         // Upload any images to uploads directory.
         var formData = new FormData(this);
@@ -294,13 +294,12 @@ $wsdomain = $wsdomain_array[1];
             xhr.upload.addEventListener("progress", function(evt) {
               if (evt.lengthComputable) {
                 var percentComplete = Math.round(evt.loaded / evt.total * 100);
-                console.log(percentComplete);
                 // $("#progress-bar").html('<div id="progress-status">' + percentComplete + ' %</div>');
                 $('#progress-bar').css({
                   width: percentComplete + '%'
                 });
-                if (percentComplete === 1) {
-                  $('#progress-bar').addClass('hide');
+                if (percentComplete === 100) {
+                  $('#progress-bar').hide();
                 }
               }
             }, true);
