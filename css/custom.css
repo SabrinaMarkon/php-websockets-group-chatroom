@@ -309,6 +309,14 @@ img {
 }
 
 /* Image Upload Area  */
+#progress-bar {
+	background-color: #ff006a;
+	height: 5px;
+	width: 0%;
+	-webkit-transition: width .3s;
+	-moz-transition: width .3s;
+	transition: width .3s;
+}
 #previewImages {
 	display: flex;
 	flex-wrap: wrap;
