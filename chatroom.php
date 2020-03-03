@@ -310,6 +310,10 @@ $wsdomain = $wsdomain_array[1];
           data: formData,
           success: function(data) {
             console.log(data);
+            // Update image src's to make sure they are displaying.
+
+            
+
           },
           error: function(err) {
             console.log(err);

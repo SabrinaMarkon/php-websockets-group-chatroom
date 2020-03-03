@@ -39,7 +39,7 @@ $imageNameList = array_unique($imageNameList);
 
 // print_r($imageNameList);
 
-$numberOfUploadedFiles = $_FILES['chatImageInput'][name];
+$numberOfUploadedFiles = $_FILES['chatImageInput']['name'];
 // echo count($numberOfUploadedFiles);
 
 foreach ($numberOfUploadedFiles as $index => $file) {
