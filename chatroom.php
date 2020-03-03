@@ -309,11 +309,10 @@ $wsdomain = $wsdomain_array[1];
           type: 'POST',
           data: formData,
           success: function(data) {
-            console.log(data);
+            console.log(typeof data); // returns string right now - need array.
             // Update image src's to make sure they are displaying.
-
-            
-
+            // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
+            // update the src of the image with id #blobId with its own url (might have to add datetime to the end to refresh it?)
           },
           error: function(err) {
             console.log(err);
@@ -326,7 +325,11 @@ $wsdomain = $wsdomain_array[1];
         // Attach new image urls to text to add to the data object below that we send over websockets.
         attachedImagesHtml += `<div class="chatMessageImage">`;
         for (let i = 0; i < imageFilenameList.length; i++) {
-          attachedImagesHtml += `<div><img src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
+          let blobName = imageFilenameList[i].blobName;
+          let blobNameArray = blobName.split('/');
+          let blobIdName = blobNameArray[blobNameArray.length - 1];
+          attachedImagesHtml += `<div><img id="${blobIdName}" 
+          src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
         }
         attachedImagesHtml += `</div>`;
       }

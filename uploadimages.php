@@ -28,37 +28,48 @@ if ($numberOfUploadedImages >= $maximumNumberOfImages) {
 }
 
 $imageNameList = [];
+$imageBlobIds = [];
 
 foreach ($data as $imageUploaded) {
   $imageName = $imageUploaded->imageName; // Each imageName in the $data array.
-  if ($imageName)
-  array_push($imageNameList, $imageName);
+  $blobName = $imageUploaded->blobName; // Each blobName in the $data array.
+  if ($imageName) {
+    array_push($imageNameList, $imageName);
+  }
+  if ($blobName) {
+    $blobNameArray = explode('/', $blobName);
+    $blobIdName = $blobNameArray[sizeof($blobNameArray) - 1];
+    array_push($imageBlobIds, $blobIdName);
+  }
 }
-// Remove duplicate filenames.
+// Remove duplicates.
 $imageNameList = array_unique($imageNameList);
+$imageBlobIds = array_unique($imageBlobIds);
 
 // print_r($imageNameList);
+print_r($imageBlobIds);
 
 $numberOfUploadedFiles = $_FILES['chatImageInput']['name'];
 // echo count($numberOfUploadedFiles);
 
 foreach ($numberOfUploadedFiles as $index => $file) {
-  $key = array_search($file, $imageNameList); // Finds index of item in array.
+  // Finds index of item in array to make sure it is a not a file that the
+  // user removed from the preview.
+  $key = array_search($file, $imageNameList); 
   // $key !== false makes sure that key 0 is not regarded as false.
   if($key !== false) { 
     // The filename was found in imageNameList, so proceed:
     $fileTmpName = $_FILES['chatImageInput']['tmp_name'][$index]; 
     $fileName = $_FILES['chatImageInput']['name'][$index]; 
     $fileSize = $_FILES['chatImageInput']['size'][$index]; 
-    // $fileExtension = strtolower(end(explode('.',$fileName)));
     $fileNameArray = explode(".", $fileName);
     $fileExtension = strtolower(array_pop($fileNameArray));
 
     $uploadPath = $currentDirectory . $uploadDirectory . $fileName;
     
     if (!in_array($fileExtension, $mimeTypes)) {
-      $errors[] = `Error : Only JPEG, PNG, or GIF files allowed.`;
-      echo `Error : Only JPEG, PNG, or GIF files allowed. ${fileExtension}`;
+      $errors[] = `Error : Only JPEG, PNG, JFIF, or GIF files allowed.`;
+      echo `Error : Only JPEG, PNG, JFIF, or GIF files allowed. ${fileExtension}`;
     }
     if ($fileSize > $maximumImageSize*1024*1024) {
       $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;
@@ -68,7 +79,8 @@ foreach ($numberOfUploadedFiles as $index => $file) {
     if (empty($errors)) {
       $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
       if ($didUpload) {
-        echo "The file " . basename($fileName) . " has been uploaded";
+        // echo "The file " . basename($fileName) . " has been uploaded";
+        echo $imageBlobIds;
       } else {
         echo "An error occurred. Please contact the administrator.";
       }
