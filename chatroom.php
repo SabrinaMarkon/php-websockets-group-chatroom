@@ -223,7 +223,7 @@ $wsdomain = $wsdomain_array[1];
         mimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jfif'];
         if (mimeTypes.indexOf($(this).get(0).files[i].type) == -1) {
           document.querySelector('#chatErrorMessageDiv').style.display = 'block';
-          document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, JFIF, or GIF files allowed.`;
+          document.querySelector('#chatErrorMessage').innerText = `Error : Only JPEG, PNG, or GIF files allowed.`;
           hideErrorMessages();
           return;
         }
@@ -330,7 +330,7 @@ $wsdomain = $wsdomain_array[1];
           let blobIdName = blobNameArray[blobNameArray.length - 1];
           // attachedImagesHtml += `<div><img id="${blobIdName}" 
           // src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
-          attachedImagesHtml += `<div id="${blobIdName}"><img src=${blobName} 
+          attachedImagesHtml += `<div><img id="${blobIdName}" class="loader_small" src="/images/loader.gif"
           alt="${imageFilenameList[i].imageName}"></div>`;
         }
         attachedImagesHtml += `</div>`;

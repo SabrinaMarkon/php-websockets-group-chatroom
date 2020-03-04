@@ -68,8 +68,8 @@ foreach ($numberOfUploadedFiles as $index => $file) {
     $uploadPath = $currentDirectory . $uploadDirectory . $fileName;
     
     if (!in_array($fileExtension, $mimeTypes)) {
-      $errors[] = `Error : Only JPEG, PNG, JFIF, or GIF files allowed.`;
-      echo `Error : Only JPEG, PNG, JFIF, or GIF files allowed. ${fileExtension}`;
+      $errors[] = `Error : Only JPEG, PNG, or GIF files allowed.`;
+      echo `Error : Only JPEG, PNG, or GIF files allowed. ${fileExtension}`;
     }
     if ($fileSize > $maximumImageSize*1024*1024) {
       $errors[] = `Error : Exceeded size {$maximumImageSize}MB.`;

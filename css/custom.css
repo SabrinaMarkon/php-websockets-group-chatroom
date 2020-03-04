@@ -376,13 +376,16 @@ img {
 .chatMessageImage div:last-child {
   margin-left: 0;
 }
-.chatMessageImage img {
+.chatMessageImage .image {
   border: 1px solid #fff;
   box-shadow: 2px 2px 3px #000;
 }
-.chatMessageImage img:hover {
+.chatMessageImage .image:hover {
 	border: 1px solid #fff;
 	box-shadow: -1px -1px 2px #fff;
+}
+.chatMessageImage .loader_small {
+  width: 25px;
 }
 
 .ja-small-font {
