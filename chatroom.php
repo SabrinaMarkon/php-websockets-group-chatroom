@@ -328,8 +328,10 @@ $wsdomain = $wsdomain_array[1];
           let blobName = imageFilenameList[i].blobName;
           let blobNameArray = blobName.split('/');
           let blobIdName = blobNameArray[blobNameArray.length - 1];
-          attachedImagesHtml += `<div><img id="${blobIdName}" 
-          src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
+          // attachedImagesHtml += `<div><img id="${blobIdName}" 
+          // src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
+          attachedImagesHtml += `<div id="${blobIdName}"><img src=${blobName} 
+          alt="${imageFilenameList[i].imageName}"></div>`;
         }
         attachedImagesHtml += `</div>`;
       }
