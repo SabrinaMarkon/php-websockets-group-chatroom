@@ -373,9 +373,9 @@ img {
   display: inline-block;
   margin: 15px 7px 0 7px;
 }
-.chatMessageImage div:last-child {
+/* .chatMessageImage div:last-child {
   margin-left: 0;
-}
+} */
 .chatMessageImage .image {
   border: 1px solid #fff;
   box-shadow: 2px 2px 3px #000;
@@ -386,6 +386,14 @@ img {
 }
 .chatMessageImage .loader_small {
   width: 25px;
+}
+.chatMessageImage .oneMessageDiv_small {
+  width: 35px;
+  height: 35px;
+  margin: 20px 5px 10px 5px;
+}
+.chatMessageImage div:last-child {
+  margin-left: 5px;
 }
 
 .ja-small-font {

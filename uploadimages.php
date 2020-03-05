@@ -6,9 +6,6 @@ $mimeTypes = ['jpeg','jpg','png','jfif'];
 $maximumImageSize = 10;
 $maximumNumberOfImages = 10;
 
-// var_dump($_POST);
-// var_dump($_FILES);
-
 $data = json_decode($_POST['imageFilenameList']); // imageFilenameList was stringified.
 if ($data == null) {
   echo json_last_error(); // There was no imageFilenameList content.
@@ -47,10 +44,9 @@ $imageNameList = array_unique($imageNameList);
 $imageBlobIds = array_unique($imageBlobIds);
 
 // print_r($imageNameList);
-print_r($imageBlobIds);
+// print_r($imageBlobIds);
 
 $numberOfUploadedFiles = $_FILES['chatImageInput']['name'];
-// echo count($numberOfUploadedFiles);
 
 foreach ($numberOfUploadedFiles as $index => $file) {
   // Finds index of item in array to make sure it is a not a file that the
@@ -79,8 +75,8 @@ foreach ($numberOfUploadedFiles as $index => $file) {
     if (empty($errors)) {
       $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
       if ($didUpload) {
-        // echo "The file " . basename($fileName) . " has been uploaded";
-        echo $imageBlobIds;
+        echo "The file " . basename($fileName) . " has been uploaded";
+        var_dump($imageBlobIds);
       } else {
         echo "An error occurred. Please contact the administrator.";
       }

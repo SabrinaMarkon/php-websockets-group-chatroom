@@ -309,7 +309,7 @@ $wsdomain = $wsdomain_array[1];
           type: 'POST',
           data: formData,
           success: function(data) {
-            console.log(typeof data); // returns string right now - need array.
+            console.log(data); // returns string right now - need array.
             // Update image src's to make sure they are displaying.
             // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
             // update the src of the image with id #blobId with its own url (might have to add datetime to the end to refresh it?)
@@ -330,7 +330,7 @@ $wsdomain = $wsdomain_array[1];
           let blobIdName = blobNameArray[blobNameArray.length - 1];
           // attachedImagesHtml += `<div><img id="${blobIdName}" 
           // src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
-          attachedImagesHtml += `<div><img id="${blobIdName}" class="loader_small" src="/images/loader.gif"
+          attachedImagesHtml += `<div class="oneMessageDiv_small"><img id="${blobIdName}" class="loader_small" src="/images/loader.gif"
           alt="${imageFilenameList[i].imageName}"></div>`;
         }
         attachedImagesHtml += `</div>`;
