@@ -309,10 +309,10 @@ $wsdomain = $wsdomain_array[1];
           type: 'POST',
           data: formData,
           success: function(data) {
-            console.log(data); // returns string right now - need array.
             // Update image src's to make sure they are displaying.
             // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
             // update the src of the image with id #blobId with its own url (might have to add datetime to the end to refresh it?)
+            console.log(data);
           },
           error: function(err) {
             console.log(err);
