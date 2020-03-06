@@ -312,18 +312,19 @@ $wsdomain = $wsdomain_array[1];
             // Update image src's on successful upload.
             // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
             // update the src of the image with id #blobId with its own url.
-            let blobFilesArray = JSON.parse(data);
-            // Were errors returned?
-
-            ///////////////////////////////
-
-            for (const blobItem of blobFilesArray) {
-              // split the filename blobItem at the . to get the DOM image id blobId.
-              const blobId = blobItem.split('.')[0];
-              // update the src of the image that has id blobId, and change the styles.
-              $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
-              $(`#${blobId}`).removeClass('loader_small').addClass('image');
-              $(`#${blobId}`).parent().removeClass('oneMessageDiv_small').addClass('oneMessageDiv_normal');
+            // console.log(typeof data);
+            try {
+              let blobFilesArray = JSON.parse(data);
+              for (const blobItem of blobFilesArray) {
+                // split the filename blobItem at the . to get the DOM image id blobId.
+                const blobId = blobItem.split('.')[0];
+                // update the src of the image that has id blobId, and change the styles.
+                $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
+                $(`#${blobId}`).removeClass('loader_small').addClass('image');
+                $(`#${blobId}`).parent().removeClass('oneMessageDiv_small').addClass('oneMessageDiv_normal');
+              }
+            } catch(e) {
+              console.log(e);
             }
           },
           error: function(err) {

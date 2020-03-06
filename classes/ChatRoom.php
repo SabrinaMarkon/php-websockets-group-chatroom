@@ -48,18 +48,26 @@ class ChatRoom {
   }
 
   public function updateImageUrlsInChatMessage($originalFilename, $newFilename) {
-    $originalFilename = "%$originalFilename%";
+    $likeOriginalFilename = "%$originalFilename%";
     $sql = "select * from chatroom where msg like ?";
     $q = $this->pdo->prepare($sql);
-    $q->execute(array($originalFilename));
+    $q->execute(array($likeOriginalFilename));
     $q->setFetchMode(PDO::FETCH_ASSOC);
     $messages = $q->fetchAll();
     foreach ($messages as $message) {
       $msg = $message['msg'];
-      $msg = str_replace($originalFilename, $newFilename, $msg);
+      $replaceLoaderGif = '/images/loader.gif';
+      $newFilePath = "/uploads/" . $newFilename;
+      $replaceLoaderClass = ' class="loader_small"';
+      $newLoaderClass = '';
+      $replaceDivClass = ' class="oneMessageDiv_small"';
+      $newDivClass = ' class="oneMessageDiv_normal"';
+      $updatedMsg = str_replace($replaceLoaderGif, $newFilePath, $msg);
+      $updatedMsg = str_replace($replaceLoaderClass, $newLoaderClass, $updatedMsg);
+      $updatedMsg = str_replace($replaceDivClass, $newDivClass, $updatedMsg);
       $sql = "update chatroom set msg=? where msg like ?";
       $q = $this->pdo->prepare($sql);
-      $q->execute(array($msg, $originalFilename));
+      $q->execute(array($updatedMsg, $likeOriginalFilename));
     }
   }
 
