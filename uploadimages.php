@@ -1,4 +1,7 @@
 <?php
+require_once('config/Database.php');
+require_once('classes/ChatRoom.php');
+
 function uploadImageFiles() {
 
   $currentDirectory = getcwd();
@@ -67,6 +70,11 @@ function uploadImageFiles() {
           $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
           if ($didUpload) {
             // echo "The file " . basename($fileNameBlob) . " has been uploaded";
+            // Update the chat message(s) (the urls for images) in the database to be the new blobId names.
+            $chatroom = new ChatRoom();
+            foreach ($returnBlobIds as $blobFileName) {
+              $chatroom->updateImageUrlsInChatMessage($fileName, $blobFileName);
+            }
           } else {
             $errors[] = `ERROR: An error occurred. Please contact the administrator.`;
           }

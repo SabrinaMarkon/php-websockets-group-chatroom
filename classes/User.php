@@ -79,7 +79,7 @@ class User
 			{
 				# successful email verification.
 				$q->setFetchMode(PDO::FETCH_ASSOC);
-				$memberdetails = $q->fetch();
+				$memberdetails = $q->fetch(); /////////////////////////////////////
 				# update verification date & time.
 				$sql = "update members set verifiedcode=NULL, verified='yes', verifieddate=NOW() where verifiedcode=?";
 				$q = $pdo->prepare($sql);

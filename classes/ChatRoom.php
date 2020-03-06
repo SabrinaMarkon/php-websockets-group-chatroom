@@ -47,6 +47,22 @@ class ChatRoom {
     $q->execute(array($resourceId));
   }
 
+  public function updateImageUrlsInChatMessage($originalFilename, $newFilename) {
+    $originalFilename = "%$originalFilename%";
+    $sql = "select * from chatroom where msg like ?";
+    $q = $this->pdo->prepare($sql);
+    $q->execute(array($originalFilename));
+    $q->setFetchMode(PDO::FETCH_ASSOC);
+    $messages = $q->fetchAll();
+    foreach ($messages as $message) {
+      $msg = $message['msg'];
+      $msg = str_replace($originalFilename, $newFilename, $msg);
+      $sql = "update chatroom set msg=? where msg like ?";
+      $q = $this->pdo->prepare($sql);
+      $q->execute(array($msg, $originalFilename));
+    }
+  }
+
   public function __destruct() {
     Database::disconnect();
   }

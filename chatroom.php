@@ -314,11 +314,13 @@ $wsdomain = $wsdomain_array[1];
             // update the src of the image with id #blobId with its own url.
             let blobFilesArray = JSON.parse(data);
             // Were errors returned?
-            
+
+            ///////////////////////////////
+
             for (const blobItem of blobFilesArray) {
               // split the filename blobItem at the . to get the DOM image id blobId.
               const blobId = blobItem.split('.')[0];
-              // update the src of the image that has id blobId.
+              // update the src of the image that has id blobId, and change the styles.
               $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
               $(`#${blobId}`).removeClass('loader_small').addClass('image');
               $(`#${blobId}`).parent().removeClass('oneMessageDiv_small').addClass('oneMessageDiv_normal');
