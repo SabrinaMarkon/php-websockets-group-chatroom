@@ -312,7 +312,17 @@ $wsdomain = $wsdomain_array[1];
             // Update image src's to make sure they are displaying.
             // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
             // update the src of the image with id #blobId with its own url (might have to add datetime to the end to refresh it?)
-            console.log(data);
+            // console.log(typeof data);
+            let blobFilesArray = JSON.parse(data);
+            // console.log(blobFilesArray);
+            for (const blobItem of blobFilesArray) {
+              // split the filename blobItem at the . to get the DOM image id blobId.
+              const blobId = blobItem.split('.')[0];
+              // update the src of the image that has id blobId.
+              // console.log(blobId);
+              $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
+              $(`#${blobId}`).removeClass('loader_small').addClass('image');
+            }
           },
           error: function(err) {
             console.log(err);
