@@ -309,19 +309,19 @@ $wsdomain = $wsdomain_array[1];
           type: 'POST',
           data: formData,
           success: function(data) {
-            // Update image src's to make sure they are displaying.
+            // Update image src's on successful upload.
             // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
-            // update the src of the image with id #blobId with its own url (might have to add datetime to the end to refresh it?)
-            // console.log(typeof data);
+            // update the src of the image with id #blobId with its own url.
             let blobFilesArray = JSON.parse(data);
-            // console.log(blobFilesArray);
+            // Were errors returned?
+            
             for (const blobItem of blobFilesArray) {
               // split the filename blobItem at the . to get the DOM image id blobId.
               const blobId = blobItem.split('.')[0];
               // update the src of the image that has id blobId.
-              // console.log(blobId);
               $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
               $(`#${blobId}`).removeClass('loader_small').addClass('image');
+              $(`#${blobId}`).parent().removeClass('oneMessageDiv_small').addClass('oneMessageDiv_normal');
             }
           },
           error: function(err) {
