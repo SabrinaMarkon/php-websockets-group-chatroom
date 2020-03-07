@@ -1,6 +1,11 @@
 <?php
-require_once('config/Database.php');
-require_once('classes/ChatRoom.php');
+/**
+ * Backend function that uploads image attachments to chat messages.
+ * PHP 5+
+ * @author Sabrina Markon
+ * @copyright 2020 Sabrina Markon, SabrinaMarkon.com
+ * @license LICENSE.md
+ **/
 
 function uploadImageFiles() {
 
@@ -68,14 +73,7 @@ function uploadImageFiles() {
 
         if (empty($errors)) {
           $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-          if ($didUpload) {
-            // echo "The file " . basename($fileNameBlob) . " has been uploaded";
-            // Update the chat message(s) (the urls for images) in the database to be the new blobId names.
-            $chatroom = new ChatRoom();
-            foreach ($returnBlobIds as $blobFileName) {
-              $chatroom->updateImageUrlsInChatMessage($fileName, $blobFileName);
-            }
-          } else {
+          if (!$didUpload) {
             $errors[] = `ERROR: An error occurred. Please contact the administrator.`;
           }
         }

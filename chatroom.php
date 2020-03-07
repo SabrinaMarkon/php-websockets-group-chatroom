@@ -254,7 +254,7 @@ $wsdomain = $wsdomain_array[1];
     <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
         $('#previewImages').append(previewImage);
       }
-      console.log(imageFilenameList);
+      // console.log(imageFilenameList);
     });
     // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
     // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
@@ -268,7 +268,7 @@ $wsdomain = $wsdomain_array[1];
       // Removes from imageFilenameList array.
       let imageSrcFile = $(this).parent().children('img').attr('src');
       imageFilenameList.splice(imageFilenameList.findIndex(findImageToDelete(imageSrcFile)), 1);
-      console.log(imageFilenameList);
+      // console.log(imageFilenameList);
       // Removes from view.
       $(this).parent().remove();
     });
@@ -319,7 +319,7 @@ $wsdomain = $wsdomain_array[1];
               for (const blobItem of blobFilesArray) {
                 // Use the name of the blob image as the image id for uniqueness.
                 const blobId = blobItem.split('.')[0];
-                attachedImagesHtml += `<div class="oneMessageDiv_normal"><img id="${blobId}" src="/uploads/${blobItem}"
+                attachedImagesHtml += `<div class="oneMessageDiv_normal"><img id="${blobId}" class="image" src="/uploads/${blobItem}"
                 alt="Image in chat message"></div>`;
               }
               attachedImagesHtml += `</div>`;
