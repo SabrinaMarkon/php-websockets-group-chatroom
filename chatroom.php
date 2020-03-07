@@ -116,6 +116,20 @@ $wsdomain = $wsdomain_array[1];
     </div>
   </form>
 </div>
+
+<div class="modal fade" id="enlargedImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargedImageModal" aria-hidden="true">
+  <div class="modal-dialog ja-modal-width">
+    <div class="modal-content ja-modal">
+      <div class="modal-body">
+        <img id="modalImage" src="images/loader.gif" alt="Enlarged image from chat message">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg btn-primary" type="button" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- <script src="/js/chatroom.js"></script> -->
 <script>
   $(document).ready(function() {
@@ -256,6 +270,7 @@ $wsdomain = $wsdomain_array[1];
       }
       // console.log(imageFilenameList);
     });
+
     // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
     // dynamically with append, jQuery can only find this appended html using an element (#previewImages)
     // that existed already when the page loaded. Remove from list of files to upload when submitted.
@@ -271,6 +286,14 @@ $wsdomain = $wsdomain_array[1];
       // console.log(imageFilenameList);
       // Removes from view.
       $(this).parent().remove();
+    });
+
+    // Enlarge the clicked image in a modal.
+    $('#ja-chat-messages').on("click", "img", function() {
+      let imageSrcFile = $(this).parent().children('img').attr('src');
+      console.log(imageSrcFile);
+      $('#modalImage').attr('src', imageSrcFile);
+      $('.modal').modal("show");
     });
 
     // Submitted chat message with enter key or send button.
@@ -323,7 +346,7 @@ $wsdomain = $wsdomain_array[1];
                 alt="Image in chat message"></div>`;
               }
               attachedImagesHtml += `</div>`;
-              
+
               // Send user's message to the chat, and with any images attached:
               let text = $('#msg').val() + attachedImagesHtml;
               let websocketSend = {
