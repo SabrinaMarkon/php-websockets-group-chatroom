@@ -276,6 +276,8 @@ $wsdomain = $wsdomain_array[1];
     // Submitted chat message with enter key or send button.
     $('.ja-chatform').submit(function(e) {
       e.preventDefault();
+      let username = "<?php echo $username ?>";
+      let email = "<?php echo $email ?>";
       let attachedImagesHtml = '';
       // Handle any images attached to the message:
       if (imageFilenameList.length > 0) {
@@ -287,7 +289,6 @@ $wsdomain = $wsdomain_array[1];
         // Attach the list of image file objects to compare with $_FILES in the upload script.
         formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
 
-        // ASYNC - MAKE SURE IMAGES ARE UPLOADED before message loads them - have progress bar for this.
         $.ajax({
           xhr: function() {
             var xhr = new window.XMLHttpRequest();
@@ -309,22 +310,35 @@ $wsdomain = $wsdomain_array[1];
           type: 'POST',
           data: formData,
           success: function(data) {
-            // Update image src's on successful upload.
-            // data will have an array of blob ids. Each blob id is an #id for an image already in the chat.
-            // update the src of the image with id #blobId with its own url.
-            // console.log(typeof data);
+            // Add images to message on successful upload.
+            // Data will have an array of image filenames (renamed after their blob names for uniqueness in the upload folder).
             try {
+              // Attach new image urls to text to add to the websocketSend object below that we send over websockets.
+              attachedImagesHtml += `<div class="chatMessageImage">`;
               let blobFilesArray = JSON.parse(data);
               for (const blobItem of blobFilesArray) {
-                // split the filename blobItem at the . to get the DOM image id blobId.
+                // Use the name of the blob image as the image id for uniqueness.
                 const blobId = blobItem.split('.')[0];
-                // update the src of the image that has id blobId, and change the styles.
-                $(`#${blobId}`).attr('src', `/uploads/${blobItem}`);
-                $(`#${blobId}`).removeClass('loader_small').addClass('image');
-                $(`#${blobId}`).parent().removeClass('oneMessageDiv_small').addClass('oneMessageDiv_normal');
+                attachedImagesHtml += `<div class="oneMessageDiv_normal"><img id="${blobId}" src="/uploads/${blobItem}"
+                alt="Image in chat message"></div>`;
               }
-            } catch(e) {
-              console.log(e);
+              attachedImagesHtml += `</div>`;
+              
+              // Send user's message to the chat, and with any images attached:
+              let text = $('#msg').val() + attachedImagesHtml;
+              let websocketSend = {
+                'username': username,
+                'email': email,
+                'text': text,
+                'chatstatus': 'post'
+              };
+              conn.send(JSON.stringify(websocketSend));
+              $('#msg').val(''); // Reset the form field to be empty.
+              $('#previewImages').empty(); // Remove images from the preview area.
+              imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
+
+            } catch (err) {
+              console.log(err);
             }
           },
           error: function(err) {
@@ -333,35 +347,8 @@ $wsdomain = $wsdomain_array[1];
           cache: false,
           contentType: false,
           processData: false
-          // async: false
         });
-        // Attach new image urls to text to add to the data object below that we send over websockets.
-        attachedImagesHtml += `<div class="chatMessageImage">`;
-        for (let i = 0; i < imageFilenameList.length; i++) {
-          let blobName = imageFilenameList[i].blobName;
-          let blobNameArray = blobName.split('/');
-          let blobIdName = blobNameArray[blobNameArray.length - 1];
-          // attachedImagesHtml += `<div><img id="${blobIdName}" 
-          // src="/uploads/${imageFilenameList[i].imageName}" alt="${imageFilenameList[i].imageName}"></div>`;
-          attachedImagesHtml += `<div class="oneMessageDiv_small"><img id="${blobIdName}" class="loader_small" src="/images/loader.gif"
-          alt="${imageFilenameList[i].imageName}"></div>`;
-        }
-        attachedImagesHtml += `</div>`;
       }
-
-      let username = "<?php echo $username ?>";
-      let email = "<?php echo $email ?>";
-      let text = $('#msg').val() + attachedImagesHtml;
-      let data = {
-        'username': username,
-        'email': email,
-        'text': text,
-        'chatstatus': 'post'
-      };
-      conn.send(JSON.stringify(data));
-      $('#msg').val(''); // Reset the form field to be empty.
-      $('#previewImages').empty(); // Remove images from the preview area.
-      imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
     });
 
     // Update chat login status to 0 by redirecting from /chatroom.
