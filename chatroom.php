@@ -291,7 +291,6 @@ $wsdomain = $wsdomain_array[1];
     // Enlarge the clicked image in a modal.
     $('#ja-chat-messages').on("click", "img", function() {
       let imageSrcFile = $(this).parent().children('img').attr('src');
-      console.log(imageSrcFile);
       $('#modalImage').attr('src', imageSrcFile);
       $('.modal').modal("show");
     });
