@@ -94,7 +94,7 @@ $wsdomain = $wsdomain_array[1];
       ?>
     </div>
   </div>
-  <form class="ja-chatform" method="post" action="uploadimages.php" enctype="multipart/form-data">
+  <form class="ja-chatform">
     <div id="progress-bar"></div>
     <div class="input-group">
       <input type="text" id="msg" name="msg" class="form-control text_element_width" placeholder="Enter Message" required minlength="1" maxlength="500">
@@ -345,7 +345,6 @@ $wsdomain = $wsdomain_array[1];
                 alt="Image in chat message"></div>`;
               }
               attachedImagesHtml += `</div>`;
-
               // Send user's message to the chat, and with any images attached:
               let text = $('#msg').val() + attachedImagesHtml;
               let websocketSend = {
@@ -355,10 +354,6 @@ $wsdomain = $wsdomain_array[1];
                 'chatstatus': 'post'
               };
               conn.send(JSON.stringify(websocketSend));
-              $('#msg').val(''); // Reset the form field to be empty.
-              $('#previewImages').empty(); // Remove images from the preview area.
-              imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
-
             } catch (err) {
               console.log(err);
             }
@@ -370,8 +365,24 @@ $wsdomain = $wsdomain_array[1];
           contentType: false,
           processData: false
         });
+      } else {
+        // Send user's plain text message to the chat.
+        let text = $('#msg').val();
+        let websocketSend = {
+          'username': username,
+          'email': email,
+          'text': text,
+          'chatstatus': 'post'
+        };
+        conn.send(JSON.stringify(websocketSend));
       }
+      $('#msg').val(''); // Reset the form field to be empty.
+      $('#previewImages').empty(); // Remove images from the preview area.
+      imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
     });
+
+    // Send the user's message to the chat, with or without images attached:
+    function sendMsgToChat(attachedImagesHtml) {}
 
     // Update chat login status to 0 by redirecting from /chatroom.
     $('#leave-chat').click(function() {
