@@ -306,6 +306,8 @@ $wsdomain = $wsdomain_array[1];
     // Submitted chat message with enter key or send button.
     $('.ja-chatform').submit(function(e) {
       e.preventDefault();
+      let text = $('#msg').val();
+      let websocketSend;
       let username = "<?php echo $username ?>";
       let email = "<?php echo $email ?>";
       let attachedImagesHtml = '';
@@ -351,12 +353,10 @@ $wsdomain = $wsdomain_array[1];
               }
               attachedImagesHtml += `</div>`;
               // Send user's message to the chat, and with any images attached:
-              let text = $('#msg').val() + attachedImagesHtml;
-              console.log(text);
-              let websocketSend = {
+              websocketSend = {
                 'username': username,
                 'email': email,
-                'text': text,
+                'text': text + attachedImagesHtml,
                 'chatstatus': 'post'
               };
               conn.send(JSON.stringify(websocketSend));
@@ -373,8 +373,7 @@ $wsdomain = $wsdomain_array[1];
         });
       } else {
         // Send user's plain text message to the chat.
-        let text = $('#msg').val();
-        let websocketSend = {
+        websocketSend = {
           'username': username,
           'email': email,
           'text': text,
