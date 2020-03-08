@@ -229,8 +229,10 @@ $wsdomain = $wsdomain_array[1];
     function hideErrorMessages() {
       setTimeout(() => document.querySelector('#chatErrorMessageDiv').style.display = 'none', 5000);
     }
-    // Array of image files the user chose (original file name + blob url).
+    // Array of images the user chose (original file name + blob url).
     let imageFilenameList = [];
+    // Array of file objects to submit.
+    let fileObjectList = [];
     document.querySelector('#chatImageInput').addEventListener('change', function() {
       for (let i = 0; i < $(this).get(0).files.length; i++) {
         // check file type.
@@ -259,16 +261,22 @@ $wsdomain = $wsdomain_array[1];
         }
         // Make an object for the image preview's url since browser won't allow path from user's system for the src.
         let imageObjectUrl = URL.createObjectURL($('#chatImageInput').get(0).files[i]);
-        imageFilenameList.push({
+        imageFilenameList = [...imageFilenameList, {
           imageName: $(this).get(0).files[i].name,
           blobName: imageObjectUrl
-        });
+        }];
         let previewImage = `<div class="imageThumbnailDiv"><img src=${imageObjectUrl} 
     alt="Preview Thumbnail" class="imageThumbnail">
     <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
         $('#previewImages').append(previewImage);
       }
-      // console.log(imageFilenameList);
+      // Append the chosen image file objects onto the fileObjectList (so we can append to #chatImageInput instead of replacing).
+      let files = $("#chatImageInput")[0].files;
+      for (var i = 0; i < files.length; i++) {
+        console.log(files[i]);
+        fileObjectList = [...fileObjectList, files[i]];
+      }
+      console.log(fileObjectList);
     });
 
     // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
@@ -310,7 +318,6 @@ $wsdomain = $wsdomain_array[1];
         var formData = new FormData(this);
         // Attach the list of image file objects to compare with $_FILES in the upload script.
         formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
-
         $.ajax({
           xhr: function() {
             var xhr = new window.XMLHttpRequest();
@@ -380,9 +387,6 @@ $wsdomain = $wsdomain_array[1];
       $('#previewImages').empty(); // Remove images from the preview area.
       imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
     });
-
-    // Send the user's message to the chat, with or without images attached:
-    function sendMsgToChat(attachedImagesHtml) {}
 
     // Update chat login status to 0 by redirecting from /chatroom.
     $('#leave-chat').click(function() {
