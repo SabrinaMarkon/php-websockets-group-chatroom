@@ -24,7 +24,7 @@ Stories:
 
 - As members of the website, users can login and chat with one another either privately or in the group channel.
 
-- The chat uses websockets.
+- The chat uses websockets for both plain text and for showing attached images uploaded by the user.
 
 - The websocket can be set up as a persistent service using /etc/init and chatSocket.conf
 

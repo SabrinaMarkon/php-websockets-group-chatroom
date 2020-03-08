@@ -29,7 +29,9 @@ There is reverse infinity scrolling in the chat box with a loader gif when more 
 Multiple users can chat and see all messages.
 When a user posts, the resourceId for their websockets connection is stored in the members table with their username.
 When a user leaves the chat, the resourceId field in the members table for their username is set to null.
-
+When a user posts, they can choose images from their computer to include with their message, which will then display in the message to all chat users.
+Images attached to a chat message can be previewed, as well as removed or have more added before submitting.
+Images in chat messages can be clicked by online users to see a larger version in a modal.
 
 --------------------------
 

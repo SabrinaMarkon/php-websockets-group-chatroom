@@ -276,7 +276,7 @@ img {
   padding: 1rem;
 }
 #ja-chat-messages {
-  height: 50vh;
+  height: 75vh;
   overflow-y: scroll;
 }
 #ja-chat-messages .ja-chat-onemessage:nth-child(even) {
