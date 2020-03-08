@@ -229,10 +229,12 @@ $wsdomain = $wsdomain_array[1];
     function hideErrorMessages() {
       setTimeout(() => document.querySelector('#chatErrorMessageDiv').style.display = 'none', 5000);
     }
+
     // Array of images the user chose (original file name + blob url).
     let imageFilenameList = [];
-    // Array of file objects to submit.
-    let fileObjectList = [];
+    // Initialize a FormData object to append the images files to that the user chooses.
+    let formData = new FormData();
+
     document.querySelector('#chatImageInput').addEventListener('change', function() {
       for (let i = 0; i < $(this).get(0).files.length; i++) {
         // check file type.
@@ -270,13 +272,11 @@ $wsdomain = $wsdomain_array[1];
     <button type="button" class="removeImageThumbnail btn btn-danger btn-block">x</button></div>`;
         $('#previewImages').append(previewImage);
       }
-      // Append the chosen image file objects onto the fileObjectList (so we can append to #chatImageInput instead of replacing).
+      // Append the chosen image file objects onto the formData object (so we can append to #chatImageInput instead of replacing).
       let files = $("#chatImageInput")[0].files;
       for (var i = 0; i < files.length; i++) {
-        console.log(files[i]);
-        fileObjectList = [...fileObjectList, files[i]];
+        formData.append('chatImageInput[]', files[i]);
       }
-      console.log(fileObjectList);
     });
 
     // Bind the close (x) clicks to the #previewImages parent. Since the preview images were created
@@ -314,17 +314,15 @@ $wsdomain = $wsdomain_array[1];
         // Start progress bar if there are images.
         $('#progress-bar').show();
 
-        // Upload any images to uploads directory.
-        var formData = new FormData(this);
         // Attach the list of image file objects to compare with $_FILES in the upload script.
         formData.append('imageFilenameList', JSON.stringify(imageFilenameList));
+        // Upload any images to uploads directory:
         $.ajax({
           xhr: function() {
             var xhr = new window.XMLHttpRequest();
             xhr.upload.addEventListener("progress", function(evt) {
               if (evt.lengthComputable) {
                 var percentComplete = Math.round(evt.loaded / evt.total * 100);
-                // $("#progress-bar").html('<div id="progress-status">' + percentComplete + ' %</div>');
                 $('#progress-bar').css({
                   width: percentComplete + '%'
                 });
@@ -354,6 +352,7 @@ $wsdomain = $wsdomain_array[1];
               attachedImagesHtml += `</div>`;
               // Send user's message to the chat, and with any images attached:
               let text = $('#msg').val() + attachedImagesHtml;
+              console.log(text);
               let websocketSend = {
                 'username': username,
                 'email': email,
@@ -386,6 +385,7 @@ $wsdomain = $wsdomain_array[1];
       $('#msg').val(''); // Reset the form field to be empty.
       $('#previewImages').empty(); // Remove images from the preview area.
       imageFilenameList = []; // Remove the files from the array that keeps track of them after the message is sent.
+      formData = new FormData(); // Reset formData so a new message will not have the previous message's files attached to it.
     });
 
     // Update chat login status to 0 by redirecting from /chatroom.
