@@ -2,11 +2,11 @@
 class Database
 {
 	private static $dbhost = "localhost";
-	private static $dbname = "collectorsscave_collectorsscave";
-	private static $dbuser = "collectorsscave_collectorsscave";
-	private static $dbpass = "+u6Au(-Lm8T{";
+	private static $dbname = "YOUR_DATABASE_NAME";
+	private static $dbuser = "YOUR_DATABASE_USER";
+	private static $dbpass = "YOUR_DATABASE_PASS";
 	private static $dbconn = null;
-	const BASE_URL = "http://collectorsscave.phpsitescripts.com/";
+	const BASE_URL = "http://YOURDOMAIN.COM";
 
 	public function __construct() {
 		die('Action not allowed'); 
@@ -29,8 +29,8 @@ class Database
 		return self::$dbconn;
 	}
 
-    public static function query($sqlquery, $attributearray) {
-        # query the database
+    public static function query($sqlquery, $attributearray, $id) {
+        # query the database - TODO: this function is to DRY out the older code.
         $sqlqueryfields = '';
         $sqlvariables = '';
         $pdo = Database::connect();
@@ -44,7 +44,7 @@ class Database
 
         $sqlquery = "update members set " . $sqlqueryfields . " where id=?";
         $q = $pdo->prepare($sqlquery);
-        $q->execute(array($id, $sqlvariables));
+        $q->execute(array($sqlvariables, $id));
     }
 
 	public static function disconnect() {

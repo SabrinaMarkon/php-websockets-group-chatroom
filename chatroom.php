@@ -3,6 +3,8 @@ include "control.php";
 $showcontent = new PageContent();
 echo $showcontent->showPage('chatroom');
 
+// TODO: Convert to module and move JS to external file.
+
 // Get the members to show which ones are online and which aren't.
 $allmembers = new Member();
 $members = $allmembers->getAllMembers('login_status desc');
