@@ -11,7 +11,7 @@ use chatClient\Chat;
     $checkedApp = new OriginCheck(new WsServer(new Chat()), array('localhost'));
 
     // CHANGE THIS LINE TO YOUR SITE'S DOMAIN!
-    $checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com'; 
+    $checkedApp->allowedOrigins[] = 'YOURDOMAIN.com'; 
 
     $server = IoServer::factory(
         new HttpServer($checkedApp),

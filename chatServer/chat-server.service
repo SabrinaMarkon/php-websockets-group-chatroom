@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/php -f /home/collectorsscave/public_html/chatServer/chat-server.php >> /home/collectorsscave/public_html/chatServer/chat-server.log
+ExecStart=/usr/local/bin/php -f /home/YOUR_HOME_DIRECTORY_PATH/public_html/chatServer/chat-server.php >> /home/YOUR_HOME_DIRECTORY_PATH/public_html/chatServer/chat-server.log
 TimeoutStartSec=0
-User=collectorsscave
-Group=collectorsscave
+User=YOUR_CPANEL_USERNAME
+Group=YOUR_CPANEL_PASSWORD
 Restart=always
 
 [Install]

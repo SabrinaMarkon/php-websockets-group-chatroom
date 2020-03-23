@@ -30,7 +30,7 @@ class Database
 	}
 
     public static function query($sqlquery, $attributearray, $id) {
-        # query the database - TODO: this function is to DRY out the older code.
+        # query the database - TODO: DRY out the database areas of the codebase.
         $sqlqueryfields = '';
         $sqlvariables = '';
         $pdo = Database::connect();

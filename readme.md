@@ -46,7 +46,7 @@ Stories:
 
 - The site looks and IS fun!
 
-Example: http://collectorscave.phpsitescripts.com
+Example: http://YOURDOMAIN.com
 
 ------------------------------------------------------------------------------------
 
@@ -130,7 +130,7 @@ chmod +x chat-server.php
 ls -lrt chat-server.php
 
 5) Open /chatServer/chat-server.php and change the line below to your own domain name (without http) instead of the default one.
-$checkedApp->allowedOrigins[] = 'collectorsscave.phpsitescripts.com';
+$checkedApp->allowedOrigins[] = 'YOURDOMAIN.com';
 This will help secure your websockets server from man-in-the-middle attacks where people can connect from anywhere.
 
 6) Enable your systemd service unit (which will be your chat-server.service) 
@@ -146,7 +146,7 @@ This will help secure your websockets server from man-in-the-middle attacks wher
 
 		4. Reboot the host to verify whether the scripts are starting as expected during system boot. Type:
 		systemctl reboot 
-		(this will reboot the server!)
+		(this will reboot the server!!!!!)
 
 		5. You can check to see if the chat-server service is running on the port you chose (default 8081) by typing:
 		lsof -i :8081
