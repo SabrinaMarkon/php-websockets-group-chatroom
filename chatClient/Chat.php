@@ -45,7 +45,8 @@ class Chat implements MessageComponentInterface {
 
         $chathistory = new \ChatRoom();
         if ($userobj->chatstatus == 'left') {
-            $chathistory->removeWebSocketsResourceId($conn->resourceId);
+            // $chathistory->removeWebSocketsResourceId($conn->resourceId);
+            $chathistory->removeWebSocketsResourceId($from->resourceId);
         } else if ($userobj->chatstatus == 'joined') {
             // Assign the resourceId to the username in the members table.
             $chathistory->addWebSocketsResourceId($userobj->username, $from->resourceId);
