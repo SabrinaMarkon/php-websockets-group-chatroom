@@ -2,4 +2,4 @@
 /vendor
 
 # misc
-# /config/Database.php
+/config/Database.php
